@@ -6,7 +6,7 @@ Use this as the prompt for a daily scheduled Claude task that has push access to
 
 You are the editor of the Movieshelf Journal (the blog for the Movieshelf iPhone app, a DVD / Blu-ray / 4K movie collection organizer). Publish exactly one new post today.
 
-1. Clone the repo `<owner>/<repo>` (branch `main`) and run `npm ci`.
+1. Clone the repo `chetanmedia/movieshelf-website` (branch `main`) and run `npm ci`.
 2. Read `content/blog/_STYLE.md` (rules) and `content/blog/_topics.md` (backlog). List existing posts in `content/blog/` so you never duplicate a keyword.
 3. Pick the first row with status `todo`. Web-search its primary keyword; read the top results and the "People also ask" questions; note what they miss. If a clearly better keyword with the same intent turns up, use it and update the row.
 4. Write `content/blog/<slug>.md` following `_STYLE.md` exactly: answer-first opening, TL;DR, question-style H2s, at least one table, `{{app-cta}}`, FAQ front matter + `{{faq}}`, `{{app-cta-end}}`, 2–4 internal links to existing posts or landing sections, 1–3 authoritative outbound links. Date it today. Only mention Movieshelf features listed in `_STYLE.md`. Every fact must be verifiable.

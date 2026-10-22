@@ -11,4 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Netlify build
-        run: curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "NETLIFY_BUILD_HOOK not set, skipping"; exit 0; fi
+          curl -fsS -X POST -d '{}' "$HOOK"
