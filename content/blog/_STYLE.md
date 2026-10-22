@@ -44,6 +44,7 @@ A good default rhythm: stats after the intro → cards for "why" → steps for "
 
 ## Facts & honesty
 - Movieshelf features that may be mentioned: barcode scanning with batch import of up to 10 barcodes at a time, formats (DVD, Blu-ray, 4K UHD), editions and box sets, custom folders, shelf location, watchlist and "what to watch", collection stats, search and filters. **Never invent features** (no spine scanning, no price tracking unless it ships).
+- Pricing facts (only these): Free plan = search and add up to 50 titles, scan up to 50 barcodes, unlimited collection folders, 3 custom fields. Movieshelf **Pro** = $0.99/month, $9.99/year, or $39.99 lifetime; unlocks unlimited search/add/scanning, unlimited custom fields, collection analytics, custom posters and backdrops, bulk CSV import and export, priority support. Bulk CSV import is Pro-only. There is no free trial. Call it "Pro", never "Premium".
 - Every number, date or spec must be verifiable. Cite the source with a link. If unsure, leave it out.
 - No fake testimonials, reviews, or quotes.
 - Mention competitors only factually and fairly, if at all.

@@ -86,7 +86,7 @@ export const storeBadge = (src = 'blog') => `<a class="store" href="${SITE.appSt
 function appCta(kind) {
   if (kind === 'end') return `<aside class="cta-end" aria-label="Get Movieshelf">
     <div><span class="eyebrow"><i></i>Movieshelf for iPhone</span><h2 class="cta-h">Your whole collection, <em>one scan at a time.</em></h2>
-    <p>Scan barcodes in batches of ten, track editions and formats, and know which shelf every disc lives on. Free for your first 25 titles.</p>
+    <p>Scan barcodes in batches of ten, track editions and formats, and know which shelf every disc lives on. Free for your first 50 titles.</p>
     ${storeBadge('blog-end')}</div></aside>`;
   return `<aside class="cta-card" aria-label="Get Movieshelf"><span class="cta-icon">${LOGO}</span>
     <div><b>Catalog your discs with Movieshelf</b><p>Scan up to 10 barcodes in one pass, track DVD, Blu-ray and 4K UHD editions, and find any disc's shelf in seconds. Free to start on iPhone.</p></div>
@@ -328,7 +328,8 @@ Movieshelf is an iPhone app (iOS 15.1 or later) for people who collect physical 
 - Tracks editions, box sets, formats, audio, subtitles, custom fields and notes for each disc.
 - Records the shelf location of every disc and warns before you add a film you already own.
 - Collections (folders), Watchlist and Wishlist.
-- Free to start: up to 25 titles and 10 collection folders. Premium (monthly, annual with free trial, or lifetime) removes the limits.
+- Free plan: search and add up to 50 titles, scan up to 50 barcodes, unlimited collection folders, up to 3 custom fields.
+- Movieshelf Pro: $0.99/month, $9.99/year or $39.99 lifetime (US prices). Unlocks unlimited search, add and barcode scanning, unlimited custom fields, collection analytics, custom posters and backdrops, bulk CSV import and export, and priority support.
 - Download: ${SITE.appStoreUrl}
 
 ## Pages

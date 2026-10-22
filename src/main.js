@@ -185,14 +185,14 @@ import('./shelfmagic.js');
 
 /* ---------- pricing ---------- */
 (() => {
-  const P = { m: ['$3.99', 'per month', ''], y: ['$29.99', 'per year', 'Free trial · save 37% vs monthly'], l: ['$99.99', 'one time', 'Pay once, keep it forever'] };
+  const P = { m: ['$0.99', 'per month', 'Cancel anytime', ''], y: ['$9.99', 'per year', 'Save 16% vs monthly', '$11.88'], l: ['$39.99', 'one time', 'Pay once, keep it forever', ''] };
   const seg = $('#seg'), bg = $('#pillbg'), val = $('#priceVal');
   const place = b => { bg.style.width = b.offsetWidth + 'px'; bg.style.transform = `translateX(${b.offsetLeft}px)`; };
   $$('button', seg).forEach(b => b.addEventListener('click', () => {
     $$('button', seg).forEach(x => x.setAttribute('aria-pressed', x === b)); place(b); const p = P[b.dataset.p];
     if (!RM) gsap.timeline().to(val, { y: -16, opacity: 0, duration: .18 }).call(() => { val.textContent = p[0]; }).fromTo(val, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: .35, ease: 'power3.out' });
     else val.textContent = p[0];
-    $('#pricePer').textContent = p[1]; $('#save').textContent = p[2];
+    $('#pricePer').textContent = p[1]; $('#save').textContent = p[2]; $('#priceWas').textContent = p[3];
   }));
   const init = () => place($('button[aria-pressed="true"]', seg)); init(); addEventListener('resize', init); document.fonts && document.fonts.ready.then(init);
 })();
