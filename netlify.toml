@@ -6,3 +6,7 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Pings IndexNow (Bing/ChatGPT search, Yandex…) and Google's WebSub hub after each live deploy.
+[[plugins]]
+  package = "/netlify/plugins/instant-indexing"

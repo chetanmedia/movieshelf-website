@@ -103,3 +103,8 @@ A scheduled Claude task can run every morning: research keywords, pick the next 
 - Reply in forum threads (Blu-ray.com, AVForums) where people ask "what app do you use to catalog?".
 - Ask happy users for App Store ratings; the App Store page itself ranks on Google for "movie collection app".
 - Watch Search Console → *Performance* weekly; queries with impressions but low clicks are your next titles to improve; queries ranking 8–20 are your next posts.
+
+## Automatic indexing (no manual steps per post)
+- `sitemap.xml` and `rss.xml` are regenerated on every build with accurate `lastmod` dates; Google re-reads the submitted sitemap on its own.
+- `netlify/plugins/instant-indexing` runs after every production deploy and pings **IndexNow** (Bing, which also powers ChatGPT search and Copilot, plus Yandex, Seznam and Naver) with new and updated URLs, and Google's **WebSub hub** for the RSS feed. The IndexNow key lives in `site.config.json` and is served at `/<key>.txt`. It never fails a deploy.
+- Use Search Console's *Request indexing* only for pages you want crawled faster (optional).

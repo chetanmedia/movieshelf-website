@@ -263,6 +263,7 @@ export function rss(posts) {
 <title>${esc(SITE.blog.title)}</title>
 <link>${abs('/blog/')}</link>
 <atom:link href="${abs('/rss.xml')}" rel="self" type="application/rss+xml"/>
+<atom:link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
 <description>${esc(SITE.blog.description)}</description>
 <language>en</language>
 <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

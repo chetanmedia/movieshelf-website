@@ -5,8 +5,16 @@
   "description": "Movieshelf is a collector-first iPhone app for physical media. Scan a barcode to catalog DVDs, Blu-rays and 4K UHDs, organize by shelf, and rediscover the films you own.",
   "appStoreUrl": "https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869",
   "appStoreId": "6760224869",
-  "author": { "name": "Chetan Nagaraja", "role": "Maker of Movieshelf", "bio": "Physical media collector and the developer behind Movieshelf, an iPhone app for cataloging DVDs, Blu-rays and 4K UHDs." },
-  "blog": { "title": "The Movieshelf Journal", "description": "Guides for people who still buy discs: cataloging, shelving, editions, formats and getting the most out of a physical movie collection." },
+  "author": {
+    "name": "Chetan Nagaraja",
+    "role": "Maker of Movieshelf",
+    "bio": "Physical media collector and the developer behind Movieshelf, an iPhone app for cataloging DVDs, Blu-rays and 4K UHDs."
+  },
+  "blog": {
+    "title": "The Movieshelf Journal",
+    "description": "Guides for people who still buy discs: cataloging, shelving, editions, formats and getting the most out of a physical movie collection."
+  },
   "locale": "en_US",
-  "privacyUrl": "https://grateful-alpaca-274206.framer.app/"
+  "privacyUrl": "https://grateful-alpaca-274206.framer.app/",
+  "indexNowKey": "bd7d8857c18fdc3f10fcc35bad1b0a80"
 }
