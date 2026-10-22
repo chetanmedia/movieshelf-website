@@ -1,0 +1,10 @@
+node_modules/
+dist/
+scans_src/
+# generated from content/blog at build time
+public/blog/
+public/sitemap.xml
+public/rss.xml
+public/robots.txt
+public/llms.txt
+.DS_Store

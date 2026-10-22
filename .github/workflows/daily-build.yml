@@ -1,0 +1,14 @@
+# Rebuilds the site every morning so posts dated "today" go live.
+# Setup: Netlify → Site configuration → Build & deploy → Build hooks → Add build hook,
+# then GitHub → Settings → Secrets and variables → Actions → New secret NETLIFY_BUILD_HOOK = <hook URL>.
+name: Daily publish
+on:
+  schedule:
+    - cron: "7 6 * * *"   # 06:07 UTC daily
+  workflow_dispatch:
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify build
+        run: curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Movieshelf: DVD, Blu-ray &amp; 4K Movie Collection App for iPhone</title>
+<meta name="description" content="Movieshelf is a collector-first iPhone app for physical media. Scan a barcode to catalog DVDs, Blu-rays and 4K UHDs, organize by shelf, and rediscover the films you own.">
+<link rel="canonical" href="__SITE__/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Movieshelf">
+<meta property="og:url" content="__SITE__/">
+<meta property="og:image" content="__SITE__/og/default.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Movieshelf: catalog your DVDs, Blu-rays and 4K UHDs">
+<meta name="twitter:description" content="Scan barcodes and organize your physical movie collection on iPhone.">
+<meta name="twitter:image" content="__SITE__/og/default.jpg">
+<link rel="alternate" type="application/rss+xml" title="The Movieshelf Journal" href="__SITE__/rss.xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!--JSONLD-->
+<meta name="theme-color" content="#07080c">
+<meta property="og:title" content="Movieshelf: your physical media collection, beautifully shelved">
+<meta property="og:description" content="Scan barcodes and organize your DVDs, Blu-rays and 4K UHDs on iPhone.">
+<meta name="apple-itunes-app" content="app-id=6760224869">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<div class="grain" id="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top" aria-label="Movieshelf home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="6" height="20" rx="1.5" fill="#6b8aff"/><rect x="11" y="4" width="6" height="23" rx="1.5" fill="#eef0f8"/><rect x="20.5" y="8" width="6" height="19" rx="1.5" fill="#ffb547" transform="rotate(12 23.5 27)"/><rect x="1" y="27" width="30" height="2.5" rx="1.2" fill="#969cb2"/></svg>
+      movieshelf
+    </a>
+    <nav aria-label="Primary"><a href="#scan">Scanning</a><a href="#organize">Organize</a><a href="#boxsets">Box sets</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="/blog/">Journal</a></nav>
+    <a class="btn btn-accent" href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869" target="_blank" rel="noopener">Get the app</a>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="gl"><canvas id="heroGL" aria-label="Floating 3D movie cases you can drag to spin" role="img"></canvas></div>
+  <div class="chip" id="chip" aria-hidden="true"><span class="ok"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b data-t>Dune</b><small data-m>Blu-ray · 2021</small></span></div>
+  <div class="hero-copy">
+    <span class="eyebrow hero-in"><i></i>For DVD, Blu-ray &amp; 4K UHD collectors</span>
+    <h1 id="h1"><span class="ln"><span>Every disc you own.</span></span><span class="ln"><span><em>Beautifully shelved.</em></span></span></h1>
+    <p class="lede hero-in">Scan the barcode on any case and Movieshelf catalogs the edition, format and audio specs, then turns your collection into a shelf you'll actually want to browse.</p>
+    <div class="cta-row hero-in">
+      <a class="store" href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869" target="_blank" rel="noopener" aria-label="Download Movieshelf on the App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+      <a class="link" href="#scan">Watch it scan <span>↓</span></a>
+    </div>
+  </div>
+  <div class="hero-hint">Drag a case to spin it</div>
+</section>
+
+<div class="reel" aria-hidden="true"><div class="ticker" id="ticker"></div></div>
+
+<!-- SCAN (sticky reel) -->
+<section class="reelsec" id="scan" aria-label="How scanning works">
+  <div class="sticky">
+    <div class="gl"><canvas id="scanGL" aria-hidden="true"></canvas></div>
+    <div class="slot" id="slotScan"></div><div class="slot" id="slotSide"></div>
+    <div class="wrap stage-ui">
+      <div class="stepper" id="scanSteps">
+        <div class="sstep on"><span class="num">01 / 04</span><h2>Pick up <em>any disc.</em></h2><p>DVD, Blu-ray or 4K UHD. Movieshelf knows the difference and records the edition you actually own.</p></div>
+        <div class="sstep"><span class="num">02 / 04</span><h2>Point at <em>the barcode.</em></h2><p>Hold your iPhone over the back of the case and the code is read in a blink. Queue up to ten discs in one pass.</p></div>
+        <div class="sstep"><span class="num">03 / 04</span><h2>Every detail, <em>filled in.</em></h2><p>Title, year, director, format, audio tracks, subtitles and the barcode itself land in your library. No typing.</p>
+</div>
+        <div class="sstep"><span class="num">04 / 04</span><h2>Right down <em>to the disc.</em></h2><p>Special editions, steelbooks, region codes, your own notes. Movieshelf tracks the copy on your shelf, not just the movie.</p></div>
+        <div class="rail"><i id="scanRail"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZE -->
+<section class="organize" id="organize">
+  <div class="wrap">
+    <div class="org-head">
+      <span class="eyebrow">Organize</span>
+      <h2 class="rv" style="margin-top:18px">Not a spreadsheet. <em>A shelf.</em></h2>
+      <p class="lede">Covers up front, the details collectors care about one tap away. This is what your collection looks like inside Movieshelf.</p>
+    </div>
+    <div class="org-grid">
+      <div class="phone-stick" aria-hidden="true">
+        <div class="halo" id="halo"></div>
+        <div class="org-slot" id="slotOrg"></div>
+      </div>
+      <div>
+        <article class="ostep on" data-c="#ffcf96">
+          <span class="pill" style="background:#fff;color:#000">Latest adds</span>
+          <h3>Flick through what just arrived.</h3>
+          <p>The disc you just scanned lands on top of a swipeable stack, lit by its own backdrop. Swipe through, then tap any card to flip it open.</p>
+          <ul class="tags"><li>Swipe to browse</li><li>Backdrop art</li><li>Tap to flip</li></ul>
+          <div class="mshot"><div class="pwrap" data-screen="latest"></div></div>
+        </article>
+        <article class="ostep" data-c="#6b8aff">
+          <span class="pill" style="background:var(--accent)">All Media</span>
+          <h3>Your whole collection, at a glance.</h3>
+          <p>Every disc in one poster grid, badged by format. Search, filter by 4K, Blu-ray or DVD, and never wonder whether you already own a film.</p>
+          <ul class="tags"><li>Instant search</li><li>Format filters</li><li>Poster grid</li></ul>
+          <div class="mshot"><div class="pwrap" data-screen="all"></div></div>
+        </article>
+        <article class="ostep" data-c="#ff3d6e">
+          <span class="pill" style="background:var(--pink)">Collections</span>
+          <h3>Folders for every shelf you own.</h3>
+          <p>Make a folder in seconds, open it, pick a film and see the exact shelf and slot it lives in.</p>
+          <ul class="tags"><li>Custom folders</li><li>Shelf locations</li><li>Notes</li></ul>
+          <div class="mshot"><div class="pwrap" data-screen="coll"></div></div>
+        </article>
+        <article class="ostep" data-c="#2fd15b">
+          <span class="pill" style="background:var(--green)">Watchlist &amp; Wishlist</span>
+          <h3>What to watch. What to hunt for.</h3>
+          <p>Queue up what to watch next from the discs you already own, and keep the editions you're still hunting on a separate Wishlist.</p>
+          <ul class="tags"><li>Watchlist</li><li>Wishlist</li><li>Swipe to remove</li></ul>
+          <div class="mshot"><div class="pwrap" data-screen="watch"></div></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOX SETS (sticky reel) -->
+<section class="reelsec short" id="boxsets" aria-label="Box sets">
+  <div class="sticky">
+    <div class="gl"><canvas id="boxGL" aria-hidden="true"></canvas></div>
+    <div class="wrap stage-ui">
+      <div class="stepper" id="boxSteps">
+        <div class="sstep on"><span class="num">BOX SETS</span><h2>Collector's editions, <em>unboxed.</em></h2><p>Slipcovers, trilogies and anniversary sets get catalogued as what they are: one package, several films.</p></div>
+        <div class="sstep"><span class="num">BOX SETS</span><h2>Flip one switch.</h2><p>Turn on Box Set while importing and Movieshelf tracks every title inside the case.</p>
+          <div class="toggle-demo"><span><b>Box Set?</b><small>Enable this if the media you are importing is a collection/multiple titles.</small></span><span class="sw" id="boxSw"></span></div></div>
+        <div class="sstep"><span class="num">BOX SETS</span><h2>Every film, <em>its own place.</em></h2><p>Each disc gets its own entry, specs and shelf spot, while still belonging to the set you bought.</p></div>
+        <div class="rail"><i id="boxRail"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feats" id="features">
+  <div class="wrap">
+    <div class="feats-head">
+      <span class="eyebrow">Collector tools</span>
+      <h2 class="rv" style="margin-top:18px">Built for people who <em>still buy discs.</em></h2>
+      <p class="lede">Editions, steelbooks, audio tracks, which shelf it lives on. Movieshelf tracks what a generic movie app ignores.</p>
+    </div>
+    <div class="magic" id="magic">
+      <div class="mg-stage"><div class="mg-photos" id="mgPhotos"></div></div>
+      <div class="mg-side">
+        <div class="mg-phone pwrap" id="mgPhone"></div>
+      </div>
+      <div class="mg-cap"><span class="mg-step" id="mgStep">Shelf 1 of 3</span><b id="mgName">Hallway DVD wall</b><span class="mg-sub">Pull a disc off the shelf, point at the barcode, and it's in your collection. Queue up to 10 barcodes, then import them all at once.</span></div>
+      <div class="mg-fx" id="mgFx" aria-hidden="true"></div>
+    </div>
+    <div class="bento">
+      <article class="cell c-dup" id="dup">
+        <span class="k">Duplicate guard</span>
+        <h3>Never buy the same film twice.</h3>
+        <p>Scan something you already own and Movieshelf stops you, showing the copy on your shelf. Skip it, or add it as a new edition.</p>
+        <div class="dup-stage">
+          <div class="dup-scan"><span class="dup-case"><i style="background-image:url(scans/inception-front.jpg)"></i></span><span class="dup-beam"></span></div>
+          <div class="dup-alert">
+            <div class="dup-top"><span class="dup-ic">!</span><b>You already own this</b></div>
+            <div class="dup-copy"><span class="dup-th" style="background-image:url(scans/inception-front.jpg)"></span><span><b>Inception</b><small>2010 · Christopher Nolan</small></span></div>
+            <div class="dup-meta"><span><small>Format you own</small><b class="pill bd">BLU-RAY</b></span><span><small>Shelf</small><b>Living room · A · 6</b></span></div>
+            <div class="dup-btns"><button type="button" data-a="skip">Skip</button><button type="button" data-a="add">Add as 4K edition</button></div>
+            <div class="dup-done"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="cell c-ways" id="ways">
+        <span class="k">Three ways in</span>
+        <h3>Scan it, search it, or import it.</h3>
+        <div class="ways">
+          <button type="button" class="way on" data-w="scan">
+            <span class="wv wv-scan"><span class="bc"></span><i class="wl"></i><i class="ring"></i><span class="wres"><i style="background-image:url(scans/joker-front.jpg)"></i>Joker ✓</span></span>
+            <b>Scan barcode</b><small>Up to 10 in one pass</small>
+          </button>
+          <button type="button" class="way" data-w="search">
+            <span class="wv wv-search"><span class="sf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><em class="typed"></em><i class="caret"></i></span>
+              <span class="sr"><i style="background-image:url(scans/inception-front.jpg)"></i><b>Inception</b><small>2010</small></span>
+              <span class="sr"><i class="ghost"></i><b>Inception</b><small>1980</small></span></span>
+            <b>Search and add</b><small>Match it against IMDb</small>
+          </button>
+          <button type="button" class="way" data-w="csv">
+            <span class="wv wv-csv"><span class="sheet"><i>Title</i><i>Format</i><i>The Matrix</i><i>DVD</i><i>Avatar</i><i>DVD</i><i>Dune</i><i>Blu-ray</i></span>
+              <span class="posters"><i style="background-image:url(scans/matrix-front.jpg)"></i><i style="background-image:url(scans/avatar-front.jpg)"></i><i style="background-image:url(scans/dune-front.jpg)"></i></span></span>
+            <b>Bulk import CSV</b><small>Bring your old list</small>
+          </button>
+        </div>
+      </article>
+
+      <article class="cell c-shelf" id="locator">
+        <span class="k">Shelf locations</span>
+        <div class="loc-head"><h3>Know exactly where it lives.</h3>
+          <span class="loc-find"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><em id="locQ">Interstellar</em></span></div>
+        <div class="shelf3d"><div class="spines" id="spines"></div><div class="ledge"></div></div>
+        <div class="loc-tag" id="locTag"><b>Interstellar</b><span>Living room · Shelf B · Slot 7</span></div>
+      </article>
+
+      <article class="cell c-spec" id="atmos">
+        <span class="k">Specs</span>
+        <h3>Audio, video, every language.</h3>
+        <div class="atmos"><canvas id="atmosCv" aria-hidden="true"></canvas>
+          <span class="sc" style="--a:185deg" data-c="#6b8aff">Dolby Atmos</span><span class="sc" style="--a:238deg" data-c="#ffb547">DTS:X</span><span class="sc" style="--a:300deg" data-c="#2fd15b">DTS-HD MA 7.1</span><span class="sc" style="--a:355deg" data-c="#ff3d6e">Dolby Vision</span><span class="sc" style="--a:130deg" data-c="#a3b4ff">HDR10+</span></div>
+      </article>
+
+      <article class="cell c-notes" id="notes">
+        <span class="k">Custom fields &amp; notes</span>
+        <h3>Your copy, your details.</h3>
+        <div class="ed">
+          <div class="ed-top"><span class="ed-th" style="background-image:url(scans/oppenheimer-front.jpg)"></span><span><b>Oppenheimer</b><small>4K UHD · 3 discs</small></span></div>
+          <div class="ed-tags"><button type="button" class="on">Steelbook</button><button type="button">Slipcover</button><button type="button" class="on">Region free</button><button type="button">Signed</button><button type="button">First press</button></div>
+          <div class="ed-note"><span id="noteTxt"></span><i class="caret"></i></div>
+        </div>
+      </article>
+
+      <article class="cell c-stats" id="stats">
+        <span class="badge">Premium</span>
+        <h3>A dashboard for your shelf.</h3>
+        <div class="dash">
+          <svg class="donut" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" class="trk"/>
+            <circle cx="60" cy="60" r="46" class="seg" data-v="38" data-l="4K UHD" style="--c:#ffb547"/><circle cx="60" cy="60" r="46" class="seg" data-v="47" data-l="Blu-ray" style="--c:#6b8aff"/><circle cx="60" cy="60" r="46" class="seg" data-v="15" data-l="DVD" style="--c:#ff3d6e"/></svg>
+          <div class="dc"><b id="dcNum">248</b><small id="dcLbl">discs</small></div>
+          <div class="decades" aria-hidden="true"><i style="--h:22%"></i><i style="--h:35%"></i><i style="--h:48%"></i><i style="--h:70%"></i><i style="--h:100%"></i><span>80s</span><span>90s</span><span>00s</span><span>10s</span><span>20s</span></div>
+        </div>
+        <span class="k">Example collection</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WALL -->
+<section class="wall" id="wall">
+  <div class="wrap wall-head">
+    <div><div class="big" id="bigNum">2,000</div><p class="t">Whether you own 20 films <em>or 2,000.</em></p></div>
+    <p class="lede">Movieshelf keeps a single shelf or a whole wall organized, searchable and fun to browse. Scroll the posters and rediscover films you forgot you owned.</p>
+  </div>
+  <div class="wall-stage"><div class="gl"><canvas id="wallGL" aria-label="A wall of 3D movie cases" role="img"></canvas></div><span class="wall-hint">Hover a case to pull it out</span></div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="pr-head">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="rv" style="margin-top:18px">Start free. <em>Grow the shelf.</em></h2>
+      <p class="lede">Catalog your first 25 films for free. Premium removes every limit and unlocks the tools for serious collections.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free</h3>
+        <div class="price"><b>$0</b><span>forever</span></div>
+        <ul>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="rgba(255,255,255,.08)"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#eef0f8" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Import up to 25 titles</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="rgba(255,255,255,.08)"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#eef0f8" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 10 collection folders</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="rgba(255,255,255,.08)"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#eef0f8" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Bulk scan 10 barcodes at a time</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="rgba(255,255,255,.08)"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#eef0f8" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Preview of the analytics dashboard</li>
+        </ul>
+        <p class="sub">Everything you need to try Movieshelf with your own discs.</p>
+      </div>
+      <div class="plan pro">
+        <h3>Movieshelf <em>Premium</em></h3>
+        <div class="seg" role="group" aria-label="Billing period" id="seg"><span class="pillbg" id="pillbg"></span>
+          <button type="button" data-p="m" aria-pressed="false">Monthly</button><button type="button" data-p="y" aria-pressed="true">Annual</button><button type="button" data-p="l" aria-pressed="false">Lifetime</button></div>
+        <div><div class="price"><b id="priceVal">$29.99</b><span id="pricePer">per year</span></div><div class="save" id="save">Free trial · save 37% vs monthly</div></div>
+        <ul>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#6b8aff"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited media imports</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#6b8aff"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited collection folders</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#6b8aff"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Change covers and backdrops</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#6b8aff"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced custom fields</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#6b8aff"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Full collection analytics dashboard</li>
+          <li><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#6b8aff"/><path d="M6 10.3l2.6 2.6L14 7.4" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>
+        </ul>
+        <a class="btn btn-accent" style="align-self:flex-start" href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869" target="_blank" rel="noopener">Start with Movieshelf</a>
+      </div>
+    </div>
+    <p class="fine">US prices shown; local App Store prices may vary. Payment is charged to your Apple Account at confirmation of purchase, or at the end of the free trial for annual plans. Subscriptions renew automatically unless auto-renew is turned off at least 24 hours before the end of the current period. Lifetime is a one-time purchase.</p>
+  </div>
+</section>
+
+<!-- MAKER -->
+<section class="maker">
+  <div class="wrap maker-grid">
+    <div class="quote">
+      <span class="eyebrow">Made by a collector</span>
+      <p>Movieshelf started with a growing pile of discs and no good way to keep track of them. <em>So I built the app I wanted on my own shelf.</em></p>
+      <div class="sig"><div class="av">C</div><div><b>Chetan Nagaraja</b><small>Maker of Movieshelf</small></div></div>
+    </div>
+    <div class="req">
+      <h3>Made for iPhone</h3>
+      <div><span>Requires</span><b>iOS 15.1 or later</b></div>
+      <div><span>Formats</span><b>DVD · Blu-ray · 4K UHD</b></div>
+      <div><span>Size</span><b>66.4 MB</b></div>
+      <div><span>Category</span><b>Entertainment</b></div>
+      <div><span>Age rating</span><b>4+</b></div>
+    </div>
+  </div>
+</section>
+
+<!--JOURNAL-->
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div><span class="eyebrow">FAQ</span><h2 style="margin-top:18px">The <em>useful</em> bits.</h2></div>
+    <div>
+      <div class="qa"><button type="button" aria-expanded="true">What can I do for free?<span class="pl"></span></button><div class="ans"><div><p>Import up to 25 titles, create up to 10 collection folders, bulk scan up to 10 barcodes at a time, and preview the collection analytics dashboard.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">What does Premium unlock?<span class="pl"></span></button><div class="ans"><div><p>Unlimited imports and folders, custom covers and backdrops, advanced custom fields, the full analytics dashboard and priority support. Choose monthly, annual or a one-time lifetime purchase.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Which formats does Movieshelf track?<span class="pl"></span></button><div class="ans"><div><p>DVD, Blu-ray and 4K UHD, including special editions and box sets, along with audio formats such as Dolby Atmos and DTS, subtitles and languages.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Can I bring in the list I already have?<span class="pl"></span></button><div class="ans"><div><p>Yes. Choose Bulk Import CSV from the Import menu, or scan barcodes and search by title to add films one by one.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Will it warn me about duplicates?<span class="pl"></span></button><div class="ans"><div><p>Yes. When you add a film you already own, Movieshelf shows which formats you have and where it's shelved, so you can skip it or add the new copy.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Is there a free trial?<span class="pl"></span></button><div class="ans"><div><p>Yes, the annual plan starts with a free trial.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">What about my data?<span class="pl"></span></button><div class="ans"><div><p>According to the App Store privacy label, the data Movieshelf collects is not linked to your identity. Read the full <a href="https://grateful-alpaca-274206.framer.app/" target="_blank" rel="noopener">privacy policy</a>.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section class="finale" id="finale">
+  <div class="wrap">
+    <h2 class="rv">Lights down. <em>Shelf up.</em></h2>
+    <p class="lede fin-lede">Scan the barcode, and the disc joins your library: catalogued, sorted and ready to find.</p>
+  </div>
+  <div class="wrap"><div class="fin-stage" id="finStage">
+    <div class="gl"><canvas id="finGL" aria-label="Cases drifting under a scanner into a lit library" role="img"></canvas></div>
+    <div class="fin-beam" aria-hidden="true"></div>
+    <div class="fin-phone" id="finPhone" aria-hidden="true"></div>
+    <div class="fin-stat l"><b>3</b><small>formats: DVD, Blu-ray and 4K UHD</small></div>
+    <div class="fin-stat r"><b>10</b><small>barcodes imported in one pass</small></div>
+  </div></div>
+  <div class="wrap">
+    <div class="cta-row"><a class="store" href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869" target="_blank" rel="noopener" aria-label="Download Movieshelf on the App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></a></div>
+    <p class="small">Free to start. Made for iPhone, iOS 15.1 or later.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="6" height="20" rx="1.5" fill="#6b8aff"/><rect x="11" y="4" width="6" height="23" rx="1.5" fill="#eef0f8"/><rect x="20.5" y="8" width="6" height="19" rx="1.5" fill="#ffb547" transform="rotate(12 23.5 27)"/><rect x="1" y="27" width="30" height="2.5" rx="1.2" fill="#969cb2"/></svg>movieshelf</a>
+    <nav aria-label="Footer"><a href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869" target="_blank" rel="noopener">App Store</a><a href="/blog/">Journal</a><a href="/rss.xml">RSS</a><a href="https://grateful-alpaca-274206.framer.app/" target="_blank" rel="noopener">Privacy</a><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of Use</a></nav>
+    <p class="legal">© 2026 MovieShelf · Made by Chetan Nagaraja. Movie titles, cover artwork and trademarks shown on this page belong to their respective owners and are used to illustrate how Movieshelf catalogs a collection. The Northbound Trilogy box set is a fictional example. Apple, the Apple logo, App Store and iPhone are trademarks of Apple Inc.</p>
+  </div>
+</footer>
+<div class="fly" id="fly" aria-hidden="true"></div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
