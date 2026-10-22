@@ -8,7 +8,7 @@ export const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname)
 export const CONTENT = path.join(ROOT, 'content/blog');
 const cfgFile = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 // On Netlify, URL is the site's primary address (custom domain once you add one).
-export const SITE = { ...cfgFile, siteUrl: (process.env.SITE_URL || process.env.URL || cfgFile.siteUrl).replace(/\/$/, '') };
+export const SITE = { ...cfgFile, siteUrl: (process.env.SITE_URL || cfgFile.siteUrl || process.env.URL).replace(/\/$/, '') };
 
 export const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const slugify = s => String(s).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
