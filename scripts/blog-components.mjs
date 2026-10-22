@@ -1,4 +1,4 @@
-// Rich, visual building blocks for Journal posts. Authors write them in Markdown:
+// Rich, visual building blocks for blog posts. Authors write them in Markdown:
 //
 //   :::tip Optional title          :::note / :::warning / :::takeaways also work
 //   Any **markdown** here.

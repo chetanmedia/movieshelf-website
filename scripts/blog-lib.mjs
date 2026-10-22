@@ -133,7 +133,7 @@ ${jsonld.map(j => `<script type="application/ld+json">${JSON.stringify(j).replac
 
 const nav = active => `<header class="nav"><div class="nav-in">
   <a class="logo" href="/" aria-label="Movieshelf home">${LOGO}movieshelf</a>
-  <nav aria-label="Primary"><a href="/#scan">Scanning</a><a href="/#organize">Organize</a><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/blog/"${active ? ' aria-current="page"' : ''}>Journal</a></nav>
+  <nav aria-label="Primary"><a href="/#scan">Scanning</a><a href="/#organize">Organize</a><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/blog/"${active ? ' aria-current="page"' : ''}>Blog</a></nav>
   <a class="btn btn-accent" href="${SITE.appStoreUrl}?ct=blog-nav&amp;mt=8" target="_blank" rel="noopener">Get the app</a>
 </div></header>`;
 
@@ -141,8 +141,8 @@ const footer = cats => `<footer class="foot"><div class="wrap">
   <div class="foot-top"><a class="logo" href="/">${LOGO}movieshelf</a>${storeBadge('blog-footer')}</div>
   <div class="foot-cols">
     <div><b>App</b><a href="/#scan">Barcode scanning</a><a href="/#organize">Organize your shelf</a><a href="/#boxsets">Box sets</a><a href="/#pricing">Pricing</a><a href="/#faq">FAQ</a></div>
-    <div><b>Journal</b><a href="/blog/">All articles</a>${cats.map(c => `<a href="/blog/category/${slugify(c)}/">${esc(c)}</a>`).join('')}<a href="/rss.xml">RSS feed</a></div>
-    <div><b>Company</b><a href="${SITE.appStoreUrl}" target="_blank" rel="noopener">App Store</a><a href="${SITE.privacyUrl}" target="_blank" rel="noopener">Privacy</a><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of Use</a></div>
+    <div><b>Blog</b><a href="/blog/">All articles</a>${cats.map(c => `<a href="/blog/category/${slugify(c)}/">${esc(c)}</a>`).join('')}<a href="/rss.xml">RSS feed</a></div>
+    <div><b>Company</b><a href="${SITE.appStoreUrl}" target="_blank" rel="noopener">App Store</a><a href="/privacy/">Privacy Policy</a><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of Use</a></div>
   </div>
   <p class="legal">© ${new Date().getFullYear()} Movieshelf · Made by ${esc(SITE.author.name)}. Movie titles and artwork belong to their respective owners. Apple, the Apple logo, App Store and iPhone are trademarks of Apple Inc.</p>
 </div></footer>
@@ -175,7 +175,7 @@ export function renderPost(post, posts) {
       about: { '@type': 'MobileApplication', name: SITE.name, operatingSystem: 'iOS', applicationCategory: 'EntertainmentApplication', url: SITE.appStoreUrl } },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') },
-      { '@type': 'ListItem', position: 2, name: 'Journal', item: abs('/blog/') },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: abs('/blog/') },
       { '@type': 'ListItem', position: 3, name: post.category, item: abs(`/blog/category/${slugify(post.category)}/`) },
       { '@type': 'ListItem', position: 4, name: post.title, item: abs(post.url) }] },
   ];
@@ -187,7 +187,7 @@ export function renderPost(post, posts) {
 <main class="post">
   <div class="progress" aria-hidden="true"><i></i></div>
   <header class="post-head wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog/">Journal</a><span>/</span><a href="/blog/category/${slugify(post.category)}/">${esc(post.category)}</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog/">Blog</a><span>/</span><a href="/blog/category/${slugify(post.category)}/">${esc(post.category)}</a></nav>
     <h1>${esc(post.title)}</h1>
     ${post.summary ? `<p class="dek">${esc(post.summary)}</p>` : ''}
     <div class="byline"><span class="av" aria-hidden="true">${esc((post.author || SITE.author.name)[0])}</span>
@@ -208,17 +208,48 @@ export function renderPost(post, posts) {
 </main>` + footer(cats);
 }
 
+export function renderPage(page) {
+  const { html, toc } = renderMarkdown({ ...page, faq: [] }, []);
+  const url = `/${page.slug}/`;
+  const jsonld = [
+    { '@context': 'https://schema.org', '@type': 'WebPage', '@id': abs(url), name: page.title, description: page.description, url: abs(url), dateModified: iso(page.updated), inLanguage: 'en', isPartOf: { '@type': 'WebSite', name: SITE.name, url: abs('/') }, publisher: orgLd() },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') }, { '@type': 'ListItem', position: 2, name: page.title, item: abs(url) }] },
+  ];
+  return head({ title: `${page.title} | ${SITE.name}`, description: page.description, url, image: '/og/default.jpg', imageAlt: SITE.name, jsonld })
+  + nav(false) + `
+<main class="post page">
+  <header class="post-head wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>${esc(page.title)}</span></nav>
+    <h1>${esc(page.title)}</h1>
+    <p class="dek">Last updated <time datetime="${ymd(page.updated)}">${human(page.updated)}</time></p>
+  </header>
+  <div class="post-grid wrap">
+    <aside class="toc" aria-label="On this page"><b>On this page</b><ol>${toc.filter(t => t.depth === 2).map(t => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ol></aside>
+    <article class="prose">${toc.some(t => t.depth === 2) ? `<details class="toc-m"><summary><span class="tm-l">On this page</span><span class="tm-c">${esc(toc.find(t => t.depth === 2).text)}</span><span class="tm-i" aria-hidden="true"></span></summary><ol>${toc.filter(t => t.depth === 2).map(t => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ol></details>` : ''}${html}</article>
+  </div>
+</main>` + footer(page.cats || []);
+}
+
+export function loadPages() {
+  const dir = path.join(ROOT, 'content', 'pages');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(f => f.endsWith('.md') && !f.startsWith('_')).map(f => {
+    const { data, content } = matter(fs.readFileSync(path.join(dir, f), 'utf8'));
+    return { ...data, slug: data.slug || f.replace(/\.md$/, ''), updated: new Date(data.updated || Date.now()), body: content };
+  });
+}
+
 export function renderIndex(posts, { page = 1, pages = 1, category = null, all = posts } = {}) {
   const cats = [...new Set(all.map(p => p.category))];
   const base = category ? `/blog/category/${slugify(category)}/` : '/blog/';
   const url = page > 1 ? `${base}page/${page}/` : base;
   const title = category ? `${category} | ${SITE.blog.title}` : (page > 1 ? `${SITE.blog.title}, page ${page}` : `${SITE.blog.title}: DVD, Blu-ray & 4K Collecting Guides`);
-  const desc = category ? `${category} from the Movieshelf Journal: practical articles for DVD, Blu-ray and 4K UHD collectors.` : SITE.blog.description;
+  const desc = category ? `${category} from the Movieshelf Blog: practical articles for DVD, Blu-ray and 4K UHD collectors.` : SITE.blog.description;
   const [lead, ...rest] = page === 1 && !category ? posts : [null, ...posts];
   const jsonld = [
     { '@context': 'https://schema.org', '@type': 'Blog', '@id': abs('/blog/#blog'), name: SITE.blog.title, description: SITE.blog.description, url: abs('/blog/'), publisher: orgLd(), inLanguage: 'en',
       blogPost: posts.slice(0, 20).map(p => ({ '@type': 'BlogPosting', headline: p.title, url: abs(p.url), datePublished: iso(p.date), image: abs(p.coverUrl) })) },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') }, { '@type': 'ListItem', position: 2, name: 'Journal', item: abs('/blog/') },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') }, { '@type': 'ListItem', position: 2, name: 'Blog', item: abs('/blog/') },
       ...(category ? [{ '@type': 'ListItem', position: 3, name: category, item: abs(base) }] : [])] },
   ];
   const prev = page > 1 ? (page === 2 ? base : `${base}page/${page - 1}/`) : null, next = page < pages ? `${base}page/${page + 1}/` : null;
@@ -227,7 +258,7 @@ export function renderIndex(posts, { page = 1, pages = 1, category = null, all =
   + nav(true) + `
 <main class="index">
   <header class="index-head wrap">
-    <span class="eyebrow"><i></i>${category ? 'Category' : 'The Movieshelf Journal'}</span>
+    <span class="eyebrow"><i></i>${category ? 'Category' : 'The Movieshelf Blog'}</span>
     <h1>${category ? esc(category) : 'Guides for people who <em>still buy discs.</em>'}</h1>
     <p class="lede">${category ? esc(desc) : 'Cataloging, shelving, editions, formats and the small habits that make a physical movie collection a joy to own. New articles every day.'}</p>
     <nav class="chips" aria-label="Categories"><a href="/blog/"${!category ? ' aria-current="page"' : ''}>All</a>${cats.map(c => `<a href="/blog/category/${slugify(c)}/"${c === category ? ' aria-current="page"' : ''}>${esc(c)}</a>`).join('')}</nav>
@@ -241,13 +272,14 @@ export function renderIndex(posts, { page = 1, pages = 1, category = null, all =
 }
 
 /* ---------- feeds ---------- */
-export function sitemap(posts) {
+export function sitemap(posts, pages = []) {
   const cats = [...new Set(posts.map(p => p.category))];
   const latest = posts[0] ? ymd(posts[0].updated) : ymd(new Date());
   const urls = [
     { loc: '/', lastmod: ymd(new Date()), pri: '1.0', freq: 'weekly' },
     { loc: '/blog/', lastmod: latest, pri: '0.9', freq: 'daily' },
     ...cats.map(c => ({ loc: `/blog/category/${slugify(c)}/`, lastmod: latest, pri: '0.6', freq: 'daily' })),
+    ...pages.map(p => ({ loc: `/${p.slug}/`, lastmod: ymd(p.updated), pri: '0.3', freq: 'yearly' })),
     ...posts.map(p => ({ loc: p.url, lastmod: ymd(p.updated), pri: '0.8', freq: 'monthly', img: p.coverUrl, imgTitle: p.coverAlt || p.title })),
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -302,7 +334,7 @@ Movieshelf is an iPhone app (iOS 15.1 or later) for people who collect physical 
 ## Pages
 
 - [Home](${abs('/')}): what Movieshelf does, features and pricing.
-- [Movieshelf Journal](${abs('/blog/')}): guides for DVD, Blu-ray and 4K UHD collectors.
+- [Movieshelf Blog](${abs('/blog/')}): guides for DVD, Blu-ray and 4K UHD collectors.
 
 ## Articles
 
@@ -315,7 +347,7 @@ export function latestSection(posts) {
   const top = posts.slice(0, 3);
   if (!top.length) return '';
   return `<section class="journal" id="journal" aria-labelledby="journal-h"><div class="wrap">
-    <div class="journal-head"><div><span class="eyebrow"><i></i>The Movieshelf Journal</span><h2 id="journal-h" class="rv" style="margin-top:18px">Collect smarter. <em>Read the guides.</em></h2></div>
+    <div class="journal-head"><div><span class="eyebrow"><i></i>The Movieshelf Blog</span><h2 id="journal-h" class="rv" style="margin-top:18px">Collect smarter. <em>Read the guides.</em></h2></div>
     <a class="link" href="/blog/">All articles <span>→</span></a></div>
     <div class="journal-grid">${top.map(p => `<article class="jcard"><a href="${p.url}"><span class="jimg"><img src="${p.coverUrl}" alt="" loading="lazy" decoding="async" width="1600" height="900"></span>
       <span class="jcat">${esc(p.category)} · ${p.minutes} min read</span><h3>${esc(p.title)}</h3><p>${esc(p.summary || p.description)}</p></a></article>`).join('')}</div>

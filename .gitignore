@@ -8,3 +8,4 @@ public/rss.xml
 public/robots.txt
 public/llms.txt
 .DS_Store
+public/privacy/

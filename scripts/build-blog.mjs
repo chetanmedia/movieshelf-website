@@ -2,7 +2,7 @@
 // Runs before `vite build` and `vite dev`. Posts dated in the future stay unpublished until that day's build.
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, CONTENT, SITE, loadPosts, renderPost, renderIndex, sitemap, rss, robots, llms, slugify } from './blog-lib.mjs';
+import { ROOT, CONTENT, SITE, loadPosts, loadPages, renderPage, renderPost, renderIndex, sitemap, rss, robots, llms, slugify } from './blog-lib.mjs';
 
 const PUB = path.join(ROOT, 'public');
 const OUT = path.join(PUB, 'blog');
@@ -26,7 +26,9 @@ export function buildBlog({ quiet = false } = {}) {
     const list = posts.filter(p => p.category === c), cp = Math.max(1, Math.ceil(list.length / PER_PAGE));
     for (let i = 1; i <= cp; i++) write(i === 1 ? `blog/category/${slugify(c)}/index.html` : `blog/category/${slugify(c)}/page/${i}/index.html`, renderIndex(list.slice((i - 1) * PER_PAGE, i * PER_PAGE), { page: i, pages: cp, category: c, all: posts }));
   }
-  write('sitemap.xml', sitemap(posts));
+  const sitePages = loadPages(), allCats = [...new Set(posts.map(p => p.category))];
+  for (const pg of sitePages) write(`${pg.slug}/index.html`, renderPage({ ...pg, cats: allCats }));
+  write('sitemap.xml', sitemap(posts, sitePages));
   write('rss.xml', rss(posts));
   write('robots.txt', robots());
   write('llms.txt', llms(posts));

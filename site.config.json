@@ -11,10 +11,10 @@
     "bio": "Physical media collector and the developer behind Movieshelf, an iPhone app for cataloging DVDs, Blu-rays and 4K UHDs."
   },
   "blog": {
-    "title": "The Movieshelf Journal",
+    "title": "The Movieshelf Blog",
     "description": "Guides for people who still buy discs: cataloging, shelving, editions, formats and getting the most out of a physical movie collection."
   },
   "locale": "en_US",
-  "privacyUrl": "https://grateful-alpaca-274206.framer.app/",
+  "privacyUrl": "/privacy/",
   "indexNowKey": "bd7d8857c18fdc3f10fcc35bad1b0a80"
 }
