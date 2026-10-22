@@ -101,7 +101,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 90 | 2027-01-20 | terminator 2 4k vs blu ray | 40 | 26 | — | Terminator 2: 4K vs Blu-ray Compared | Formats | todo |
 | 91 | 2027-01-21 | disney dvd collection | 1900 | 28 | — | Collecting Disney on DVD and Blu-ray: Editions Explained | Collecting | todo |
 | 92 | 2027-01-22 | criterion collection dvd | 3600 | 30 | criterion collection blu ray, criterion collection 4k | Criterion Collection on DVD vs Blu-ray vs 4K: Which to Buy | Collecting | todo |
-| 93 | 2027-01-23 | movie wishlist *(long-tail)* | — | — | — | How to Build a Movie Wishlist That Saves You Money | Guides | todo |
+| 93 | 2027-01-23 | movie wish list | 320 | 35 | — | How to Build a Movie Wishlist That Saves You Money | Guides | todo |
 | 94 | 2027-01-24 | horror dvd collection | 720 | 29 | horror blu ray collection | How to Build a Horror Blu-ray Collection | Collecting | todo |
 | 95 | 2027-01-25 | the matrix 4k vs blu ray | 30 | 22 | — | The Matrix: 4K vs Blu-ray Compared | Formats | todo |
 | 96 | 2027-01-26 | digitize dvd collection | 40 | 27 | — | Should You Digitize Your DVD Collection? Pros, Cons and Alternatives | Collecting | todo |
@@ -124,7 +124,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 113 | 2027-02-12 | best 4k blu rays | 480 | 28 | best 4k blu rays reddit | The Best 4K Blu-rays for Picture Quality | Formats | todo |
 | 114 | 2027-02-13 | move house with disc collection *(long-tail)* | — | — | — | How to Move House With a Big Disc Collection | Organizing | todo |
 | 115 | 2027-02-14 | aliens 4k vs blu ray | 30 | 25 | — | Aliens: 4K vs Blu-ray Compared | Formats | todo |
-| 116 | 2027-02-15 | upcoming 4k releases 2026 | 140 | 26 | upcoming 4k releases, 4k blu ray release dates, new blu ray releases this week | How to Keep Up With Upcoming 4K Blu-ray Releases | Collecting | todo |
+| 116 | 2027-02-15 | dvd profiler | 260 | 34 | dvd profiler alternative, export movies | DVD Profiler in 2027: Still Usable? What Collectors Switch To | Guides | todo |
 | 117 | 2027-02-16 | shout factory blu ray | 1600 | 31 | — | Shout! Factory and Scream Factory: A Collector's Guide | Collecting | todo |
 | 118 | 2027-02-17 | downsize movie collection *(long-tail)* | — | — | — | How to Downsize a Movie Collection Without Regret | Organizing | todo |
 | 119 | 2027-02-18 | game of thrones 4k vs blu ray | 50 | 30 | — | Game of Thrones: 4K vs Blu-ray Compared | Formats | todo |
@@ -170,7 +170,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 159 | 2027-03-30 | criterion spine numbers *(long-tail)* | — | — | criterion dvd collection, criterion blu ray case | Tracking Your Criterion Collection by Spine Number | Organizing | todo |
 | 160 | 2027-03-31 | dvd collection | 2900 | 31 | my dvd collection, huge dvd collection | The DVD Collector's Handbook | Guides | todo |
 | 161 | 2027-04-01 | 4k player buying mistakes *(long-tail)* | — | — | — | 7 Mistakes to Avoid When Buying a 4K Blu-ray Player | Gear | todo |
-| 162 | 2027-04-02 | new blu ray releases | 2900 | 42 | new blu ray releases this week | New Blu-ray Releases: How Collectors Keep Up Every Week | Collecting | todo |
+| 162 | 2027-04-02 | clz movies | 880 | 35 | clz movies app, movie collector app, movie organizer app | CLZ Movies vs Movieshelf: Which Collection App Fits You? | Guides | todo |
 | 163 | 2027-04-03 | godzilla blu ray collection | 170 | 30 | — | Godzilla on Blu-ray: Showa to Monsterverse Collections | Collecting | todo |
 | 164 | 2027-04-04 | organize box sets on shelf *(long-tail)* | — | — | — | How to Shelve Box Sets Without Breaking Your System | Organizing | todo |
 | 165 | 2027-04-05 | vinegar syndrome | 33100 | 43 | — | Vinegar Syndrome: The Film Decay and the Blu-ray Label Explained | Collecting | todo |
@@ -191,6 +191,11 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 180 | 2027-04-20 | display vs storage *(long-tail)* | — | — | — | Display Shelf vs Storage: Splitting a Collection the Smart Way | Organizing | todo |
 | 181 | 2027-04-21 | anniversary editions *(long-tail)* | — | — | — | Anniversary Editions: When Upgrading Is Worth It | Formats | todo |
 | 182 | 2027-04-22 | ask the collector faq *(long-tail)* | — | — | — | Movie Collecting FAQ: 25 Questions New Collectors Ask | Guides | todo |
+
+## Competitor notes (Ubersuggest, 2026-10-22)
+
+- **CLZ Movies (clz.com)** — DA 58, ~7,500 US search visits/month across all CLZ apps; the movie section gets ~600. No blog: it ranks with product landing pages per keyword (`/movies/movie-organizer`, `/movies/bluray-database`, `/movies/dvd-profiler`) and its help manual (export to Excel, wish list, sorting). Owns "clz movies" (880), "movie collector" (110), "bluray database" (70) and sits #6 for "dvd profiler" (260) and #11 for "movie wish list" (320). Our blog content is the gap they don't cover.
+- **Blu-ray.com** — DA 84, ~780,000 US search visits/month. Owns per-title searches ("<film> blu ray", "<film> 4k"), release dates, reviews, deals and news. **Do not target those** (we replaced the two release-date posts). Link to its reviews as an outbound source where useful; position Movieshelf as the tracker for what you own, not a database.
 
 ## Ideas backlog
 

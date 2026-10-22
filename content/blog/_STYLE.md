@@ -8,7 +8,8 @@ Collectors of physical media: DVD, Blu-ray, 4K UHD, steelbooks, boutique labels 
 ## One post = one search intent
 - Choose **one primary keyword** (the `keyword` front-matter field) with clear consumer intent and realistic competition. Long-tail keywords beat head terms. ("how to organize blu-ray collection by genre" beats "blu-ray".)
 - Before writing, search the keyword. Read the top 5 results and note what they miss. Our post must answer the question **better and faster** than all of them.
-- Never publish two posts targeting the same keyword. Check `content/blog/` and `_topics.md` first.
+- Never publish two posts targeting the same keyword.
+- Don't target searches Blu-ray.com owns: single-title pages ("<film> blu ray", "<film> 4k" on its own), release dates/schedules, deals and news. The "<film>: 4K vs Blu-ray Compared" format is fine because it answers a comparison question. Comparisons with CLZ Movies or other apps must be factual and fair, based on their public websites. Check `content/blog/` and `_topics.md` first.
 
 ## Structure (required)
 1. `title`: under 65 chars, keyword near the front. `seoTitle` may differ slightly and must also be under 65 chars.
