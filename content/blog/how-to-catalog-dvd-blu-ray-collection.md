@@ -28,6 +28,12 @@ If you own more than a couple of shelves of discs, you have probably done at lea
 
 This guide walks through a system that works for 50 discs or 5,000: what to record, how to capture it quickly, and how to keep it accurate as the collection grows.
 
+:::stats
+- 10–15s | to add a disc by scanning its barcode | vs several minutes typing it in
+- 8 | steps from a wall of cases to a searchable library
+- 1 | list to rule them all: your single source of truth
+:::
+
 <div class="tldr">
 
 **The short version**
@@ -46,12 +52,22 @@ This guide walks through a system that works for 50 discs or 5,000: what to reco
 
 A catalog earns its keep in four everyday moments:
 
-- **In the store.** You can check whether you already own a film, and which edition, before you buy it again.
-- **On movie night.** Browsing covers on your phone surfaces films you forgot you owned.
-- **When you lend something.** A note on the entry is all it takes to remember who borrowed it.
-- **For insurance.** A list of titles, formats and purchase prices is far easier to hand over than a room full of cases.
+:::cards
+### In the store
+Check whether you already own a film, and which edition, before you buy it again.
+### On movie night
+Browsing covers on your phone surfaces films you forgot you owned.
+### When you lend something
+A note on the entry is all it takes to remember who borrowed it.
+### For insurance
+A list of titles, formats and purchase prices is far easier to hand over than a room full of cases.
+:::
 
-There's also a quieter benefit. Collectors care about details that streaming services erase: the steelbook, the Criterion spine number, the Dolby Atmos track, the slipcover you kept. A catalog is where those details live.
+There's also a quieter benefit. Collectors care about details that streaming services erase: the steelbook, the Criterion spine number, the Dolby Atmos track, the slipcover you kept.
+
+:::pullquote
+A catalog is where the details streaming erases get to live.
+:::
 
 ## Step 1: Decide what one entry means
 
@@ -61,7 +77,9 @@ Before you scan anything, decide what a single record represents. Getting this r
 - **One entry per edition** is what most collectors end up wanting. Two copies of the same film in different formats become two entries, each with its own format, region and shelf spot.
 - **Box sets** need a rule too. A good approach is one entry for the set, with each film inside it listed as well, so searching for any title still finds it.
 
-If you're unsure, go with one entry per edition. It's the only option that never loses information.
+:::tip When in doubt
+Go with **one entry per edition**. It's the only option that never loses information, and you can always group editions of the same film later.
+:::
 
 ## Step 2: Choose a tool, then make it the only list
 
@@ -88,15 +106,28 @@ Barcodes are the secret to cataloging quickly. The number on the back of a case 
 
 A rhythm that works:
 
-1. **Work one shelf at a time.** Pull roughly ten discs, scan them, put them back in the same order.
-2. **Scan in good light and tilt glossy cases.** Reflections from shrink-wrap and slipcovers are the main cause of misreads.
-3. **Review the matches before importing.** Check the year and format on each one. Remasters and re-releases often share a title.
-4. **Type the number when a barcode won't scan.** Torn stickers and price tags happen. The digits printed under the bars work just as well.
-5. **Search by title for anything without a barcode.** Imports, rentals and some box sets fall into this group.
+:::steps
+### Work one shelf at a time
+Pull roughly ten discs, scan them, and put them back in the same order.
+### Scan in good light and tilt glossy cases
+Reflections from shrink-wrap and slipcovers are the main cause of misreads.
+### Review the matches before importing
+Check the year and format on each one. Remasters and re-releases often share a title.
+### Type the number when a barcode won't scan
+Torn stickers and price tags happen. The digits printed under the bars work just as well.
+### Search by title for anything without a barcode
+Imports, rentals and some box sets fall into this group.
+:::
 
-<div class="note">In Movieshelf you can queue up to 10 barcodes in one pass, check each match, then import them together. Box sets get their own switch, so a trilogy is stored as one package with every film inside it.</div>
+{{phone:scan|Ten barcodes, one import|In Movieshelf you can queue up to 10 barcodes in one pass, check each match, then import them together. Box sets get their own switch, so a trilogy is stored as one package with every film inside it.}}
 
 At around ten to fifteen seconds per disc, a barcode workflow gets a few hundred discs done in an evening. Typing the same details by hand can easily take several minutes per disc.
+
+:::bars Rough time to add one disc
+- Barcode scan | 12 | ~10–15 sec
+- Search by title | 40 | ~30–45 sec
+- Typing it all by hand | 180 | 3+ min
+:::
 
 ## Step 4: Record the details collectors care about
 
@@ -110,6 +141,10 @@ The title and year are the minimum. These are the fields that make a catalog gen
 - **Condition and purchase info:** where you bought it, what you paid, and any scratches.
 - **Notes:** who borrowed it, why you bought it, which disc holds the extras.
 
+:::warning Imports and region codes
+A Region B Blu-ray won't play on most North American players, and a Region 2 DVD won't play on a Region 1 player. Record the region on every import so you know before you lend it or pack it for a trip.
+:::
+
 You don't need every field on day one. Capture format and edition as you scan, and fill in the rest gradually.
 
 ## Step 5: Give every disc a shelf address
@@ -122,7 +157,31 @@ Use a simple, consistent pattern: **room · shelf · slot**. For example:
 - *Hallway · Tower 2 · Row 14*
 - *Bedroom · Box set drawer*
 
-Label the shelf edges with small letters or numbers so the system is obvious to everyone in the house. Then, when you search your catalog, the answer isn't just "you own it." It's "it's on Shelf B, fourteenth from the left."
+Label the shelf edges with small letters or numbers so the system is obvious to everyone in the house.
+
+:::shelf Shelf B, format first then A to Z. Slot 14 is the one you were looking for.
+- Avatar | dvd
+- Avengers: Endgame | dvd
+- Interstellar | dvd
+- Jurassic Park | dvd
+- The Matrix | dvd
+- Dune | bluray
+- Joker | bluray
+- The Dark Knight | bluray
+- Blade Runner 2049 | bluray
+- Arrival | bluray
+- Heat | bluray
+- No Country for Old Men | bluray
+- Parasite | bluray
+- *Prisoners | bluray
+- Inception | uhd
+- Oppenheimer | uhd
+- Top Gun: Maverick | uhd
+:::
+
+Then, when you search your catalog, the answer isn't just "you own it." It's "it's on Shelf B, fourteenth from the left."
+
+{{phone:detail}}
 
 ## Step 6: Choose a shelving order you can maintain
 
@@ -135,6 +194,16 @@ How you arrange the physical shelves is personal, but some systems are much easi
 | Genre | Browsing by mood | Every new disc needs a judgment call |
 | Director or franchise | Film buffs, series collectors | Co-directed films and spin-offs |
 | Label and spine number | Criterion, Arrow and other boutique labels | Only works for numbered lines |
+
+:::versus Alphabetical | Genre
+- One correct spot for every new disc
+- Anyone in the house can find things
+- Easy to audit shelf by shelf
+---
+- Great for browsing by mood
+- Looks curated on display
+- Every new disc needs a judgment call
+:::
 
 A good default is **format first, then alphabetical**, with box sets on their own shelf. Once you've recorded shelf locations, the order matters less, because search will always tell you where something lives.
 
@@ -149,25 +218,38 @@ These are the entries that usually trip people up:
 
 ## Step 8: Keep the catalog current
 
-A catalog is only useful if it stays accurate. Three habits keep it that way:
+A catalog is only useful if it stays accurate. Three habits keep it that way. Tick them off as you set them up:
 
-1. **New disc, new entry, same day.** Scan it before it goes on the shelf.
-2. **Keep a wishlist of specific editions.** "Dune: Part Two, 4K steelbook" is much more useful in a store than "Dune 2."
-3. **Do a quick audit every few months.** Walk one shelf, compare it against the catalog, and fix any gaps.
+:::checklist Keep-it-current routine
+- **New disc, new entry, same day.** Scan it before it goes on the shelf.
+- **Keep a wishlist of specific editions.** "Dune: Part Two, 4K steelbook" is much more useful in a store than "Dune 2."
+- **Do a quick audit every few months.** Walk one shelf, compare it against the catalog, and fix any gaps.
+:::
+
+{{phone:collection}}
 
 ## How long does it take to catalog a collection?
 
 Roughly, with barcode scanning:
 
-- **100 discs:** under an hour.
-- **500 discs:** one long evening, or two relaxed ones.
-- **2,000+ discs:** a weekend, done shelf by shelf.
+:::bars Time to catalog, with barcode scanning
+- 100 discs | 1 | under an hour
+- 500 discs | 4 | one long evening
+- 2,000+ discs | 14 | a weekend
+:::
 
 The best trick for a big collection is to start with the shelf you browse most. Even a partial catalog is immediately useful, and the momentum carries you through the rest.
 
 ## Frequently asked questions
 
 {{faq}}
+
+:::takeaways
+- Make one entry per **edition**, not per film.
+- Keep **one list** and scan barcodes in batches of about ten.
+- Give every disc a **room · shelf · slot** address.
+- Add new discs **the day they arrive**.
+:::
 
 ## Start with one shelf tonight
 

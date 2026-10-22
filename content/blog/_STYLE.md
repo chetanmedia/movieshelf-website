@@ -23,6 +23,25 @@ Collectors of physical media: DVD, Blu-ray, 4K UHD, steelbooks, boutique labels 
 10. 1–3 outbound links to authoritative sources (manufacturers, studios, Wikipedia, official specs). Never link to direct competitors.
 11. Length: 1,200–2,200 words. Depth beats padding. Cut any sentence that a reader would skip.
 
+## Make it visual (required)
+Plain text walls are banned. Readers skim, and visual blocks keep them on the page (which helps rankings). Every post must use **at least 5 different components** from the list below, and **never more than ~4 plain paragraphs in a row** without a table, list or component. Components still render as real HTML text, so Google and AI search can read them.
+
+| Component | Write it like this | Use it for |
+|---|---|---|
+| Stats strip | `:::stats` then `- 10–15s \| label \| small print` lines, `:::` | 2–4 headline numbers near the top (numbers count up on scroll) |
+| Cards grid | `:::cards` then `### Title` + one short paragraph, repeated, `:::` | Reasons, use cases, options (3–6 cards) |
+| Step timeline | `:::steps` then `### Step title` + text, repeated, `:::` | Any how-to sequence (replaces numbered lists) |
+| Versus | `:::versus Option A \| Option B` then list A, a line with `---`, list B, `:::` | Comparisons, myths vs facts, before/after |
+| Bar chart | `:::bars Caption` then `- Label \| number \| shown text`, `:::` | Times, sizes, counts, rough comparisons (only defensible numbers) |
+| Shelf illustration | `:::shelf Caption` then `- Title \| dvd/bluray/uhd`, prefix `*` to highlight, `:::` | Any post about organizing or shelving |
+| Checklist | `:::checklist Title` then `- item` lines, `:::` | Routines and to-dos readers tick off (saved in their browser) |
+| Callouts | `:::tip`, `:::note`, `:::warning`, `:::takeaways` + optional title, markdown inside, `:::` | Pro tips, caveats, and a takeaways box before the closing section |
+| Pull quote | `:::pullquote` one sentence `:::` | One memorable line per post |
+| App phone | `{{phone:scan\|Title\|Text}}`, `{{phone:collection\|…}}`, `{{phone:detail\|…}}` (title/text optional) | Show Movieshelf doing the thing the section describes; max 2 per post |
+| Table | normal markdown table | Feature/edition/format comparisons |
+
+A good default rhythm: stats after the intro → cards for "why" → steps for "how" → a phone where the app helps → bars or versus for a comparison → checklist → takeaways → closing section. See `how-to-catalog-dvd-blu-ray-collection.md` for a complete example.
+
 ## Facts & honesty
 - Movieshelf features that may be mentioned: barcode scanning with batch import of up to 10 barcodes at a time, formats (DVD, Blu-ray, 4K UHD), editions and box sets, custom folders, shelf location, watchlist and "what to watch", collection stats, search and filters. **Never invent features** (no spine scanning, no price tracking unless it ships).
 - Every number, date or spec must be verifiable. Cite the source with a link. If unsure, leave it out.

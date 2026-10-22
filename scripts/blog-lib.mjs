@@ -1,4 +1,5 @@
 // Movieshelf blog: Markdown in content/blog → static, crawlable HTML in public/blog.
+import { renderBlock, phone } from './blog-components.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
@@ -61,7 +62,11 @@ function renderMarkdown(post, posts) {
       table(header, body) { return `<div class="table"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>\n`; },
     },
   });
-  let html = md.parse(post.body);
+  const blocks = [];
+  const body = post.body.replace(/^:::([a-z]+)[ \t]*(.*)\n([\s\S]*?)\n:::[ \t]*$/gm, (_, name, arg, inner) => {
+    blocks.push(renderBlock(name, arg.trim(), inner, md)); return `\n\n<!--MSBLOCK${blocks.length - 1}-->\n\n`; });
+  let html = md.parse(body).replace(/<!--MSBLOCK(\d+)-->/g, (_, i) => blocks[i]);
+  html = html.replace(/(?:<p>)?\{\{phone:([a-z]+)(?:\|([^|}]*))?(?:\|([^}]*))?\}\}(?:<\/p>)?/g, (_, k, t, x) => phone(k, t && t.trim(), x && x.trim(), `${SITE.appStoreUrl}?ct=blog-phone&amp;mt=8`));
   html = html.replace(/<p>\{\{app-cta\}\}<\/p>|\{\{app-cta\}\}/g, appCta('inline'))
     .replace(/<p>\{\{app-cta-end\}\}<\/p>|\{\{app-cta-end\}\}/g, appCta('end'))
     .replace(/<p>\{\{faq\}\}<\/p>|\{\{faq\}\}/g, faqHtml(post.faq))
@@ -93,6 +98,7 @@ function head({ title, description, url, image, imageAlt, type = 'website', json
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
@@ -195,7 +201,7 @@ export function renderPost(post, posts) {
   <div class="post-grid wrap">
     <aside class="toc" aria-label="On this page"><b>On this page</b><ol>${toc.filter(t => t.depth === 2).map(t => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ol>
       <div class="toc-app"><span>${LOGO}</span><p>Catalog your collection with Movieshelf.</p>${storeBadge('blog-toc')}</div></aside>
-    <article class="prose">${html}</article>
+    <article class="prose">${toc.some(t => t.depth === 2) ? `<details class="toc-m"><summary><span class="tm-l">On this page</span><span class="tm-c">${esc(toc.find(t => t.depth === 2).text)}</span><span class="tm-i" aria-hidden="true"></span></summary><ol>${toc.filter(t => t.depth === 2).map(t => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ol></details>` : ''}${html}</article>
   </div>
   <section class="wrap author-box" aria-label="About the author"><span class="av lg">${esc((post.author || SITE.author.name)[0])}</span><div><b>${esc(post.author || SITE.author.name)}</b><p>${esc(SITE.author.bio)}</p></div></section>
   ${related.length ? `<section class="wrap related" aria-label="Related articles"><h2>Keep reading</h2><div class="grid">${related.map(p => card(p)).join('')}</div></section>` : ''}
