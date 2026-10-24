@@ -10,7 +10,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 |---|---|---|---|---|---|---|---|---|
 | 0 | 2026-10-22 | how to catalog dvd collection | 30 | 23 | catalog movie collection, organize dvd collection | How to Catalog Your DVD and Blu-ray Collection | Guides | done 2026-10-22 |
 | 1 | 2026-10-23 | halloween movie night ideas | 480 | 16 | spooky movie night ideas, horror movie marathon ideas | 31 Halloween Movie Night Ideas From Your Own Shelf | Watching | done 2026-10-23 |
-| 2 | 2026-10-24 | what is a steelbook | 1000 | 22 | what is steelbook, steelbook, steelbook reddit, blu ray steelbook | What Is a Steelbook? A Collector's Guide | Collecting | todo |
+| 2 | 2026-10-24 | what is a steelbook | 1000 | 22 | what is steelbook, steelbook, steelbook reddit, blu ray steelbook | What Is a Steelbook? A Collector's Guide | Collecting | done 2026-10-24 |
 | 3 | 2026-10-25 | blu ray 4k vs blu ray | 2400 | 6 | 4k vs blu ray, 4k uhd vs blu ray, is 4k blu ray worth it, 4k vs blu ray comparison | 4K Blu-ray vs Blu-ray: Is the Upgrade Worth It? | Formats | todo |
 | 4 | 2026-10-26 | what blu ray region is the us | 260 | 5 | blu ray region, blu ray region a, blu ray region b, are blu ray region locked | What Blu-ray Region Is the US? Regions A, B and C Explained | Formats | todo |
 | 5 | 2026-10-27 | how to organize dvd collection | 30 | 23 | organize dvd collection, dvd organization ideas, dvd organization | How to Organize a DVD Collection: 9 Systems Compared | Organizing | todo |
