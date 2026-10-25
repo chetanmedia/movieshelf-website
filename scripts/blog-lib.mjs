@@ -147,6 +147,7 @@ const footer = cats => `<footer class="foot"><div class="wrap">
   <p class="legal">© ${new Date().getFullYear()} Movieshelf · Made by ${esc(SITE.author.name)}. Movie titles and artwork belong to their respective owners. Apple, the Apple logo, App Store and iPhone are trademarks of Apple Inc.</p>
 </div></footer>
 <script src="/blog-assets/blog.js" defer></script>
+<script type="module" src="/js/analytics.js"></script>
 </body></html>`;
 
 const card = (p, big = false) => `<article class="card${big ? ' big' : ''}">

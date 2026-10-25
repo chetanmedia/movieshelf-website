@@ -36,4 +36,11 @@ function movieshelfBlog() {
   };
 }
 
-export default defineConfig({ base: '/', plugins: [movieshelfBlog()], build: { target: 'es2020', chunkSizeWarningLimit: 900 } });
+export default defineConfig({ base: '/', plugins: [movieshelfBlog()], build: {
+  target: 'es2020', chunkSizeWarningLimit: 900,
+  rollupOptions: {
+    input: { main: path.resolve('index.html'), analytics: path.resolve('src/analytics.js') },
+    // Fixed, uncached-by-hash name so the static blog pages can load it.
+    output: { entryFileNames: c => (c.name === 'analytics' ? 'js/analytics.js' : 'assets/[name]-[hash].js') },
+  },
+} });
