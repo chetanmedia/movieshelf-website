@@ -127,6 +127,7 @@ ${extra}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/blog-assets/blog.css">
 ${jsonld.map(j => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n')}
+<script defer data-website-id="vcp3plf0lo6o" src="https://appsight.thisischetan-media.workers.dev/js/script.js"></script>
 </head>
 <body>`;
 }
