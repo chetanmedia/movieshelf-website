@@ -185,7 +185,7 @@ import('./shelfmagic.js');
 
 /* ---------- pricing ---------- */
 (() => {
-  const P = { m: ['$0.99', 'per month', 'Cancel anytime', ''], y: ['$9.99', 'per year', 'Save 16% vs monthly', '$11.88'], l: ['$39.99', 'one time', 'Pay once, keep it forever', ''] };
+  const P = { m: ['$2.99', 'per month', 'Cancel anytime', ''], y: ['$14.99', 'per year', 'Save 58% vs monthly', '$35.88'], l: ['$44.99', 'one time', 'Pay once, keep it forever', ''] };
   const seg = $('#seg'), bg = $('#pillbg'), val = $('#priceVal');
   const place = b => { bg.style.width = b.offsetWidth + 'px'; bg.style.transform = `translateX(${b.offsetLeft}px)`; };
   $$('button', seg).forEach(b => b.addEventListener('click', () => {

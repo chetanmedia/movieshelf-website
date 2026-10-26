@@ -331,7 +331,7 @@ Movieshelf is an iPhone app (iOS 15.1 or later) for people who collect physical 
 - Records the shelf location of every disc and warns before you add a film you already own.
 - Collections (folders), Watchlist and Wishlist.
 - Free plan: search and add up to 50 titles, scan up to 50 barcodes, unlimited collection folders, up to 3 custom fields.
-- Movieshelf Pro: $0.99/month, $9.99/year or $39.99 lifetime (US prices). Unlocks unlimited search, add and barcode scanning, unlimited custom fields, collection analytics, custom posters and backdrops, bulk CSV import and export, and priority support.
+- Movieshelf Pro: $2.99/month, $14.99/year or $44.99 lifetime (US prices). Unlocks unlimited search, add and barcode scanning, unlimited custom fields, collection analytics, custom posters and backdrops, bulk CSV import and export, and priority support.
 - Download: ${SITE.appStoreUrl}
 
 ## Pages
