@@ -1,0 +1,53 @@
+/* "Get the app" popup: phone demo + official App Store and Google Play badges. */
+.ga-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; visibility: hidden; pointer-events: none }
+.ga-modal.open { visibility: visible; pointer-events: auto }
+.ga-back { position: absolute; inset: 0; background: rgba(4, 5, 8, .72); backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2); opacity: 0; transition: opacity .35s ease }
+.ga-modal.open .ga-back { opacity: 1 }
+.ga-card { position: relative; width: min(900px, 100%); max-height: calc(100dvh - 40px); overflow: hidden; display: grid; grid-template-columns: 340px 1fr; align-items: center; gap: 44px;
+  padding: 44px 52px 44px 40px; border-radius: 34px; color: #eef0f8; font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(120% 90% at 0% 0%, rgba(107, 138, 255, .22), transparent 55%), radial-gradient(90% 80% at 100% 100%, rgba(255, 181, 71, .14), transparent 60%), #0e1017;
+  border: 1px solid rgba(206, 216, 255, .16); box-shadow: 0 60px 140px -30px rgba(0, 0, 0, .95);
+  opacity: 0; transform: translateY(26px) scale(.97); transition: opacity .4s cubic-bezier(.2, .8, .2, 1), transform .5s cubic-bezier(.2, .8, .2, 1) }
+.ga-modal.open .ga-card { opacity: 1; transform: none }
+.ga-x { position: absolute; top: 16px; right: 16px; width: 42px; height: 42px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; z-index: 3;
+  background: rgba(255, 255, 255, .08); color: #eef0f8; transition: background .2s }
+.ga-x:hover { background: rgba(255, 255, 255, .16) }
+.ga-x svg { width: 18px; height: 18px }
+.ga-stage { position: relative; display: grid; place-items: center }
+.ga-halo { position: absolute; width: 130%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 207, 150, .32), transparent 70%); filter: blur(10px) }
+.ga-phone { position: relative; width: 300px; aspect-ratio: 421 / 880; transform: rotate(-4deg); transition: transform .8s cubic-bezier(.2, .8, .2, 1) }
+.ga-modal.open .ga-phone { transform: rotate(-2deg) }
+.ga-phone .ip { position: absolute; left: 0; top: 0 }
+.ga-copy { display: flex; flex-direction: column; gap: 18px; min-width: 0 }
+.ga-eyebrow { display: inline-flex; align-items: center; gap: 10px; font: 500 12px/1 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; color: #969cb2 }
+.ga-eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: #ffb547; box-shadow: 0 0 14px #ffb547 }
+.ga-copy h2 { margin: 0; font-family: 'Bricolage Grotesque', 'Arial Narrow', system-ui, sans-serif; font-weight: 700; font-size: clamp(34px, 4.2vw, 50px); line-height: 1.02; letter-spacing: -.03em }
+.ga-copy h2 em { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; color: #a3b4ff; letter-spacing: 0 }
+.ga-copy p { margin: 0; color: #b8bdd0; font-size: 17px; line-height: 1.55 }
+.ga-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 6px }
+.ga-badge { display: inline-flex; align-items: center; justify-content: center; height: 56px; border-radius: 12px; transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s; text-decoration: none }
+.ga-badge:hover { transform: translateY(-2px) }
+.ga-badge:focus-visible { outline: 2px solid #a3b4ff; outline-offset: 3px }
+.ga-badge img { display: block; height: 56px; width: auto }
+.ga-badge.gp img { height: 82px; margin: -13px -12px } /* Google's badge art includes its own padding */
+.ga-badge.fallback { padding: 0 20px; background: #000; color: #fff; border: 1px solid #a6a6a6; font: 600 16px system-ui; gap: 8px }
+.ga-badge.pref { order: -1 }
+.ga-badge.fallback { gap: 10px; padding: 0 18px 0 14px; min-width: 168px; justify-content: flex-start }
+.ga-fb { display: flex; flex-direction: column; line-height: 1.05; text-align: left }
+.ga-fb small { font-size: 11px; font-weight: 500 } .ga-fb b { font-size: 20px; font-weight: 600; letter-spacing: -.01em }
+.ga-note { display: flex; flex-wrap: wrap; gap: 8px 18px; color: #969cb2; font-size: 14px }
+.ga-note span { display: inline-flex; align-items: center; gap: 7px }
+.ga-note svg { width: 16px; height: 16px; color: #2fd15b }
+html.ga-lock, html.ga-lock body { overflow: hidden }
+@media (max-width: 760px) {
+  .ga-modal { padding: 0; align-items: end }
+  .ga-card { grid-template-columns: 1fr; gap: 18px; padding: 26px 22px calc(26px + env(safe-area-inset-bottom, 0px)); border-radius: 28px 28px 0 0; max-height: 94dvh; overflow-y: auto; transform: translateY(60px) }
+  .ga-stage { height: 300px; overflow: hidden; margin: -6px -22px 0; -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent) }
+  .ga-phone { width: 200px; align-self: start; margin-top: 8px }
+  .ga-copy { text-align: center; align-items: center }
+  .ga-copy p { font-size: 16px }
+  .ga-badges { justify-content: center }
+  .ga-badge, .ga-badge img { height: 50px } .ga-badge.gp img { height: 74px; margin: -12px -11px }
+  .ga-note { justify-content: center }
+}
+@media (prefers-reduced-motion: reduce) { .ga-card, .ga-back, .ga-phone { transition: none } }

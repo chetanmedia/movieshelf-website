@@ -48,7 +48,7 @@ async function latest(c) {
     card.dataset.pos = i === 0 ? 'front' : i === 1 ? 'right' : i === 2 ? 'left' : 'hidden';
     card.style.zIndex = 10 - i;
   });
-  const reset = () => { order = $$('.a-card', stack); order.sort((a, b) => STACK_ORDER.indexOf(a.dataset.id) - STACK_ORDER.indexOf(b.dataset.id)); layout(false); dots.forEach((d, i) => d.classList.toggle('on', i === 0)); glow.style.backgroundImage = `url(scans/dune-front.jpg)`; if (det) { $('.a-dscroll', det).style.transform = ''; det.classList.remove('scrolled'); } };
+  const reset = () => { order = $$('.a-card', stack); order.sort((a, b) => STACK_ORDER.indexOf(a.dataset.id) - STACK_ORDER.indexOf(b.dataset.id)); layout(false); dots.forEach((d, i) => d.classList.toggle('on', i === 0)); glow.style.backgroundImage = `url(/scans/dune-front.jpg)`; if (det) { $('.a-dscroll', det).style.transform = ''; det.classList.remove('scrolled'); } };
   reset(); c.screen('latest');
   await c.w(1300);
   for (let k = 0; k < 2; k++) {
@@ -60,7 +60,7 @@ async function latest(c) {
     order = [...order.slice(1), top];
     layout(); top.style.zIndex = 0;
     dots.forEach((d, i) => d.classList.toggle('on', i === k + 1));
-    glow.style.backgroundImage = `url(scans/${order[0].dataset.id}-front.jpg)`;
+    glow.style.backgroundImage = `url(/scans/${order[0].dataset.id}-front.jpg)`;
     await c.w(1100);
   }
   const card = order[0];
@@ -163,7 +163,7 @@ async function watch(c) {
   await c.w(900);
   // a film arrives from All Media
   const m = document.createElement('div'); m.className = 'a-wr new';
-  m.innerHTML = `<span class="a-del">Remove</span><div class="a-li"><span class="a-lt" style="background-image:url(scans/matrix-front.jpg)"></span><span><b>The Matrix</b><small>DVD · 136 min</small></span><i class="a-chev">›</i></div>`;
+  m.innerHTML = `<span class="a-del">Remove</span><div class="a-li"><span class="a-lt" style="background-image:url(/scans/matrix-front.jpg)"></span><span><b>The Matrix</b><small>DVD · 136 min</small></span><i class="a-chev">›</i></div>`;
   wlist.prepend(m); wc.textContent = '4 films';
   say('The Matrix moved to Watchlist');
   await c.w(2000);

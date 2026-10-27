@@ -4,7 +4,7 @@ import { FILMS } from './films.js';
 
 export const PW = 421, PH = 880; // phone outer size (screen + bezel)
 const F = Object.fromEntries(FILMS.map(f => [f.id, f]));
-const img = id => `scans/${id}-front.jpg`;
+const img = id => `/scans/${id}-front.jpg`;
 const FMT = { uhd: ['4K', '#111'], bluray: ['BD', '#2a63e0'], dvd: ['DVD', '#4a4d58'] };
 
 const I = {
@@ -49,7 +49,7 @@ const badge = f => `<i class="a-fmt" style="background:${FMT[f.fmt][1]}">${FMT[f
 /* ---------- scan ---------- */
 function scanScreen() {
   return `<div class="scr" data-s="scan">
-    <div class="a-cam"><div class="a-feed" style="background-image:url(scans/dune-back.jpg)"></div><div class="a-camfade"></div></div>
+    <div class="a-cam"><div class="a-feed" style="background-image:url(/scans/dune-back.jpg)"></div><div class="a-camfade"></div></div>
     ${statusBar()}
     <div class="a-scantop"><span class="a-glass a-round">${I.x}</span><span class="a-seg"><b>Scan Barcode</b><span>Search</span></span><span class="a-glass a-round">${I.bolt}</span></div>
     <div class="a-ret"><i></i><i></i><i></i><i></i><span class="a-laser"></span><span class="a-lock"></span></div>

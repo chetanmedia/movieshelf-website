@@ -149,6 +149,7 @@ const footer = cats => `<footer class="foot"><div class="wrap">
 </div></footer>
 <script src="/blog-assets/blog.js" defer></script>
 <script type="module" src="/js/analytics.js"></script>
+<script type="module" src="/js/getapp.js"></script>
 </body></html>`;
 
 const card = (p, big = false) => `<article class="card${big ? ' big' : ''}">
@@ -158,7 +159,7 @@ const card = (p, big = false) => `<article class="card${big ? ' big' : ''}">
   <p>${esc(p.summary || p.description)}</p>
   <span class="meta"><time datetime="${ymd(p.date)}">${human(p.date)}</time> · ${p.minutes} min read</span></div></article>`;
 
-const orgLd = () => ({ '@type': 'Organization', '@id': abs('/#org'), name: SITE.name, url: abs('/'), logo: { '@type': 'ImageObject', url: abs('/logo-512.png'), width: 512, height: 512 }, sameAs: [SITE.appStoreUrl] });
+const orgLd = () => ({ '@type': 'Organization', '@id': abs('/#org'), name: SITE.name, url: abs('/'), logo: { '@type': 'ImageObject', url: abs('/logo-512.png'), width: 512, height: 512 }, sameAs: [SITE.appStoreUrl, SITE.playStoreUrl] });
 
 /* ---------- pages ---------- */
 export function renderPost(post, posts) {
@@ -174,7 +175,7 @@ export function renderPost(post, posts) {
       author: { '@type': 'Person', name: post.author || SITE.author.name, description: SITE.author.bio, url: abs('/blog/') },
       publisher: orgLd(), mainEntityOfPage: { '@type': 'WebPage', '@id': abs(post.url) }, articleSection: post.category,
       keywords: post.tags.join(', '), wordCount: post.words,
-      about: { '@type': 'MobileApplication', name: SITE.name, operatingSystem: 'iOS', applicationCategory: 'EntertainmentApplication', url: SITE.appStoreUrl } },
+      about: { '@type': 'MobileApplication', name: SITE.name, operatingSystem: 'iOS, Android', applicationCategory: 'EntertainmentApplication', url: SITE.appStoreUrl } },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: abs('/blog/') },
@@ -332,7 +333,8 @@ Movieshelf is an iPhone app (iOS 15.1 or later) for people who collect physical 
 - Collections (folders), Watchlist and Wishlist.
 - Free plan: search and add up to 50 titles, scan up to 50 barcodes, unlimited collection folders, up to 3 custom fields.
 - Movieshelf Pro: $2.99/month, $14.99/year or $44.99 lifetime (US prices). Unlocks unlimited search, add and barcode scanning, unlimited custom fields, collection analytics, custom posters and backdrops, bulk CSV import and export, and priority support.
-- Download: ${SITE.appStoreUrl}
+- Download for iPhone: ${SITE.appStoreUrl}
+- Download for Android: ${SITE.playStoreUrl}
 
 ## Pages
 
@@ -362,7 +364,7 @@ export function landingJsonLd() {
     { '@context': 'https://schema.org', '@type': 'WebSite', '@id': abs('/#website'), name: SITE.name, url: abs('/'), description: SITE.description, publisher: { '@id': abs('/#org') }, inLanguage: 'en' },
     { '@context': 'https://schema.org', ...orgLd() },
     { '@context': 'https://schema.org', '@type': 'MobileApplication', '@id': abs('/#app'), name: 'MovieShelf: Media Organizer', alternateName: 'Movieshelf',
-      operatingSystem: 'iOS 15.1 or later', applicationCategory: 'EntertainmentApplication', description: SITE.description, url: abs('/'), downloadUrl: SITE.appStoreUrl, installUrl: SITE.appStoreUrl,
+      operatingSystem: 'iOS 15.1 or later, Android', applicationCategory: 'EntertainmentApplication', description: SITE.description, url: abs('/'), downloadUrl: SITE.appStoreUrl, installUrl: SITE.appStoreUrl,
       image: abs('/og/default.jpg'), author: { '@type': 'Person', name: SITE.author.name }, publisher: { '@id': abs('/#org') },
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', category: 'Free', availability: 'https://schema.org/InStock' },
       featureList: ['Barcode scanning for DVD, Blu-ray and 4K UHD', 'Bulk scan up to 10 barcodes at a time', 'Bulk CSV import', 'Shelf locations', 'Duplicate warnings', 'Box set tracking', 'Custom fields and notes', 'Collections, Watchlist and Wishlist', 'Collection analytics'] },

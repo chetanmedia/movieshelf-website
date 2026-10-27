@@ -16,5 +16,6 @@
   },
   "locale": "en_US",
   "privacyUrl": "/privacy/",
-  "indexNowKey": "bd7d8857c18fdc3f10fcc35bad1b0a80"
+  "indexNowKey": "bd7d8857c18fdc3f10fcc35bad1b0a80",
+  "playStoreUrl": "https://play.google.com/store/apps/details?id=com.movieshelf.app"
 }
