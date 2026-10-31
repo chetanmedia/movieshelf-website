@@ -3,6 +3,9 @@
 const BLOCKED = new Set(['IN', 'PK', 'BD', 'NP']); // India, Pakistan, Bangladesh, Nepal
 const KEY = 'DF4Fm_OcxVgtttte';
 const COOKIE = 'ms_access';
+// Search engine and AI crawlers always get the real site, whatever country they crawl from,
+// so rankings and indexing are never affected by the block.
+const CRAWLERS = /googlebot|google-inspectiontool|googleother|storebot-google|adsbot-google|mediapartners-google|bingbot|bingpreview|duckduckbot|applebot|yandex|baiduspider|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-searchbot|claude-user|perplexitybot|perplexity-user/i;
 
 const PAGE = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>Not available in your region</title>
@@ -13,6 +16,7 @@ h1{font-size:26px;margin:0 0 8px}p{color:#969cb2;margin:0}</style></head>
 export default async (request, context) => {
   const country = context.geo?.country?.code;
   if (!country || !BLOCKED.has(country)) return; // everyone else: serve the site as normal
+  if (CRAWLERS.test(request.headers.get('user-agent') || '')) return;
 
   const url = new URL(request.url);
   if (url.searchParams.get('access') === KEY) {
