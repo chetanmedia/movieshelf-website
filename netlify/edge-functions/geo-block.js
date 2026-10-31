@@ -28,4 +28,8 @@ export default async (request, context) => {
   return new Response(PAGE, { status: 403, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
 };
 
-export const config = { path: '/*' };
+// Only HTML pages need checking; skipping static files keeps edge-function usage low.
+export const config = {
+  path: '/*',
+  excludedPath: ['/assets/*', '/js/*', '/scans/*', '/covers/*', '/shelves/*', '/blog-assets/*', '/blog/images/*', '/og/*', '/*.png', '/*.jpg', '/*.svg', '/*.xml', '/*.txt'],
+};
