@@ -35,5 +35,5 @@ export default async (request, context) => {
 // Only HTML pages need checking; skipping static files keeps edge-function usage low.
 export const config = {
   path: '/*',
-  excludedPath: ['/assets/*', '/js/*', '/scans/*', '/covers/*', '/shelves/*', '/blog-assets/*', '/blog/images/*', '/og/*', '/*.png', '/*.jpg', '/*.svg', '/*.xml', '/*.txt'],
+  excludedPath: ['/assets/*', '/js/*', '/scans/*', '/covers/*', '/shelves/*', '/blog-assets/*', '/blog/images/*', '/og/*', '/*.png', '/*.jpg', '/*.svg', '/*.xml', '/*.txt','/*.ico','/*.webmanifest'],
 };
