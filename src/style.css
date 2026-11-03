@@ -51,6 +51,9 @@ section { position: relative }
 .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; font-size: 15px; border-radius: 99px; padding: 11px 20px; border: 0; cursor: pointer; font-family: var(--body); transition: transform .3s var(--ease), background .3s }
 .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 8px 30px -10px rgba(107, 138, 255, .8) }
 .btn-accent:hover { transform: translateY(-2px); background: #7b97ff }
+.btn-lg { font-size: 18px; padding: 16px 26px 16px 30px; gap: 14px }
+.btn-os { display: inline-flex; align-items: center; gap: 8px; padding-left: 14px; border-left: 1px solid rgba(255, 255, 255, .35) }
+.btn-os svg { width: 17px; height: 19px }
 .btn-ghost { background: rgba(255, 255, 255, .06); color: var(--fg); border: 1px solid var(--line2) }
 .btn-ghost:hover { background: rgba(255, 255, 255, .1) }
 @media (max-width: 860px) { .nav nav { display: none } .nav .btn { margin-left: auto } }
