@@ -1,82 +1,166 @@
 /* Shelf space calculator */
-.sc { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 22px; align-items: start }
-.sc-in, .sc-out { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: clamp(20px, 2.6vw, 32px) }
+.sc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 22px; align-items: start }
+.sc-in, .sc-out { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: clamp(20px, 2.6vw, 32px); min-width: 0 }
 .sc-out { position: sticky; top: 92px; background: radial-gradient(120% 70% at 100% 0%, rgba(255, 181, 71, .10), transparent 60%), radial-gradient(90% 70% at 0% 100%, rgba(107, 138, 255, .12), transparent 60%), var(--card) }
+.sc button { touch-action: manipulation; -webkit-tap-highlight-color: transparent }
 .sc-h { font-family: var(--display); font-size: 20px; letter-spacing: -.01em; margin: 0 0 14px }
 .sc-row-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px }
 .sc-row-h .sc-h { margin: 0 }
 .sc-in .sc-h:not(:first-child) { margin-top: 28px }
 .sc-units, .sc-seg { display: inline-flex; padding: 3px; border-radius: 99px; background: var(--bg2); border: 1px solid var(--line) }
-.sc-units button, .sc-seg button { border: 0; background: none; color: var(--mute); font: 600 13.5px var(--body); padding: 7px 13px; border-radius: 99px; cursor: pointer }
+.sc-units button, .sc-seg button { border: 0; background: none; color: var(--mute); font: 600 13.5px var(--body); padding: 8px 13px; border-radius: 99px; cursor: pointer; transition: color .2s, background .25s; white-space: nowrap }
 .sc-units button[aria-pressed="true"], .sc-seg button[aria-pressed="true"] { background: var(--card2); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line2) }
+
+/* inputs */
 .sc-formats { display: grid; gap: 8px }
-.sc-f { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 14px; padding: 10px 10px 10px 14px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--line); transition: border-color .2s }
+.sc-f { display: grid; grid-template-columns: 12px 1fr auto; align-items: center; gap: 14px; padding: 10px 10px 10px 14px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--line); transition: border-color .2s }
 .sc-f:focus-within { border-color: var(--accent) }
-.sc-sw { width: 10px; height: 34px; border-radius: 3px; background: var(--c); box-shadow: inset 0 0 0 1px var(--b, transparent) }
-.sc-n { font-weight: 600; line-height: 1.2 }
+.sc-sw { position: relative; width: 12px; height: 36px; border-radius: 3px; background: rgba(255, 255, 255, .06); overflow: hidden; box-shadow: inset 0 0 0 1px var(--line2) }
+.sc-sw::after { content: ""; position: absolute; inset: auto 0 0; height: calc(var(--fill, 0) * 100%); background: var(--c); box-shadow: inset 0 0 0 1px var(--b, transparent); transition: height .45s var(--ease) }
+.sc-n { font-weight: 600; line-height: 1.2; min-width: 0 }
 .sc-n small, .sc-tg small { display: block; font-weight: 400; font-size: 13px; color: var(--dim) }
-.sc-step { display: inline-flex; align-items: center; border-radius: 12px; background: var(--card); border: 1px solid var(--line2) }
-.sc-step button { width: 38px; height: 40px; border: 0; background: none; color: var(--mute); font-size: 20px; cursor: pointer; border-radius: 12px }
+.sc-step { display: inline-flex; align-items: center; border-radius: 12px; background: var(--card); border: 1px solid var(--line2); user-select: none; -webkit-user-select: none; -webkit-touch-callout: none }
+.sc-step button { width: 40px; height: 42px; border: 0; background: none; color: var(--mute); font-size: 20px; cursor: pointer; border-radius: 12px; transition: color .15s, background .15s, transform .12s }
 .sc-step button:hover { color: var(--fg); background: rgba(255, 255, 255, .05) }
-.sc input[type=number] { width: 74px; height: 40px; border: 0; background: none; color: var(--fg); font: 600 17px var(--mono); text-align: center; -moz-appearance: textfield; appearance: textfield }
+.sc-step button:active { transform: scale(.88); color: var(--fg); background: rgba(107, 138, 255, .18) }
+.sc input[type=number] { width: 74px; height: 42px; border: 0; background: none; color: var(--fg); font: 600 17px var(--mono); text-align: center; -moz-appearance: textfield; appearance: textfield }
 .sc input[type=number]::-webkit-inner-spin-button, .sc input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0 }
 .sc input[type=number]:focus { outline: none }
+.sc input.bump { animation: sc-bump .28s var(--ease) }
+@keyframes sc-bump { 40% { transform: scale(1.18); color: var(--beam) } }
 .sc-len { display: inline-flex; align-items: center; padding-right: 12px; border-radius: 12px; background: var(--card); border: 1px solid var(--line2) }
 .sc-len input { width: 84px !important }
 .sc-u { color: var(--dim); font: 500 13px var(--mono) }
-.sc-opts { display: grid; gap: 14px }
-.sc-tg { display: flex; align-items: center; gap: 14px; cursor: pointer; font-weight: 500 }
+.sc-opts { display: grid; gap: 16px }
+.sc-tg { display: flex; align-items: center; gap: 14px; cursor: pointer; font-weight: 500; min-height: 44px }
 .sc-tg input { position: absolute; opacity: 0; pointer-events: none }
-.sc-sl { flex: none; width: 46px; height: 28px; border-radius: 99px; background: var(--card2); border: 1px solid var(--line2); position: relative; transition: background .25s }
-.sc-sl::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--mute); transition: transform .25s var(--ease), background .25s }
+.sc-sl { flex: none; width: 48px; height: 30px; border-radius: 99px; background: var(--card2); border: 1px solid var(--line2); position: relative; transition: background .25s }
+.sc-sl::after { content: ""; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--mute); transition: transform .3s var(--ease), background .25s }
 .sc-tg input:checked + .sc-sl { background: var(--accent) }
 .sc-tg input:checked + .sc-sl::after { transform: translateX(18px); background: #fff }
 .sc-tg input:focus-visible + .sc-sl { outline: 2px solid var(--accent2); outline-offset: 2px }
-.sc-grow, .sc-own { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 500 }
+.sc-grow, .sc-own { display: flex; align-items: center; justify-content: space-between; gap: 10px 12px; flex-wrap: wrap; font-weight: 500 }
 .sc-adv { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 16px }
-.sc-adv summary { cursor: pointer; color: var(--mute); font-weight: 600; font-size: 15px }
+.sc-adv summary { cursor: pointer; color: var(--mute); font-weight: 600; font-size: 15px; min-height: 32px; display: flex; align-items: center }
 .sc-adv p { color: var(--dim); font-size: 14px; margin: 10px 0 }
 .sc-adv-g { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 16px }
 .sc-adv-g label { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14.5px; color: var(--text) }
-.sc-adv-g input { width: 56px !important; font-size: 15px !important }
+.sc-adv-g input { width: 56px !important; font-size: 16px !important }
 
-.sc-big { margin: 10px 0 4px; font-family: var(--display); font-size: clamp(46px, 6vw, 76px); line-height: 1; letter-spacing: -.035em }
+/* result */
+.sc-big { margin: 10px 0 4px; font-family: var(--display); font-size: clamp(44px, 6vw, 76px); line-height: 1.02; letter-spacing: -.035em; font-variant-numeric: tabular-nums }
 .sc-big b { font-weight: 800; background: linear-gradient(100deg, var(--fg) 30%, var(--beam)); -webkit-background-clip: text; background-clip: text; color: transparent }
-.sc-sub { color: var(--text); margin: 8px 0 18px; font-size: 16px }
+.sc-sub { color: var(--text); margin: 8px 0 16px; font-size: 16px }
+
+/* tape measure */
+.sc-tape { position: relative; height: 54px; display: flex; align-items: center; margin: 0 0 18px }
+.tp-case { position: relative; z-index: 2; flex: none; width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(145deg, #ffcb6b, #e89a1f); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .18), 0 10px 22px -10px rgba(255, 181, 71, .7); display: grid; place-items: center }
+.tp-case i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle, #2b2f3a 0 30%, #474d5c 31% 60%, #2b2f3a 61%); }
+.sc-tape.pull .tp-case i { animation: tp-spin .9s var(--ease) }
+@keyframes tp-spin { from { transform: rotate(-540deg) } }
+.tp-strip { position: relative; flex: 1; height: 34px; margin-left: -6px; border-radius: 0 3px 3px 0; background: linear-gradient(#ffd27f, #ffb547); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15); transform-origin: left center; color: #2a2015 }
+.sc-tape.pull .tp-strip { animation: tp-pull .9s cubic-bezier(.2, 1.15, .3, 1) }
+@keyframes tp-pull { from { transform: scaleX(.04) } }
+.tp-strip svg { position: absolute; inset: 0; width: 100%; height: 100% }
+.tp-strip .tk line { stroke: #2a2015; stroke-width: 2; vector-effect: non-scaling-stroke }
+.tp-lab { position: absolute; inset: 0 }
+.tp-lab span { position: absolute; bottom: 3px; transform: translateX(-50%); font: 700 12px/1 var(--mono); color: #2a2015; white-space: nowrap }
+.tp-hook { position: absolute; right: -5px; top: -3px; bottom: -3px; width: 6px; border-radius: 2px; background: linear-gradient(90deg, #9aa1ad, #e2e6ec) }
+
 .sc-bar { display: flex; height: 12px; border-radius: 99px; overflow: hidden; gap: 2px; background: var(--bg2) }
-.sc-bar i { background: var(--c); min-width: 3px; box-shadow: inset 0 0 0 1px var(--e, transparent) }
-.sc-bar i.grow { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .12) 0 4px, transparent 4px 8px) }
-.sc-fit { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px }
-.sc-fit li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 14px; background: rgba(7, 8, 12, .5); border: 1px solid var(--line) }
-.sc-fit b { font-family: var(--display); font-size: 18px; letter-spacing: -.01em }
-.sc-fit span { color: var(--mute); font-size: 14.5px }
-.sc-viz-h { margin: 22px 0 10px; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute) }
-.sc-viz-h span { color: var(--dim); letter-spacing: .04em; text-transform: none }
-.sc-cubes { display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 0; border: 5px solid #d9d4cb; border-radius: 4px; background: #d9d4cb }
-.sc-cube { position: relative; aspect-ratio: 1; display: flex; align-items: flex-end; padding: 0 1px; background: #15171f; outline: 4px solid #d9d4cb; overflow: hidden }
-.sc-cube i { display: block; flex: none; background: var(--c); border-radius: 1px 1px 0 0; box-shadow: inset -1px 0 0 rgba(0, 0, 0, .35), inset 1px 0 0 var(--e, rgba(255, 255, 255, .12)) }
-.sc-cube i.bx { box-shadow: inset -1px 0 0 rgba(0, 0, 0, .45) }
-.sc-cube .free { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 4px; font: 500 9.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .03) 0 6px, transparent 6px 12px) }
-.sc-legend { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--text) }
+.sc-bar i { background: var(--c); min-width: 0; box-shadow: inset 0 0 0 1px var(--e, transparent); transition: flex-grow .6s var(--ease) }
+.sc-bar i[hidden] { display: block; flex-grow: 0 !important; min-width: 0 }
+.sc-bar i.grow { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .14) 0 4px, transparent 4px 8px) }
+
+/* furniture cards */
+.sc-fit { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px }
+.sc-fit[hidden] { display: none }
+.sc-fit button { width: 100%; height: 100%; display: grid; grid-template-columns: 36px 1fr; gap: 4px 12px; align-items: start; text-align: left; padding: 12px 14px; border-radius: 16px; background: rgba(7, 8, 12, .5); border: 1px solid var(--line); color: inherit; font: inherit; cursor: pointer; position: relative; transition: border-color .2s, background .2s, transform .2s var(--ease) }
+.sc-fit button:hover { border-color: var(--line2) }
+.sc-fit button:active { transform: scale(.98) }
+.sc-fit button[aria-pressed="true"] { border-color: var(--accent); background: rgba(107, 138, 255, .10) }
+.fi svg { width: 34px; height: 34px; fill: none; stroke: var(--mute); stroke-width: 1.6; stroke-linecap: round }
+.fi .sp { stroke: var(--accent2) }
+.sc-fit button[aria-pressed="true"] .fi svg { stroke: var(--fg) }
+.sc-fit b { display: block; font-family: var(--display); font-size: 17px; letter-spacing: -.01em; line-height: 1.25; font-variant-numeric: tabular-nums }
+.sc-fit [data-note] { display: block; color: var(--mute); font-size: 13.5px; line-height: 1.4; margin-top: 2px }
+
+/* shelf preview */
+.sc-viz { position: relative; margin-top: 22px }
+.sc-viz[hidden] { display: none }
+.sc-viz-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-bottom: 12px }
+.sc-viz-h { margin: 0 auto 0 0; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute) }
+.sc-views button { padding: 7px 11px; font-size: 13px }
+.sc-fin { display: inline-flex; gap: 6px }
+.sc-fin button { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--card); background: var(--c); box-shadow: 0 0 0 1px var(--line2); cursor: pointer; transition: box-shadow .2s, transform .2s }
+.sc-fin button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--accent2); transform: scale(1.08) }
+.sc-room { position: relative; border-radius: 18px; overflow: hidden; background:
+  linear-gradient(to top, #191510 0 22px, rgba(0, 0, 0, .6) 22px 24px, transparent 24px),
+  radial-gradient(80% 90% at 50% 0%, rgba(255, 214, 160, .13), transparent 70%),
+  linear-gradient(#232634, #171922); border: 1px solid var(--line) }
+.sc-room::after { content: ""; position: absolute; inset: auto 0 0; height: 22px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .025) 0 90px, rgba(0, 0, 0, .12) 90px 92px); pointer-events: none }
+.sc-stage { position: relative; z-index: 1; display: flex; align-items: flex-end; gap: 16px; padding: 26px 22px 22px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: thin; -webkit-overflow-scrolling: touch }
+.sc-person { flex: none; width: auto; fill: rgba(206, 216, 255, .16); margin-right: 4px; scroll-snap-align: start }
+.sc-unit { position: relative; flex: none; display: grid; grid-template-columns: repeat(var(--cols), var(--cw)); grid-template-rows: repeat(var(--rows), var(--ch)); gap: var(--fr); padding: var(--fr); background: linear-gradient(90deg, var(--wood2), var(--wood) 12%, var(--wood) 88%, var(--wood2)); border-radius: 2px; box-shadow: 0 1px 0 rgba(255, 255, 255, .25) inset, 14px 6px 22px -8px rgba(0, 0, 0, .7); scroll-snap-align: start; transition: background .4s }
+.sc-unit.bl { padding-bottom: calc(var(--fr) * 3) }
+.sc-unit::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -6px; height: 8px; border-radius: 50%; background: rgba(0, 0, 0, .55); filter: blur(4px); z-index: -1 }
+.sc-unit-l { position: absolute; left: 0; right: 0; top: 100%; margin-top: 3px; text-align: center; font: 500 9.5px var(--mono); letter-spacing: .08em; color: rgba(206, 216, 255, .45); white-space: nowrap; display: none }
+.sc-cube { position: relative; display: flex; align-items: flex-end; padding: 0 1px; overflow: hidden; background: linear-gradient(rgba(0, 0, 0, .55), rgba(0, 0, 0, .28) 40%, rgba(0, 0, 0, .38)), var(--wood2); box-shadow: inset 0 6px 8px -4px rgba(0, 0, 0, .6) }
+.sc-cube i { display: block; flex: none; min-width: 1px; background: var(--c); border-radius: 1px 1px 0 0; box-shadow: inset -1px 0 0 rgba(0, 0, 0, .35), inset 1px 0 0 var(--e, rgba(255, 255, 255, .14)); transform-origin: bottom; transition: transform .18s var(--ease), filter .18s; cursor: default }
+.sc-cube i:hover { transform: translateY(-14%); filter: brightness(1.35) }
+.sc-cube.in i { animation: sc-rise .55s var(--ease) both; animation-delay: calc(var(--d, 0ms) + var(--i) * 9ms) }
+@keyframes sc-rise { from { transform: translateX(-40%) scaleY(.2); opacity: 0 } }
+.sc-cube .free { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .045) 0 5px, transparent 5px 10px) }
+.sc-tip { position: absolute; z-index: 5; transform: translate(-50%, -100%); padding: 6px 10px; border-radius: 8px; background: #fff; color: #0b0c10; font: 600 12.5px var(--body); white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px -6px rgba(0, 0, 0, .6) }
+.sc-tip[hidden] { display: none }
+.sc-viz-cap { margin: 10px 2px 0; color: var(--mute); font-size: 13.5px }
+.sc-viz-cap .swipe { color: var(--accent2); white-space: nowrap }
+.sc-legend { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--text) }
 .sc-legend li { display: inline-flex; align-items: center; gap: 7px }
 .sc-legend i { width: 9px; height: 16px; border-radius: 2px; background: var(--c); box-shadow: inset 0 0 0 1px var(--e, transparent) }
 .sc-legend span { color: var(--dim); font-family: var(--mono); font-size: 12px }
 .sc-act { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px }
-.sc-copy { border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 15px var(--body); padding: 11px 18px; border-radius: 99px; cursor: pointer }
+.sc-copy { border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 15px var(--body); padding: 12px 18px; border-radius: 99px; cursor: pointer }
 .sc-copy:hover { background: rgba(255, 255, 255, .1) }
+.sc-act .btn { padding: 12px 20px }
+
 .sc-peek { display: none }
+@media (max-width: 1100px) { .sc-fit { grid-template-columns: 1fr } }
 @media (max-width: 900px) {
-  .sc-peek { display: flex; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 50; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 99px; border: 1px solid var(--line2); background: rgba(16, 18, 26, .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text); font: 500 15px var(--body); cursor: pointer; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .8); transform: translate(-50%, 120px); opacity: 0; transition: transform .35s var(--ease), opacity .35s; white-space: nowrap }
-  .sc-peek b { font-family: var(--display); font-size: 18px; color: var(--fg) }
-  .sc-peek.on { transform: translate(-50%, 0); opacity: 1 }
   .sc { grid-template-columns: 1fr }
   .sc-out { position: static }
+  .sc-fit { grid-template-columns: 1fr 1fr }
+  .sc-peek { display: flex; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 50; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 99px; border: 1px solid var(--line2); background: rgba(16, 18, 26, .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text); font: 500 15px var(--body); cursor: pointer; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .8); transform: translate(-50%, 140px); opacity: 0; transition: transform .35s var(--ease), opacity .35s; white-space: nowrap; font-variant-numeric: tabular-nums }
+  .sc-peek b { font-family: var(--display); font-size: 18px; color: var(--fg) }
+  .sc-peek.on { transform: translate(-50%, 0); opacity: 1 }
 }
-@media (max-width: 480px) {
+@media (max-width: 560px) {
+  .sc { gap: 16px }
   .sc-in, .sc-out { border-radius: 22px; padding: 18px 14px }
-  .sc-f { gap: 10px; padding: 8px 8px 8px 10px }
-  .sc-step button { width: 34px }
-  .sc input[type=number] { width: 58px }
+  .sc-f { gap: 10px; padding: 8px 8px 8px 12px }
+  .sc-step button { width: 44px; height: 44px }
+  .sc input[type=number] { width: 56px; height: 44px }
+  .sc-len input { width: 70px !important }
   .sc-adv-g { grid-template-columns: 1fr }
-  .sc-act > * { flex: 1 1 100%; justify-content: center }
+  .sc-fit { grid-template-columns: 1fr }
+  .sc-fit button { grid-template-columns: 30px 1fr; padding: 11px 12px }
+  .fi svg { width: 28px; height: 28px }
+  .sc-viz-top { gap: 10px }
+  .sc-viz-h { flex-basis: 100% }
+  .sc-units button, .sc-seg button { min-height: 40px }
+  .sc-views { display: flex; width: 100% }
+  .sc-views button { flex: 1; min-height: 42px; padding: 8px 4px; font-size: 13px }
+  .sc-fin { gap: 10px }
+  .sc-fin::before { content: "Finish"; align-self: center; margin-right: 4px; color: var(--mute); font-size: 13.5px }
+  .sc-fin button { width: 36px; height: 36px }
+  .sc-stage { padding: 22px 16px 22px; gap: 12px }
+  .sc-room { margin-inline: -4px }
+  .sc-act > * { flex: 1 1 100%; justify-content: center; text-align: center }
+  .sc-grow .sc-seg { width: 100% } .sc-grow .sc-seg button { flex: 1 }
+  .tp-case { width: 44px; height: 44px; border-radius: 12px } .tp-case i { width: 22px; height: 22px }
+  .tp-lab span { font-size: 10.5px }
+}
+@media (hover: none) { .sc-cube i:hover { transform: none; filter: none } }
+@media (prefers-reduced-motion: reduce) {
+  .sc *, .sc *::after { animation: none !important; transition: none !important }
 }
