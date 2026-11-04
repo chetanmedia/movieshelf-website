@@ -21,7 +21,11 @@ if (root) {
     own: '<svg viewBox="0 0 32 32"><path d="M3 20h26M5 20v5m22-5v5"/><path class="sp" d="M7 19v-9m2.5 9v-10m2.5 10v-8m2.5 8v-9m2.5 9v-7"/><path d="M3 7h26" stroke-dasharray="2 2"/></svg>',
   };
   const form = root.querySelector('form');
-  const $ = s => root.querySelector(s), $$ = s => [...root.querySelectorAll(s)];
+  // Full screen moves the preview into this top-level holder, so nothing on the page can sit on top of it.
+  const portal = document.createElement('div');
+  portal.className = 'sc sc-portal';
+  document.body.append(portal);
+  const $ = s => root.querySelector(s) || portal.querySelector(s), $$ = s => [...root.querySelectorAll(s), ...portal.querySelectorAll(s)];
   let unit = (navigator.language || 'en-US').toLowerCase() === 'en-us' ? 'in' : 'cm';
   let grow = 20, used = false;
 
@@ -328,9 +332,11 @@ if (root) {
   }
 
   // full-screen preview: our own overlay, because iPhone Safari only allows real fullscreen for video
+  const holder = document.createComment('shelf preview');
   function setFull(on, fromHistory = false) {
     const viz = $('[data-viz]'), btn = viz.querySelector('[data-fs]');
     if (viz.classList.contains('full') === on) return;
+    if (on) { viz.before(holder); portal.append(viz); } else holder.replaceWith(viz);
     viz.classList.toggle('full', on);
     document.documentElement.classList.toggle('sc-lock', on);
     btn.querySelector('span').textContent = on ? 'Close' : 'Full screen';
@@ -342,11 +348,12 @@ if (root) {
   addEventListener('popstate', () => setFull(false, true));
   addEventListener('keydown', e => { if (e.key === 'Escape') setFull(false); });
 
-  root.addEventListener('input', e => {
+  const onWall = e => {
     if (!e.target.matches('[data-wall]')) return;
     const v = +e.target.value; if (!v) return;
     wallMM = Math.max(100, unit === 'in' ? v * 12 * IN : v * 1000); once(); update();
-  });
+  };
+  root.addEventListener('input', onWall); portal.addEventListener('input', onWall);
 
   // highlight one format on the shelf and scroll to where it starts
   function highlight(key) {
@@ -366,7 +373,7 @@ if (root) {
   let t;
   const update = () => { clearTimeout(t); t = setTimeout(render, 60); };
   form.addEventListener('input', () => { once(); update(); });
-  root.addEventListener('click', e => {
+  const onClick = e => {
     const step = e.target.closest('[data-d]');
     if (step && e.detail === 0) bump(step); // keyboard; pointer presses are handled below
     const u = e.target.closest('[data-unit]');
@@ -389,7 +396,8 @@ if (root) {
       navigator.clipboard?.writeText(location.href).then(done, () => prompt('Copy this link', location.href));
       document.dispatchEvent(new CustomEvent('ms:track', { detail: { name: 'Tool Share', props: { tool: 'shelf-calculator' } } }));
     }
-  });
+  };
+  root.addEventListener('click', onClick); portal.addEventListener('click', onClick);
   form.addEventListener('focusin', e => { if (e.target.type === 'number') setTimeout(() => e.target.select(), 0); });
   // re-scale the preview after rotating a phone or resizing
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(render, 200); });

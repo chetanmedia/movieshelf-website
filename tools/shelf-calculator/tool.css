@@ -102,6 +102,7 @@
 
 /* shelf preview */
 .sc-viz { position: relative; margin-top: 22px }
+.sc.sc-portal { display: block }
 .sc-fs { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 7px 13px; border-radius: 99px; border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 13.5px var(--body); cursor: pointer; transition: background .2s }
 .sc-fs:hover { background: rgba(255, 255, 255, .1) }
 .sc-fs svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
