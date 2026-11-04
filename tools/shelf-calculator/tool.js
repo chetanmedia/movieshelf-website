@@ -222,7 +222,7 @@ if (root) {
     room.style.setProperty('--wood', FINISH[finish][0]); room.style.setProperty('--wood2', FINISH[finish][1]);
 
     // lay the discs out in order: unit by unit, compartment by compartment, left to right
-    const units = planUnits(view, total), MAXU = 10, shownU = units.slice(0, MAXU);
+    const units = planUnits(view, total), MAXU = 30, shownU = units.slice(0, MAXU);
     const spines = [];
     for (const r of rows) for (let i = 0; i < r.count && spines.length < 6000; i++) spines.push(r);
     for (let left = box.mm; left > 0; left -= 45) spines.push({ ...box, spine: Math.min(45, left), box: true });
@@ -240,7 +240,12 @@ if (root) {
     const stageH = Math.min(340, Math.max(230, innerHeight * 0.36));
     const widest = Math.max(...shownU.map(u => u.cols * u.cw + (u.cols + 1) * u.frame));
     const avail = room.clientWidth - 70; // stage padding and gaps
-    const k = Math.min(stageH / tallest, avail / (widest + 620)); // whole first unit + person always fit
+    // Show the whole setup at once when the discs stay readable; otherwise fit the first unit and let people swipe.
+    const gapPx = shownU.length * (innerWidth <= 560 ? 12 : 16) + 6; // flex gaps between person and units, in pixels
+    const allMM = shownU.reduce((a, u) => a + u.cols * u.cw + (u.cols + 1) * u.frame, 0) + 620;
+    const kFirst = Math.min(stageH / tallest, (avail - 20) / (widest + 620));
+    const kAll = Math.min(stageH / tallest, (avail - gapPx) / allMM);
+    const k = kAll >= 0.045 ? kAll : Math.max(Math.min(kFirst, 0.12), Math.min(kAll, kFirst));
     stage.style.setProperty('--k', k);
     let ci = 0, fresh = 0;
     const unitsHtml = [];
@@ -249,7 +254,7 @@ if (root) {
       const cells = [];
       for (let c = 0; c < u.cols * u.rows; c++, ci++) {
         const list = comps[ci] || [];
-        cells.push(list.map((s, i) => `<i data-n="${s.name}${s.box ? '' : ` · ${s.spine} mm`}" style="--i:${i};width:${(Math.min(1, s.spine / u.cw) * 100).toFixed(3)}%;height:${Math.min(100, s.h / u.ch * 100 * (0.97 + ((i * 7) % 5) / 100)).toFixed(1)}%;--c:${s.color};${s.edge ? `--e:${s.edge}` : ''}"${s.box ? ' class="bx"' : ''}></i>`).join('') || '<span class="free" data-n="Room to grow"></span>');
+        cells.push(list.map((s, i) => `<i data-k="${s.k}" data-n="${s.name}${s.box ? '' : ` · ${s.spine} mm`}" style="--i:${i};width:${(Math.min(1, s.spine / u.cw) * 100).toFixed(3)}%;height:${Math.min(100, s.h / u.ch * 100 * (0.97 + ((i * 7) % 5) / 100)).toFixed(1)}%;--c:${s.color};${s.edge ? `--e:${s.edge}` : ''}"${s.box ? ' class="bx"' : ''}></i>`).join('') || '<span class="free" data-n="Room to grow"></span>');
       }
       unitsHtml.push({ sig, cells, u });
     });
@@ -274,8 +279,26 @@ if (root) {
     while (stage.children.length > shownU.length + 1) stage.lastElementChild.remove();
     const more = units.length - shownU.length;
     const names = [...new Set(units.map(u => u.label))];
-    viz.querySelector('.sc-viz-cap').innerHTML = `${units.length === 1 ? `One ${names[0]}` : `${units.length} units: ${names.map(nm => `${units.filter(u => u.label === nm).length} × ${nm}`).join(' + ')}`}${more ? ` (first ${MAXU} shown)` : ''}. Person shown for scale.${units.length > 1 || stage.scrollWidth > stage.clientWidth ? ' <span class="swipe">Swipe to see it all →</span>' : ''}`;
-    viz.querySelector('.sc-legend').innerHTML = [...rows.filter(r => r.count), ...(box.mm ? [box] : [])].map(r => `<li style="--c:${r.color};${r.edge ? `--e:${r.edge}` : ''}"><i></i>${r.name}${r.count != null ? ` <span>${r.count.toLocaleString()} × ${r.spine} mm</span>` : ` <span>${fmt(r.mm)}</span>`}</li>`).join('');
+    viz.querySelector('.sc-viz-cap').innerHTML = `${units.length === 1 ? `One ${names[0]}` : `${units.length} units: ${names.map(nm => `${units.filter(u => u.label === nm).length} × ${nm}`).join(' + ')}`}${more ? ` (first ${MAXU} shown)` : ''}. Person shown for scale.<span class="swipe" hidden> Swipe to see it all →</span>`;
+    requestAnimationFrame(() => { const sw = viz.querySelector('.swipe'); if (sw) sw.hidden = stage.scrollWidth - stage.clientWidth < 8; });
+    const hl = room.dataset.hl;
+    if (hl && !rows.some(r => r.k === hl && r.count) && !(hl === 'box' && box.mm)) delete room.dataset.hl;
+    viz.querySelector('.sc-legend').innerHTML = [...rows.filter(r => r.count), ...(box.mm ? [box] : [])].map(r => `<li style="--c:${r.color};${r.edge ? `--e:${r.edge}` : ''}"><button type="button" data-hl="${r.k}" aria-pressed="${room.dataset.hl === r.k}"><i></i>${r.name}${r.count != null ? ` <span>${r.count.toLocaleString()}<em> × ${r.spine} mm</em></span>` : ` <span>${fmt(r.mm)}</span>`}</button></li>`).join('')
+      + `<li class="hint">Tap a format to find it on the shelf</li>`;
+  }
+
+  // highlight one format on the shelf and scroll to where it starts
+  function highlight(key) {
+    const room = $('.sc-room'); if (!room) return;
+    if (room.dataset.hl === key) delete room.dataset.hl; else room.dataset.hl = key;
+    $$('[data-hl]').forEach(b => b.setAttribute('aria-pressed', b.dataset.hl === room.dataset.hl));
+    const first = room.dataset.hl && room.querySelector(`.sc-cube i[data-k="${key}"]`);
+    if (first) {
+      const stage = room.querySelector('.sc-stage'), unitEl = first.closest('.sc-unit');
+      const x = unitEl.offsetLeft - 16;
+      stage.scrollTo({ left: Math.max(0, x), behavior: calm.matches ? 'auto' : 'smooth' });
+      replay(first.closest('.sc-unit'), 'ping');
+    }
   }
 
   const once = () => { if (used) return; used = true; document.dispatchEvent(new CustomEvent('ms:track', { detail: { name: 'Tool Used', props: { tool: 'shelf-calculator' } } })); };
@@ -291,6 +314,8 @@ if (root) {
     if (g) { grow = +g.dataset.grow; $$('[data-grow]').forEach(b => b.setAttribute('aria-pressed', b === g)); once(); update(); }
     const vw = e.target.closest('[data-view]');
     if (vw) { view = vw.dataset.view; render(); }
+    const hb = e.target.closest('[data-hl]');
+    if (hb) highlight(hb.dataset.hl);
     const fn = e.target.closest('[data-fin]');
     if (fn) { finish = fn.dataset.fin; render(); }
     const card = e.target.closest('[data-show]');
