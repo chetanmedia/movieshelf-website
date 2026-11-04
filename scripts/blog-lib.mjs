@@ -137,7 +137,7 @@ ${jsonld.map(j => `<script type="application/ld+json">${JSON.stringify(j).replac
 
 const nav = active => `<header class="nav"><div class="nav-in">
   <a class="logo" href="/" aria-label="Movieshelf home">${LOGO}movieshelf</a>
-  <nav aria-label="Primary"><a href="/#scan">Scanning</a><a href="/#organize">Organize</a><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/blog/"${active ? ' aria-current="page"' : ''}>Blog</a></nav>
+  <nav aria-label="Primary"><a href="/#scan">Scanning</a><a href="/#organize">Organize</a><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/tools/"${active === 'tools' ? ' aria-current="page"' : ''}>Free tools</a><a href="/blog/"${active === true ? ' aria-current="page"' : ''}>Blog</a></nav>
   <a class="btn btn-accent" href="${SITE.appStoreUrl}?ct=blog-nav&amp;mt=8" target="_blank" rel="noopener">Get the app</a>
 </div></header>`;
 
@@ -146,6 +146,7 @@ const footer = cats => `<footer class="foot"><div class="wrap">
   <div class="foot-cols">
     <div><b>App</b><a href="/#scan">Barcode scanning</a><a href="/#organize">Organize your shelf</a><a href="/#boxsets">Box sets</a><a href="/#pricing">Pricing</a><a href="/#faq">FAQ</a></div>
     <div><b>Blog</b><a href="/blog/">All articles</a>${cats.map(c => `<a href="/blog/category/${slugify(c)}/">${esc(c)}</a>`).join('')}<a href="/rss.xml">RSS feed</a></div>
+    <div><b>Free tools</b>${TOOLS_LINKS()}<a href="/tools/">All tools</a></div>
     <div><b>Company</b><a href="${SITE.appStoreUrl}" target="_blank" rel="noopener">App Store</a><a href="/privacy/">Privacy Policy</a><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of Use</a></div>
   </div>
   <p class="legal">© ${new Date().getFullYear()} Movieshelf · Made by ${esc(SITE.author.name)}. Movie titles and artwork belong to their respective owners. Apple, the Apple logo, App Store and iPhone are trademarks of Apple Inc.</p>
@@ -277,6 +278,85 @@ export function renderIndex(posts, { page = 1, pages = 1, category = null, all =
 </main>` + footer(cats);
 }
 
+/* ---------- free tools ---------- */
+// Each tool lives in tools/<slug>/: page.md (front matter + explainer + faq), widget.html (the interactive part),
+// and any assets (tool.js, tool.css...) which are copied to /tools/<slug>/ as-is.
+export const TOOLS_DIR = path.join(ROOT, 'tools');
+let TOOLS_CACHE = null;
+export function loadTools() {
+  if (TOOLS_CACHE) return TOOLS_CACHE;
+  if (!fs.existsSync(TOOLS_DIR)) return (TOOLS_CACHE = []);
+  TOOLS_CACHE = fs.readdirSync(TOOLS_DIR).filter(d => !d.startsWith('_') && fs.existsSync(path.join(TOOLS_DIR, d, 'page.md'))).map(slug => {
+    const dir = path.join(TOOLS_DIR, slug);
+    const { data, content } = matter(fs.readFileSync(path.join(dir, 'page.md'), 'utf8'));
+    return { ...data, slug, dir, body: content, faq: data.faq || [], url: `/tools/${slug}/`, order: data.order ?? 99,
+      updated: new Date(data.updated || Date.now()), widget: fs.readFileSync(path.join(dir, 'widget.html'), 'utf8') };
+  }).filter(t => !t.draft).sort((a, b) => a.order - b.order);
+  return TOOLS_CACHE;
+}
+const TOOLS_LINKS = () => loadTools().map(t => `<a href="${t.url}">${esc(t.short || t.title)}</a>`).join('');
+
+export function renderTool(tool, posts) {
+  const { html, toc } = renderMarkdown(tool, posts);
+  const cats = [...new Set(posts.map(p => p.category))];
+  const jsonld = [
+    { '@context': 'https://schema.org', '@type': 'WebApplication', '@id': abs(tool.url) + '#app', name: tool.title, description: tool.description, url: abs(tool.url),
+      applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any (web browser)', isAccessibleForFree: true, inLanguage: 'en',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, dateModified: iso(tool.updated), publisher: orgLd() },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') },
+      { '@type': 'ListItem', position: 2, name: 'Free tools', item: abs('/tools/') },
+      { '@type': 'ListItem', position: 3, name: tool.title, item: abs(tool.url) }] },
+  ];
+  if (tool.faq.length) jsonld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: tool.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+  const assets = fs.readdirSync(tool.dir);
+  const css = assets.filter(f => f.endsWith('.css')).map(f => `<link rel="stylesheet" href="${tool.url}${f}">`).join('\n');
+  const js = assets.filter(f => f.endsWith('.js')).map(f => `<script type="module" src="${tool.url}${f}"></script>`).join('\n');
+  return head({ title: `${tool.seoTitle || tool.title} | ${SITE.name}`, description: tool.description, url: tool.url, image: tool.image || '/og/default.jpg', imageAlt: tool.title, jsonld,
+    extra: `<link rel="stylesheet" href="/blog-assets/tools.css">\n${css}` })
+  + nav('tools') + `
+<main class="post tool-page">
+  <header class="tool-head wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/tools/">Free tools</a><span>/</span><span>${esc(tool.short || tool.title)}</span></nav>
+    <span class="eyebrow"><i></i>Free tool · no sign-up</span>
+    <h1>${tool.h1 || esc(tool.title)}</h1>
+    ${tool.dek ? `<p class="dek">${esc(tool.dek)}</p>` : ''}
+  </header>
+  <section class="wrap tool-app" aria-label="${esc(tool.title)}">${tool.widget}</section>
+  <div class="post-grid wrap tool-body">
+    <aside class="toc" aria-label="On this page"><b>On this page</b><ol>${toc.filter(t => t.depth === 2).map(t => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ol>
+      <div class="toc-app"><span>${LOGO}</span><p>Catalog your collection with Movieshelf.</p>${storeBadge('tool-toc')}</div></aside>
+    <article class="prose">${html}</article>
+  </div>
+  ${loadTools().length > 1 ? `<section class="wrap related" aria-label="More free tools"><h2>More free tools</h2><div class="tool-grid">${loadTools().filter(t => t.slug !== tool.slug).map(toolCard).join('')}</div></section>` : ''}
+</main>
+${js}` + footer(cats);
+}
+
+const toolCard = t => `<a class="tool-card" href="${t.url}"><span class="tc-ico" aria-hidden="true">${t.icon || '◆'}</span><b>${esc(t.title)}</b><p>${esc(t.summary || t.description)}</p><span class="tc-go">Open tool →</span></a>`;
+
+export function renderToolsHub(posts) {
+  const tools = loadTools(), cats = [...new Set(posts.map(p => p.category))];
+  const desc = 'Free tools for DVD, Blu-ray and 4K UHD collectors: plan shelf space, check region codes and more. No sign-up, works in your browser.';
+  const jsonld = [
+    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Free tools for physical media collectors', description: desc, url: abs('/tools/'), publisher: orgLd(),
+      hasPart: tools.map(t => ({ '@type': 'WebApplication', name: t.title, url: abs(t.url), applicationCategory: 'UtilitiesApplication', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } })) },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') }, { '@type': 'ListItem', position: 2, name: 'Free tools', item: abs('/tools/') }] },
+  ];
+  return head({ title: `Free Tools for DVD & Blu-ray Collectors | ${SITE.name}`, description: desc, url: '/tools/', image: '/og/default.jpg', jsonld,
+    extra: '<link rel="stylesheet" href="/blog-assets/tools.css">' })
+  + nav('tools') + `
+<main class="index">
+  <header class="index-head wrap">
+    <span class="eyebrow"><i></i>Free tools</span>
+    <h1>Handy tools for people who <em>still buy discs.</em></h1>
+    <p class="lede">Free, no sign-up, and they work in your browser. Built by the team behind Movieshelf.</p>
+  </header>
+  <section class="wrap"><div class="tool-grid">${tools.map(toolCard).join('')}</div></section>
+  <section class="wrap">${appCta('end')}</section>
+</main>` + footer(cats);
+}
+
 /* ---------- feeds ---------- */
 export function sitemap(posts, pages = []) {
   const cats = [...new Set(posts.map(p => p.category))];
@@ -285,6 +365,8 @@ export function sitemap(posts, pages = []) {
     { loc: '/', lastmod: ymd(new Date()), pri: '1.0', freq: 'weekly' },
     { loc: '/blog/', lastmod: latest, pri: '0.9', freq: 'daily' },
     ...cats.map(c => ({ loc: `/blog/category/${slugify(c)}/`, lastmod: latest, pri: '0.6', freq: 'daily' })),
+    ...(loadTools().length ? [{ loc: '/tools/', lastmod: ymd(new Date()), pri: '0.8', freq: 'weekly' }] : []),
+    ...loadTools().map(t => ({ loc: t.url, lastmod: ymd(t.updated), pri: '0.9', freq: 'monthly' })),
     ...pages.map(p => ({ loc: `/${p.slug}/`, lastmod: ymd(p.updated), pri: '0.3', freq: 'yearly' })),
     ...posts.map(p => ({ loc: p.url, lastmod: ymd(p.updated), pri: '0.8', freq: 'monthly', img: p.coverUrl, imgTitle: p.coverAlt || p.title })),
   ];

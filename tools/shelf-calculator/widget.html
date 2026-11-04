@@ -1,0 +1,41 @@
+<div class="sc" id="sc">
+  <form class="sc-in" autocomplete="off" onsubmit="return false">
+    <div class="sc-row-h"><h2 class="sc-h">1. How many do you own?</h2>
+      <div class="sc-units" role="radiogroup" aria-label="Units"><button type="button" data-unit="in" aria-pressed="true">ft / in</button><button type="button" data-unit="cm" aria-pressed="false">m / cm</button></div></div>
+    <div class="sc-formats">
+      <label class="sc-f" style="--c:#7d93ff"><span class="sc-sw"></span><span class="sc-n">DVDs<small>standard case</small></span><span class="sc-step"><button type="button" data-d="-10" aria-label="10 fewer">−</button><input type="number" inputmode="numeric" min="0" max="99999" name="dvd" value="150" aria-label="Number of DVDs"><button type="button" data-d="10" aria-label="10 more">+</button></span></label>
+      <label class="sc-f" style="--c:#3d7bff"><span class="sc-sw"></span><span class="sc-n">Blu-rays<small>standard case</small></span><span class="sc-step"><button type="button" data-d="-10" aria-label="10 fewer">−</button><input type="number" inputmode="numeric" min="0" max="99999" name="br" value="200" aria-label="Number of Blu-rays"><button type="button" data-d="10" aria-label="10 more">+</button></span></label>
+      <label class="sc-f" style="--c:#14161d;--b:#5b6175"><span class="sc-sw"></span><span class="sc-n">4K UHDs<small>black case</small></span><span class="sc-step"><button type="button" data-d="-10" aria-label="10 fewer">−</button><input type="number" inputmode="numeric" min="0" max="99999" name="uhd" value="60" aria-label="Number of 4K UHD discs"><button type="button" data-d="10" aria-label="10 more">+</button></span></label>
+      <label class="sc-f" style="--c:linear-gradient(90deg,#8d939f,#e3e7ee,#8d939f)"><span class="sc-sw"></span><span class="sc-n">Steelbooks<small>metal case</small></span><span class="sc-step"><button type="button" data-d="-10" aria-label="10 fewer">−</button><input type="number" inputmode="numeric" min="0" max="99999" name="steel" value="20" aria-label="Number of steelbooks"><button type="button" data-d="10" aria-label="10 more">+</button></span></label>
+      <label class="sc-f" style="--c:#6f7a94"><span class="sc-sw"></span><span class="sc-n">Slim cases<small>slim DVDs, thin packs</small></span><span class="sc-step"><button type="button" data-d="-10" aria-label="10 fewer">−</button><input type="number" inputmode="numeric" min="0" max="99999" name="slim" value="0" aria-label="Number of slim cases"><button type="button" data-d="10" aria-label="10 more">+</button></span></label>
+      <label class="sc-f" style="--c:#2a2420;--b:#6d5a48"><span class="sc-sw"></span><span class="sc-n">VHS tapes<small>sleeve or clamshell</small></span><span class="sc-step"><button type="button" data-d="-10" aria-label="10 fewer">−</button><input type="number" inputmode="numeric" min="0" max="99999" name="vhs" value="0" aria-label="Number of VHS tapes"><button type="button" data-d="10" aria-label="10 more">+</button></span></label>
+      <label class="sc-f sc-box" style="--c:#ffb547"><span class="sc-sw"></span><span class="sc-n">Box sets<small>total width, measured</small></span><span class="sc-step sc-len"><input type="number" inputmode="decimal" min="0" max="99999" step="0.5" name="box" value="0" aria-label="Total width of box sets"><span class="sc-u" data-u-short>in</span></span></label>
+    </div>
+
+    <h2 class="sc-h">2. A few details</h2>
+    <div class="sc-opts">
+      <label class="sc-tg"><input type="checkbox" name="slip"><span class="sc-sl" aria-hidden="true"></span><span>Most of my discs have slipcovers<small>adds about 1 mm per case</small></span></label>
+      <div class="sc-grow"><span>Room to grow</span><div class="sc-seg" role="radiogroup" aria-label="Room to grow">
+        <button type="button" data-grow="0" aria-pressed="false">None</button><button type="button" data-grow="10" aria-pressed="false">10%</button><button type="button" data-grow="20" aria-pressed="true">20%</button><button type="button" data-grow="35" aria-pressed="false">35%</button></div></div>
+      <label class="sc-own"><span>My own shelf width</span><span class="sc-len"><input type="number" inputmode="decimal" min="1" max="9999" step="0.5" name="shelfw" value="30" aria-label="Your shelf width"><span class="sc-u" data-u-short>in</span></span></label>
+    </div>
+    <details class="sc-adv"><summary>Adjust case sizes</summary>
+      <p>Spine widths vary a little by studio and country. Defaults are typical retail cases; change any of them to match yours.</p>
+      <div class="sc-adv-g" data-adv></div>
+    </details>
+  </form>
+
+  <button type="button" class="sc-peek" data-peek aria-label="Jump to result">You need <b>—</b> <span aria-hidden="true">↓</span></button>
+  <div class="sc-out" aria-live="polite">
+    <span class="eyebrow"><i></i>You need about</span>
+    <p class="sc-big"><b data-total>—</b></p>
+    <p class="sc-sub" data-sub></p>
+    <div class="sc-bar" data-bar aria-hidden="true"></div>
+    <ul class="sc-fit" data-fit></ul>
+    <div class="sc-viz" data-viz></div>
+    <div class="sc-act">
+      <button type="button" class="sc-copy" data-copy>Copy link to this result</button>
+      <a class="btn btn-accent sc-cta" href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869?ct=tool-shelf-calculator&amp;mt=8" target="_blank" rel="noopener">Catalog it in Movieshelf</a>
+    </div>
+  </div>
+</div>

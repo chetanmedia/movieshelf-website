@@ -6,7 +6,7 @@ init({
   domain: 'getmovieshelf.app',
   outboundLinks: true,
   fileDownloads: true,
-  customProperties: () => ({ section: location.pathname.startsWith('/blog') ? 'blog' : 'site' }),
+  customProperties: () => ({ section: location.pathname.startsWith('/blog') ? 'blog' : location.pathname.startsWith('/tools') ? 'tools' : 'site' }),
 });
 
 // Conversion goals. A "Get the app" button opens the store popup ("Get App Open", tagged with where it was
@@ -23,3 +23,6 @@ document.addEventListener('click', e => {
   try { placement = new URL(a.href).searchParams.get('ct') || a.dataset.placement || a.className || 'link'; } catch {}
   track('Get App Open', { props: { placement: String(placement).slice(0, 60), page } });
 }, { capture: true });
+
+// Pages can send their own events without importing the tracker (used by the free tools).
+document.addEventListener('ms:track', e => { const d = e.detail || {}; if (d.name) track(d.name, { props: { ...(d.props || {}), page: location.pathname } }); });

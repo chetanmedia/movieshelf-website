@@ -1,0 +1,15 @@
+/* Shared styles for /tools/ pages and the tools hub. */
+.tool-head { padding-block: clamp(44px, 6vw, 80px) 28px; max-width: 980px; position: relative }
+.tool-head::before { content: ""; position: absolute; left: 50%; top: -140px; width: min(900px, 100vw); height: 560px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255, 181, 71, .10), transparent); pointer-events: none; z-index: -1 }
+.tool-head h1 { font-size: clamp(38px, 5.6vw, 76px); margin: 16px 0 0 }
+.tool-head h1 em { font-family: var(--serif); font-weight: 400; font-style: italic; color: var(--beam); letter-spacing: 0 }
+.tool-app { margin-bottom: clamp(40px, 6vw, 80px) }
+.tool-body { border-top: 1px solid var(--line); padding-top: clamp(30px, 4vw, 50px) }
+.tool-body .prose > h2:first-child { margin-top: 0 }
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px }
+.tool-card { display: flex; flex-direction: column; gap: 10px; padding: 26px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .3s, transform .4s var(--ease) }
+.tool-card:hover { border-color: var(--line2); transform: translateY(-3px) }
+.tc-ico { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; background: var(--card2); border: 1px solid var(--line2) }
+.tool-card b { font-family: var(--display); font-size: 22px; letter-spacing: -.02em; color: var(--fg) }
+.tool-card p { margin: 0; color: var(--mute); font-size: 15.5px }
+.tc-go { margin-top: auto; padding-top: 6px; color: var(--accent2); font-weight: 600; font-size: 15px }

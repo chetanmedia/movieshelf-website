@@ -2,7 +2,7 @@
 // Runs before `vite build` and `vite dev`. Posts dated in the future stay unpublished until that day's build.
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, CONTENT, SITE, loadPosts, loadPages, renderPage, renderPost, renderIndex, sitemap, rss, robots, llms, slugify } from './blog-lib.mjs';
+import { ROOT, CONTENT, SITE, loadPosts, loadPages, renderPage, loadTools, renderTool, renderToolsHub, renderPost, renderIndex, sitemap, rss, robots, llms, slugify } from './blog-lib.mjs';
 
 const PUB = path.join(ROOT, 'public');
 const OUT = path.join(PUB, 'blog');
@@ -28,6 +28,14 @@ export function buildBlog({ quiet = false } = {}) {
   }
   const sitePages = loadPages(), allCats = [...new Set(posts.map(p => p.category))];
   for (const pg of sitePages) write(`${pg.slug}/index.html`, renderPage({ ...pg, cats: allCats }));
+  // free tools
+  fs.rmSync(path.join(PUB, 'tools'), { recursive: true, force: true });
+  const tools = loadTools();
+  for (const t of tools) {
+    for (const f of fs.readdirSync(t.dir)) if (!/\.(md|html)$/.test(f)) fs.cpSync(path.join(t.dir, f), path.join(PUB, 'tools', t.slug, f), { recursive: true });
+    write(`tools/${t.slug}/index.html`, renderTool(t, posts));
+  }
+  if (tools.length) write('tools/index.html', renderToolsHub(posts));
   write('sitemap.xml', sitemap(posts, sitePages));
   write('rss.xml', rss(posts));
   write('robots.txt', robots());

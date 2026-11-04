@@ -1,0 +1,82 @@
+/* Shelf space calculator */
+.sc { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 22px; align-items: start }
+.sc-in, .sc-out { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: clamp(20px, 2.6vw, 32px) }
+.sc-out { position: sticky; top: 92px; background: radial-gradient(120% 70% at 100% 0%, rgba(255, 181, 71, .10), transparent 60%), radial-gradient(90% 70% at 0% 100%, rgba(107, 138, 255, .12), transparent 60%), var(--card) }
+.sc-h { font-family: var(--display); font-size: 20px; letter-spacing: -.01em; margin: 0 0 14px }
+.sc-row-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px }
+.sc-row-h .sc-h { margin: 0 }
+.sc-in .sc-h:not(:first-child) { margin-top: 28px }
+.sc-units, .sc-seg { display: inline-flex; padding: 3px; border-radius: 99px; background: var(--bg2); border: 1px solid var(--line) }
+.sc-units button, .sc-seg button { border: 0; background: none; color: var(--mute); font: 600 13.5px var(--body); padding: 7px 13px; border-radius: 99px; cursor: pointer }
+.sc-units button[aria-pressed="true"], .sc-seg button[aria-pressed="true"] { background: var(--card2); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line2) }
+.sc-formats { display: grid; gap: 8px }
+.sc-f { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 14px; padding: 10px 10px 10px 14px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--line); transition: border-color .2s }
+.sc-f:focus-within { border-color: var(--accent) }
+.sc-sw { width: 10px; height: 34px; border-radius: 3px; background: var(--c); box-shadow: inset 0 0 0 1px var(--b, transparent) }
+.sc-n { font-weight: 600; line-height: 1.2 }
+.sc-n small, .sc-tg small { display: block; font-weight: 400; font-size: 13px; color: var(--dim) }
+.sc-step { display: inline-flex; align-items: center; border-radius: 12px; background: var(--card); border: 1px solid var(--line2) }
+.sc-step button { width: 38px; height: 40px; border: 0; background: none; color: var(--mute); font-size: 20px; cursor: pointer; border-radius: 12px }
+.sc-step button:hover { color: var(--fg); background: rgba(255, 255, 255, .05) }
+.sc input[type=number] { width: 74px; height: 40px; border: 0; background: none; color: var(--fg); font: 600 17px var(--mono); text-align: center; -moz-appearance: textfield; appearance: textfield }
+.sc input[type=number]::-webkit-inner-spin-button, .sc input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0 }
+.sc input[type=number]:focus { outline: none }
+.sc-len { display: inline-flex; align-items: center; padding-right: 12px; border-radius: 12px; background: var(--card); border: 1px solid var(--line2) }
+.sc-len input { width: 84px !important }
+.sc-u { color: var(--dim); font: 500 13px var(--mono) }
+.sc-opts { display: grid; gap: 14px }
+.sc-tg { display: flex; align-items: center; gap: 14px; cursor: pointer; font-weight: 500 }
+.sc-tg input { position: absolute; opacity: 0; pointer-events: none }
+.sc-sl { flex: none; width: 46px; height: 28px; border-radius: 99px; background: var(--card2); border: 1px solid var(--line2); position: relative; transition: background .25s }
+.sc-sl::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--mute); transition: transform .25s var(--ease), background .25s }
+.sc-tg input:checked + .sc-sl { background: var(--accent) }
+.sc-tg input:checked + .sc-sl::after { transform: translateX(18px); background: #fff }
+.sc-tg input:focus-visible + .sc-sl { outline: 2px solid var(--accent2); outline-offset: 2px }
+.sc-grow, .sc-own { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 500 }
+.sc-adv { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 16px }
+.sc-adv summary { cursor: pointer; color: var(--mute); font-weight: 600; font-size: 15px }
+.sc-adv p { color: var(--dim); font-size: 14px; margin: 10px 0 }
+.sc-adv-g { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 16px }
+.sc-adv-g label { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14.5px; color: var(--text) }
+.sc-adv-g input { width: 56px !important; font-size: 15px !important }
+
+.sc-big { margin: 10px 0 4px; font-family: var(--display); font-size: clamp(46px, 6vw, 76px); line-height: 1; letter-spacing: -.035em }
+.sc-big b { font-weight: 800; background: linear-gradient(100deg, var(--fg) 30%, var(--beam)); -webkit-background-clip: text; background-clip: text; color: transparent }
+.sc-sub { color: var(--text); margin: 8px 0 18px; font-size: 16px }
+.sc-bar { display: flex; height: 12px; border-radius: 99px; overflow: hidden; gap: 2px; background: var(--bg2) }
+.sc-bar i { background: var(--c); min-width: 3px; box-shadow: inset 0 0 0 1px var(--e, transparent) }
+.sc-bar i.grow { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .12) 0 4px, transparent 4px 8px) }
+.sc-fit { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px }
+.sc-fit li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 14px; background: rgba(7, 8, 12, .5); border: 1px solid var(--line) }
+.sc-fit b { font-family: var(--display); font-size: 18px; letter-spacing: -.01em }
+.sc-fit span { color: var(--mute); font-size: 14.5px }
+.sc-viz-h { margin: 22px 0 10px; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute) }
+.sc-viz-h span { color: var(--dim); letter-spacing: .04em; text-transform: none }
+.sc-cubes { display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 0; border: 5px solid #d9d4cb; border-radius: 4px; background: #d9d4cb }
+.sc-cube { position: relative; aspect-ratio: 1; display: flex; align-items: flex-end; padding: 0 1px; background: #15171f; outline: 4px solid #d9d4cb; overflow: hidden }
+.sc-cube i { display: block; flex: none; background: var(--c); border-radius: 1px 1px 0 0; box-shadow: inset -1px 0 0 rgba(0, 0, 0, .35), inset 1px 0 0 var(--e, rgba(255, 255, 255, .12)) }
+.sc-cube i.bx { box-shadow: inset -1px 0 0 rgba(0, 0, 0, .45) }
+.sc-cube .free { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 4px; font: 500 9.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .03) 0 6px, transparent 6px 12px) }
+.sc-legend { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--text) }
+.sc-legend li { display: inline-flex; align-items: center; gap: 7px }
+.sc-legend i { width: 9px; height: 16px; border-radius: 2px; background: var(--c); box-shadow: inset 0 0 0 1px var(--e, transparent) }
+.sc-legend span { color: var(--dim); font-family: var(--mono); font-size: 12px }
+.sc-act { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px }
+.sc-copy { border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 15px var(--body); padding: 11px 18px; border-radius: 99px; cursor: pointer }
+.sc-copy:hover { background: rgba(255, 255, 255, .1) }
+.sc-peek { display: none }
+@media (max-width: 900px) {
+  .sc-peek { display: flex; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 50; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 99px; border: 1px solid var(--line2); background: rgba(16, 18, 26, .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text); font: 500 15px var(--body); cursor: pointer; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .8); transform: translate(-50%, 120px); opacity: 0; transition: transform .35s var(--ease), opacity .35s; white-space: nowrap }
+  .sc-peek b { font-family: var(--display); font-size: 18px; color: var(--fg) }
+  .sc-peek.on { transform: translate(-50%, 0); opacity: 1 }
+  .sc { grid-template-columns: 1fr }
+  .sc-out { position: static }
+}
+@media (max-width: 480px) {
+  .sc-in, .sc-out { border-radius: 22px; padding: 18px 14px }
+  .sc-f { gap: 10px; padding: 8px 8px 8px 10px }
+  .sc-step button { width: 34px }
+  .sc input[type=number] { width: 58px }
+  .sc-adv-g { grid-template-columns: 1fr }
+  .sc-act > * { flex: 1 1 100%; justify-content: center }
+}
