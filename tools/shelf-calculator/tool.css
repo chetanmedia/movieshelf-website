@@ -52,21 +52,36 @@
 .sc-big b { font-weight: 800; background: linear-gradient(100deg, var(--fg) 30%, var(--beam)); -webkit-background-clip: text; background-clip: text; color: transparent }
 .sc-sub { color: var(--text); margin: 8px 0 16px; font-size: 16px }
 
-/* tape measure */
-.sc-tape { position: relative; height: 54px; display: flex; align-items: center; margin: 0 0 18px }
-.tp-case { position: relative; z-index: 2; flex: none; width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(145deg, #ffcb6b, #e89a1f); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .18), 0 10px 22px -10px rgba(255, 181, 71, .7); display: grid; place-items: center }
-.tp-case i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle, #2b2f3a 0 30%, #474d5c 31% 60%, #2b2f3a 61%); }
+/* "Will it fit on your wall?" tape measure */
+.sc-wallbox { margin-top: 16px; padding: 16px; border-radius: 18px; background: rgba(7, 8, 12, .5); border: 1px solid var(--line) }
+.sc-wall-h { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px }
+.sc-wall-h b { display: block; font-family: var(--display); font-size: 18px; letter-spacing: -.01em }
+.sc-wall-h small { display: block; color: var(--mute); font-size: 13.5px; margin-top: 2px }
+.sc-wall-in { display: inline-flex; align-items: center; gap: 10px; font-weight: 500; font-size: 14.5px }
+.sc-tape { position: relative; display: flex; align-items: center; margin: 34px 0 6px; min-height: 50px }
+.tp-case { position: relative; z-index: 3; flex: none; width: 46px; height: 46px; border-radius: 13px; background: linear-gradient(145deg, #ffcb6b, #e89a1f); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .18), 0 10px 22px -10px rgba(255, 181, 71, .7); display: grid; place-items: center }
+.tp-case i { width: 24px; height: 24px; border-radius: 50%; background: radial-gradient(circle, #2b2f3a 0 30%, #474d5c 31% 60%, #2b2f3a 61%) }
 .sc-tape.pull .tp-case i { animation: tp-spin .9s var(--ease) }
 @keyframes tp-spin { from { transform: rotate(-540deg) } }
-.tp-strip { position: relative; flex: 1; height: 34px; margin-left: -6px; border-radius: 0 3px 3px 0; background: linear-gradient(#ffd27f, #ffb547); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15); transform-origin: left center; color: #2a2015 }
-.sc-tape.pull .tp-strip { animation: tp-pull .9s cubic-bezier(.2, 1.15, .3, 1) }
-@keyframes tp-pull { from { transform: scaleX(.04) } }
-.tp-strip svg { position: absolute; inset: 0; width: 100%; height: 100% }
-.tp-strip .tk line { stroke: #2a2015; stroke-width: 2; vector-effect: non-scaling-stroke }
-.tp-lab { position: absolute; inset: 0 }
-.tp-lab span { position: absolute; bottom: 3px; transform: translateX(-50%); font: 700 12px/1 var(--mono); color: #2a2015; white-space: nowrap }
+.tp-track { position: relative; flex: 1; height: 34px; margin-left: -4px }
+.tp-wall { position: absolute; left: 0; top: -8px; bottom: -8px; border-radius: 4px; border: 1.5px dashed rgba(206, 216, 255, .45); border-left: 0; background: rgba(206, 216, 255, .05) }
+.tp-wall span { position: absolute; right: 0; bottom: 100%; margin-bottom: 4px; transform: translateX(min(50%, 0px)); font: 500 11.5px var(--mono); color: var(--mute); white-space: nowrap }
+.tp-strip { position: absolute; left: 0; top: 0; bottom: 0; z-index: 2; border-radius: 0 3px 3px 0; transform-origin: left center; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15);
+  background: linear-gradient(90deg, transparent var(--over), rgba(255, 61, 110, .9) var(--over)), linear-gradient(#ffd27f, #ffb547) }
+.sc-tape.pull .tp-strip { animation: tp-pull 1s cubic-bezier(.2, 1.1, .3, 1) }
+@keyframes tp-pull { from { transform: scaleX(.02) } }
+.tp-tk i { position: absolute; top: 0; width: 1.5px; background: #2a2015 }
+.tp-lab span { position: absolute; bottom: 3px; transform: translateX(-50%); font: 700 11.5px/1 var(--mono); color: #2a2015; white-space: nowrap }
 .tp-hook { position: absolute; right: -5px; top: -3px; bottom: -3px; width: 6px; border-radius: 2px; background: linear-gradient(90deg, #9aa1ad, #e2e6ec) }
-
+.tp-end { position: absolute; top: 100%; z-index: 2 }
+.tp-end span { position: absolute; top: 10px; right: 0; transform: translateX(min(50%, 0px)); font: 600 11.5px var(--mono); color: var(--beam); white-space: nowrap }
+.tp-end.bad span { color: #ff6b8e }
+.sc-verdict { margin: 30px 0 0; font-size: 15px; line-height: 1.55; color: var(--text) }
+.sc-verdict b { color: var(--fg) }
+.sc-verdict.ok > b:first-child { color: var(--green) }
+.sc-verdict.no > b:first-child { color: #ff6b8e }
+.sc-alt { display: inline-flex; margin: 6px 6px 0 0; padding: 7px 12px; min-height: 36px; align-items: center; border-radius: 99px; border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 13.5px var(--body); cursor: pointer }
+.sc-alt:hover { border-color: var(--accent) }
 .sc-bar { display: flex; height: 12px; border-radius: 99px; overflow: hidden; gap: 2px; background: var(--bg2) }
 .sc-bar i { background: var(--c); min-width: 0; box-shadow: inset 0 0 0 1px var(--e, transparent); transition: flex-grow .6s var(--ease) }
 .sc-bar i[hidden] { display: block; flex-grow: 0 !important; min-width: 0 }
@@ -87,6 +102,21 @@
 
 /* shelf preview */
 .sc-viz { position: relative; margin-top: 22px }
+.sc-fs { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 7px 13px; border-radius: 99px; border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 13.5px var(--body); cursor: pointer; transition: background .2s }
+.sc-fs:hover { background: rgba(255, 255, 255, .1) }
+.sc-fs svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+.sc-fs .c, .sc-viz.full .sc-fs .o { display: none }
+.sc-viz.full .sc-fs .c { display: block }
+.sc-rot { display: none }
+html.sc-lock, html.sc-lock body { overflow: hidden }
+.sc-viz.full { position: fixed; inset: 0; z-index: 1000; margin: 0; display: flex; flex-direction: column; overflow-y: auto; background: var(--bg);
+  padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); animation: sc-fade .3s var(--ease) }
+@keyframes sc-fade { from { opacity: 0; transform: scale(.98) } }
+.sc-viz.full .sc-room { flex: 1 0 auto; display: flex; align-items: flex-end; min-height: 0 }
+.sc-viz.full .sc-stage { width: 100%; min-height: 100% }
+.sc-viz.full .sc-viz-h { font-size: 13px }
+.sc-viz.full .sc-fs { order: 9; margin-left: auto }
+@media (orientation: portrait) and (max-width: 700px) { .sc-viz.full .sc-rot { display: block; margin: 0 0 10px; color: var(--accent2); font-size: 13.5px } }
 .sc-viz[hidden] { display: none }
 .sc-viz-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-bottom: 12px }
 .sc-viz-h { margin: 0 auto 0 0; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute) }
@@ -174,8 +204,10 @@
   .sc-room { margin-inline: -4px }
   .sc-act > * { flex: 1 1 100%; justify-content: center; text-align: center }
   .sc-grow .sc-seg { width: 100% } .sc-grow .sc-seg button { flex: 1 }
-  .tp-case { width: 44px; height: 44px; border-radius: 12px } .tp-case i { width: 22px; height: 22px }
-  .tp-lab span { font-size: 10.5px }
+  .tp-case { width: 40px; height: 40px; border-radius: 11px } .tp-case i { width: 20px; height: 20px }
+  .tp-lab span { font-size: 10px }
+  .sc-wallbox { padding: 14px 12px }
+  .sc-wall-in { width: 100%; justify-content: space-between }
   .sc-legend { gap: 2px 12px; font-size: 13px }
   .sc-legend em { display: none }
   .sc-legend button { min-height: 40px }

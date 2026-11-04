@@ -76,27 +76,53 @@ if (root) {
   }
   const replay = (el, cls) => { if (!el || calm.matches) return; el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
 
-  // Tape measure: ticks and labels for the current total, in the chosen unit.
+  // ---------- "Will it fit on your wall?" ----------
+  // Outside widths and heights of the furniture (IKEA product sizes, mm).
+  const KX = { '5×5': [1820, 1820], '4×4': [1470, 1470], '2×5': [770, 1820], '2×4': [770, 1470], '2×2': [770, 770], '1×2': [420, 770] };
+  function footprint(style, total) {
+    const units = planUnits(style, total);
+    if (style === 'kallax') return { w: units.reduce((a, u) => a + KX[u.label.slice(7)][0], 0), h: Math.max(...units.map(u => KX[u.label.slice(7)][1])), n: units.length };
+    if (style === 'billy80') return { w: units.length * 800, h: 2020, n: units.length };
+    if (style === 'billy40') return { w: units.length * 400, h: 2020, n: units.length };
+    return { w: units.length * (shelfMM + 40), h: 5 * 300 + 6 * 20, n: units.length, approx: true };
+  }
+  let wallMM = q.has('wall') ? Math.max(300, +q.get('wall') || 0) : (unit === 'in' ? 120 * IN : 3000);
   let lastTape = '';
   function drawTape(total) {
-    const tape = $('[data-tape]');
-    if (!total) { tape.innerHTML = ''; lastTape = ''; return; }
-    const key = `${Math.round(total)}:${unit}`;
+    const box = $('[data-wallbox]');
+    if (!box) return;
+    const tape = box.querySelector('[data-tape]'), verdict = box.querySelector('[data-verdict]');
+    if (!total) { tape.innerHTML = ''; verdict.textContent = ''; lastTape = ''; return; }
+    const fp = footprint(view, total), wall = wallMM, foot = fp.w;
+    const key = `${view}:${Math.round(foot)}:${Math.round(wall)}:${unit}`;
+    const fits = foot <= wall;
+    const others = Object.keys(STYLES).filter(k => k !== view && k !== 'own').map(k => [k, footprint(k, total)]).filter(([, f]) => f.w <= wall);
+    const deep = footprint('kallax', total / 2), deepUnits = planUnits('kallax', total / 2);
+    const deepName = [...new Set(deepUnits.map(u => u.label))].map(nm => `${deepUnits.filter(u => u.label === nm).length} × ${nm}`).join(' + ');
+    verdict.className = `sc-verdict ${fits ? 'ok' : 'no'}`;
+    verdict.innerHTML = fits
+      ? `<b>✓ Fits.</b> ${fp.n === 1 ? 'It' : `The ${fp.n} units`} ${fp.n === 1 ? 'is' : 'are'} ${fmt(foot)} wide${fp.approx ? ' (roughly)' : ''}, leaving <b>${fmt(wall - foot)}</b> of wall spare. ${fp.n === 1 ? 'It stands' : 'They stand'} ${fmt(fp.h)} tall.`
+      : `<b>✕ Too wide by ${fmt(foot - wall)}.</b> ${fp.n === 1 ? `It is ${fmt(foot)} wide.` : `The ${fp.n} units are ${fmt(foot)} wide side by side.`} ${others.length ? `These would fit: ${others.map(([k, f]) => `<button type="button" data-view="${k}" class="sc-alt">${STYLES[k].name} (${fmt(f.w)})</button>`).join(' ')}` : deep.w <= wall ? `Shelve KALLAX two rows deep and it fits: ${deepName}, ${fmt(deep.w)} wide. ${view === 'kallax' ? '' : `<button type="button" data-view="kallax" class="sc-alt">See KALLAX</button>`}` : 'Even two rows deep it won’t fit one wall, so plan for two walls or a taller unit.'}`;
     if (key === lastTape) return;
     lastTape = key;
-    const units = unit === 'in' ? total / (12 * IN) : total / 1000; // feet or metres
-    const steps = [0.1, 0.25, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500];
-    const major = steps.find(st => units / st <= 7) || 1000, minor = major / (major >= 1 && unit === 'in' && major < 2 ? 12 : 5);
-    const W = 1000, x = v => (v / units) * W;
+    const max = Math.max(foot, wall) * 1.04, pct = v => (v / max * 100).toFixed(2);
+    // ticks along the tape, in feet or metres
+    const len = unit === 'in' ? foot / (12 * IN) : foot / 1000;
+    const steps = [0.1, 0.25, 0.5, 1, 2, 5, 10, 20, 50, 100];
+    const major = steps.find(st => len / st <= 6) || 200, minor = major / (unit === 'in' && major === 1 ? 4 : 5);
     let ticks = '', labels = '';
-    for (let v = minor; v < units - minor * 0.3; v += minor) {
-      const isMajor = Math.abs(v / major - Math.round(v / major)) < 1e-6;
-      ticks += `<line x1="${x(v).toFixed(1)}" x2="${x(v).toFixed(1)}" y1="0" y2="${isMajor ? 15 : 8}"/>`;
-      if (isMajor) labels += `<span style="left:${(x(v) / 10).toFixed(2)}%">${+v.toFixed(2)}${unit === 'in' ? '′' : ' m'}</span>`;
+    for (let v = minor; v < len - minor * 0.4; v += minor) {
+      const isMajor = Math.abs(v / major - Math.round(v / major)) < 1e-6, x = (v / len * 100).toFixed(2);
+      ticks += `<i style="left:${x}%;height:${isMajor ? 13 : 7}px"></i>`;
+      if (isMajor) labels += `<span style="left:${x}%">${+v.toFixed(2)}${unit === 'in' ? '′' : ' m'}</span>`;
     }
+    const over = fits ? 100 : (wall / foot * 100).toFixed(2);
     tape.innerHTML = `<div class="tp-case" aria-hidden="true"><i></i></div>
-      <div class="tp-strip"><svg viewBox="0 0 ${W} 32" preserveAspectRatio="none" aria-hidden="true"><g class="tk">${ticks}</g></svg>
-        <div class="tp-lab" aria-hidden="true">${labels}</div><span class="tp-hook"></span></div>`;
+      <div class="tp-track">
+        <div class="tp-wall" style="width:${pct(wall)}%"><span>Your wall · ${fmt(wall)}</span></div>
+        <div class="tp-strip" style="width:${pct(foot)}%;--over:${over}%"><div class="tp-tk">${ticks}</div><div class="tp-lab">${labels}</div><span class="tp-hook"></span></div>
+        <div class="tp-end${fits ? '' : ' bad'}" style="left:${pct(foot)}%"><span>Furniture · ${fmt(foot)}</span></div>
+      </div>`;
     replay(tape, 'pull');
   }
 
@@ -128,7 +154,6 @@ if (root) {
   function render() {
     const { rows, box, base, total, discs } = calc();
     tween($('[data-total]'), total, v => v ? fmt(v) : '0');
-    drawTape(total);
     $('[data-sub]').innerHTML = total
       ? `of shelf for ${plural(discs, 'case')}${box.mm ? ' plus box sets' : ''}${grow ? `, including ${grow}% room to grow` : ''}. That's ${alt(total).replace(' ', '&nbsp;')}.`
       : 'Add some discs to see how much shelf you need.';
@@ -164,6 +189,7 @@ if (root) {
     });
     // per-format breakdown + KALLAX picture
     drawShelf(rows, box, total);
+    drawTape(total);
     // keep the URL shareable
     const p = new URLSearchParams();
     rows.forEach(r => { if (r.count) p.set(r.k, r.count); const s = +form['sp_' + r.k].value; if (s && s !== F.find(f => f.k === r.k).spine) p.set('sp_' + r.k, s); });
@@ -172,9 +198,10 @@ if (root) {
     if (grow !== 20) p.set('grow', grow);
     p.set('u', unit);
     if (view !== 'kallax') p.set('v', view);
+    p.set('wall', Math.round(wallMM));
     if (finish !== 'white') p.set('fin', finish);
     if (Math.round(shelfMM) !== Math.round(unit === 'in' ? 30 * IN : 800)) p.set('shelf', Math.round(shelfMM));
-    history.replaceState(null, '', `${location.pathname}?${p}`);
+    history.replaceState(history.state, '', `${location.pathname}?${p}`);
   }
 
   // ---------- the shelf preview: the collection drawn to scale on real furniture ----------
@@ -212,11 +239,22 @@ if (root) {
     if (!viz.querySelector('.sc-room')) {
       viz.innerHTML = `<div class="sc-viz-top"><p class="sc-viz-h">Preview your shelf</p>
         <div class="sc-seg sc-views" role="radiogroup" aria-label="Furniture">${Object.entries(STYLES).map(([k, v]) => `<button type="button" data-view="${k}">${v.name}</button>`).join('')}</div>
-        <div class="sc-fin" role="radiogroup" aria-label="Finish">${Object.entries(FINISH).map(([k, [c]]) => `<button type="button" data-fin="${k}" style="--c:${c}" aria-label="${k === 'black' ? 'Black-brown' : k === 'oak' ? 'Oak effect' : 'White'} finish"></button>`).join('')}</div></div>
+        <div class="sc-fin" role="radiogroup" aria-label="Finish">${Object.entries(FINISH).map(([k, [c]]) => `<button type="button" data-fin="${k}" style="--c:${c}" aria-label="${k === 'black' ? 'Black-brown' : k === 'oak' ? 'Oak effect' : 'White'} finish"></button>`).join('')}</div>
+        <button type="button" class="sc-fs" data-fs><svg viewBox="0 0 24 24" aria-hidden="true"><path class="o" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path class="c" d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg><span>Full screen</span></button></div>
+        <p class="sc-rot">Turn your phone sideways for a bigger view.</p>
         <div class="sc-room"><div class="sc-stage"></div></div>
-        <p class="sc-viz-cap"></p><span class="sc-tip" hidden></span><ul class="sc-legend"></ul>`;
+        <p class="sc-viz-cap"></p>
+        <div class="sc-wallbox" data-wallbox>
+          <div class="sc-wall-h"><div><b>Will it fit on your wall?</b><small>The tape measures how wide the furniture above is, next to your wall.</small></div>
+            <label class="sc-wall-in"><span>Wall width</span><span class="sc-len"><input type="number" inputmode="decimal" min="0.5" max="999" step="0.1" data-wall aria-label="Your wall width"><span class="sc-u" data-u-wall>${unit === 'in' ? 'ft' : 'm'}</span></span></label></div>
+          <div class="sc-tape" data-tape></div>
+          <p class="sc-verdict" data-verdict aria-live="polite"></p>
+        </div><span class="sc-tip" hidden></span><ul class="sc-legend"></ul>`;
     }
-    $$('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === view));
+    const wi = viz.querySelector('[data-wall]');
+    if (wi && document.activeElement !== wi) wi.value = +(unit === 'in' ? wallMM / (12 * IN) : wallMM / 1000).toFixed(2);
+    const wu = viz.querySelector('[data-u-wall]'); if (wu) wu.textContent = unit === 'in' ? 'ft' : 'm';
+    $$('[data-view]').forEach(b => { if (!b.classList.contains('sc-alt')) b.setAttribute('aria-pressed', b.dataset.view === view); });
     $$('[data-fin]').forEach(b => b.setAttribute('aria-pressed', b.dataset.fin === finish));
     const room = viz.querySelector('.sc-room'), stage = viz.querySelector('.sc-stage');
     room.style.setProperty('--wood', FINISH[finish][0]); room.style.setProperty('--wood2', FINISH[finish][1]);
@@ -237,7 +275,8 @@ if (root) {
     // scale everything so the tallest thing (furniture or the person) fits the stage
     const unitH = u => u.rows * u.ch + (u.rows + 1) * u.frame + (u.label.startsWith('KALLAX') ? 0 : 60);
     const tallest = Math.max(1750, ...shownU.map(unitH));
-    const stageH = Math.min(340, Math.max(230, innerHeight * 0.36));
+    const full = viz.classList.contains('full');
+    const stageH = full ? Math.max(160, innerHeight - (innerWidth > innerHeight ? 170 : 260)) : Math.min(340, Math.max(230, innerHeight * 0.36));
     const widest = Math.max(...shownU.map(u => u.cols * u.cw + (u.cols + 1) * u.frame));
     const avail = room.clientWidth - 70; // stage padding and gaps
     // Show the whole setup at once when the discs stay readable; otherwise fit the first unit and let people swipe.
@@ -245,7 +284,8 @@ if (root) {
     const allMM = shownU.reduce((a, u) => a + u.cols * u.cw + (u.cols + 1) * u.frame, 0) + 620;
     const kFirst = Math.min(stageH / tallest, (avail - 20) / (widest + 620));
     const kAll = Math.min(stageH / tallest, (avail - gapPx) / allMM);
-    const k = kAll >= 0.045 ? kAll : Math.max(Math.min(kFirst, 0.12), Math.min(kAll, kFirst));
+    const k = full ? (kAll >= kFirst * 0.7 ? kAll : kFirst) // full screen: big and swipeable rather than tiny
+      : kAll >= 0.045 ? kAll : Math.max(Math.min(kFirst, 0.12), Math.min(kAll, kFirst));
     stage.style.setProperty('--k', k);
     let ci = 0, fresh = 0;
     const unitsHtml = [];
@@ -259,7 +299,7 @@ if (root) {
       unitsHtml.push({ sig, cells, u });
     });
     // person for scale first, then the furniture
-    if (!stage.querySelector('.sc-person')) stage.insertAdjacentHTML('afterbegin', `<svg class="sc-person" viewBox="0 0 60 170" aria-hidden="true"><circle cx="30" cy="13" r="11"/><path d="M17 30h26a8 8 0 0 1 8 8v46a5 5 0 0 1-10 0V48h-1v116a6 6 0 0 1-12 0V102h-2v62a6 6 0 0 1-12 0V48h-1v36a5 5 0 0 1-10 0V38a8 8 0 0 1 8-8z"/></svg>`);
+    if (!stage.querySelector('.sc-person')) stage.insertAdjacentHTML('afterbegin', `<svg class="sc-person" data-n="Person · 170 cm (5 ft 7 in)" viewBox="0 0 60 170" aria-hidden="true"><circle cx="30" cy="13" r="11"/><path d="M17 30h26a8 8 0 0 1 8 8v46a5 5 0 0 1-10 0V48h-1v116a6 6 0 0 1-12 0V102h-2v62a6 6 0 0 1-12 0V48h-1v36a5 5 0 0 1-10 0V38a8 8 0 0 1 8-8z"/></svg>`);
     stage.querySelector('.sc-person').style.height = `${1700 * k}px`;
     unitsHtml.forEach(({ sig, cells, u }, ui) => {
       let el = stage.children[ui + 1];
@@ -279,13 +319,34 @@ if (root) {
     while (stage.children.length > shownU.length + 1) stage.lastElementChild.remove();
     const more = units.length - shownU.length;
     const names = [...new Set(units.map(u => u.label))];
-    viz.querySelector('.sc-viz-cap').innerHTML = `${units.length === 1 ? `One ${names[0]}` : `${units.length} units: ${names.map(nm => `${units.filter(u => u.label === nm).length} × ${nm}`).join(' + ')}`}${more ? ` (first ${MAXU} shown)` : ''}. Person shown for scale.<span class="swipe" hidden> Swipe to see it all →</span>`;
+    viz.querySelector('.sc-viz-cap').innerHTML = `${units.length === 1 ? `One ${names[0]}` : `${units.length} units: ${names.map(nm => `${units.filter(u => u.label === nm).length} × ${nm}`).join(' + ')}`}${more ? ` (first ${MAXU} shown)` : ''}. Person is ${unit === 'in' ? '5 ft 7 in (170 cm)' : '170 cm (5 ft 7 in)'} tall, for scale.<span class="swipe" hidden> Swipe to see it all →</span>`;
     requestAnimationFrame(() => { const sw = viz.querySelector('.swipe'); if (sw) sw.hidden = stage.scrollWidth - stage.clientWidth < 8; });
     const hl = room.dataset.hl;
     if (hl && !rows.some(r => r.k === hl && r.count) && !(hl === 'box' && box.mm)) delete room.dataset.hl;
     viz.querySelector('.sc-legend').innerHTML = [...rows.filter(r => r.count), ...(box.mm ? [box] : [])].map(r => `<li style="--c:${r.color};${r.edge ? `--e:${r.edge}` : ''}"><button type="button" data-hl="${r.k}" aria-pressed="${room.dataset.hl === r.k}"><i></i>${r.name}${r.count != null ? ` <span>${r.count.toLocaleString()}<em> × ${r.spine} mm</em></span>` : ` <span>${fmt(r.mm)}</span>`}</button></li>`).join('')
       + `<li class="hint">Tap a format to find it on the shelf</li>`;
   }
+
+  // full-screen preview: our own overlay, because iPhone Safari only allows real fullscreen for video
+  function setFull(on, fromHistory = false) {
+    const viz = $('[data-viz]'), btn = viz.querySelector('[data-fs]');
+    if (viz.classList.contains('full') === on) return;
+    viz.classList.toggle('full', on);
+    document.documentElement.classList.toggle('sc-lock', on);
+    btn.querySelector('span').textContent = on ? 'Close' : 'Full screen';
+    btn.setAttribute('aria-label', on ? 'Close full screen' : 'Show the shelf full screen');
+    if (on) { if (!fromHistory) history.pushState({ scFull: 1 }, ''); btn.focus({ preventScroll: true }); document.dispatchEvent(new CustomEvent('ms:track', { detail: { name: 'Tool Fullscreen', props: { tool: 'shelf-calculator' } } })); }
+    else if (!fromHistory && history.state?.scFull) history.back();
+    render();
+  }
+  addEventListener('popstate', () => setFull(false, true));
+  addEventListener('keydown', e => { if (e.key === 'Escape') setFull(false); });
+
+  root.addEventListener('input', e => {
+    if (!e.target.matches('[data-wall]')) return;
+    const v = +e.target.value; if (!v) return;
+    wallMM = Math.max(100, unit === 'in' ? v * 12 * IN : v * 1000); once(); update();
+  });
 
   // highlight one format on the shelf and scroll to where it starts
   function highlight(key) {
@@ -314,6 +375,8 @@ if (root) {
     if (g) { grow = +g.dataset.grow; $$('[data-grow]').forEach(b => b.setAttribute('aria-pressed', b === g)); once(); update(); }
     const vw = e.target.closest('[data-view]');
     if (vw) { view = vw.dataset.view; render(); }
+    const fsb = e.target.closest('[data-fs]');
+    if (fsb) setFull(!$('[data-viz]').classList.contains('full'));
     const hb = e.target.closest('[data-hl]');
     if (hb) highlight(hb.dataset.hl);
     const fn = e.target.closest('[data-fin]');
@@ -356,7 +419,7 @@ if (root) {
   // tooltip for the discs in the KALLAX picture
   const viz = $('[data-viz]');
   const tipAt = e => {
-    const s = e.target.closest('.sc-cube i, .sc-cube .free'), tip = viz.querySelector('.sc-tip');
+    const s = e.target.closest('.sc-cube i, .sc-cube .free, .sc-person'), tip = viz.querySelector('.sc-tip');
     if (!tip) return;
     if (!s) { tip.hidden = true; return; }
     const r = s.getBoundingClientRect(), v = viz.getBoundingClientRect();
