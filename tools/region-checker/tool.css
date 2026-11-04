@@ -1,0 +1,131 @@
+/* Region code checker */
+.rc { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 22px; align-items: start }
+.rc-in, .rc-out { min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: clamp(20px, 2.6vw, 32px) }
+.rc-out { position: sticky; top: 92px; background: radial-gradient(110% 60% at 100% 0%, rgba(107, 138, 255, .12), transparent 60%), var(--card) }
+.rc button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; font-family: var(--body) }
+.rc-h { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 20px; letter-spacing: -.01em; margin: 0 0 14px }
+.rc-h:not(:first-child) { margin-top: 30px }
+.rc-h span { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 600 13px var(--mono); background: var(--card2); border: 1px solid var(--line2); color: var(--accent2) }
+.rc-hint { margin: -6px 0 14px; color: var(--mute); font-size: 14.5px }
+
+/* format tabs */
+.rc-fmt { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px }
+.rc-fmt button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 14px 12px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg2); color: var(--fg); cursor: pointer; text-align: left; transition: border-color .2s, background .2s, transform .15s }
+.rc-fmt button:active { transform: scale(.97) }
+.rc-fmt b { font-family: var(--display); font-size: 19px; letter-spacing: -.01em }
+.rc-fmt small { color: var(--dim); font-size: 12.5px }
+.rc-fmt button[aria-pressed="true"] { border-color: var(--accent); background: rgba(107, 138, 255, .12) }
+.rc-fmt button[aria-pressed="true"] small { color: var(--accent2) }
+
+/* region badges */
+.rc-badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px }
+.rc-b { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 92px; padding: 10px 6px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg2); color: var(--fg); cursor: pointer; text-align: center; transition: border-color .2s, background .2s, transform .15s }
+.rc-b:active { transform: scale(.95) }
+.rc-b small { color: var(--dim); font-size: 11.5px; line-height: 1.25 }
+.rc-b b { font-family: var(--display); font-size: 22px; line-height: 1 }
+.rc-b.dvd b { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font-size: 17px; text-shadow: 0 0 6px var(--bg2), 0 0 3px var(--bg2) }
+.rc-b.dvd svg { width: 38px; height: 38px; fill: none; stroke: var(--mute); stroke-width: 1.6 }
+.rc-b.dvd svg path { stroke-opacity: .35 }
+.rc-b.dvd b { z-index: 1 }
+.rc-b.bd b { width: 40px; height: 34px; display: grid; place-items: center; border-radius: 7px; border: 2px solid var(--mute); font-size: 20px }
+.rc-b.free b { font-size: 16px; padding: 6px 8px; border-radius: 7px; border: 2px dashed var(--mute) }
+.rc-b[aria-pressed="true"] { border-color: var(--c, var(--green)); background: color-mix(in srgb, var(--c, var(--green)) 14%, var(--bg2)) }
+.rc-b[aria-pressed="true"] small { color: var(--text) }
+.rc-b.dvd[aria-pressed="true"] svg { stroke: var(--c) }
+.rc-b.bd[aria-pressed="true"] b { border-color: var(--c); background: var(--c); color: #0b0c10 }
+.rc-b.free[aria-pressed="true"] { --c: var(--green) }
+.rc-b.free[aria-pressed="true"] b { border-color: var(--green); color: var(--green) }
+.rc-b[aria-pressed="true"]::after { content: ""; position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--green)); box-shadow: 0 0 10px var(--c, var(--green)) }
+.rc-uhd-note { display: flex; align-items: center; gap: 16px; padding: 14px; border-radius: 16px; background: rgba(47, 209, 91, .08); border: 1px solid rgba(47, 209, 91, .35) }
+.rc-uhd-note p { margin: 0; color: var(--text) }
+.rc-b.uhd { cursor: default; min-height: 70px; min-width: 84px; border-color: rgba(47, 209, 91, .5) }
+.rc-b.uhd b { color: var(--green) }
+
+/* selects */
+.rc-sel { display: grid; gap: 6px; margin-top: 14px; font-size: 14.5px; color: var(--mute) }
+.rc-sel[hidden] { display: none }
+.rc-sel select { width: 100%; min-height: 48px; padding: 0 40px 0 14px; border-radius: 14px; border: 1px solid var(--line2); background: var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23969cb2' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 18px; color: var(--fg); font: 500 16px var(--body); appearance: none; -webkit-appearance: none; cursor: pointer }
+.rc-sel select:focus { outline: none; border-color: var(--accent) }
+.rc-types { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px }
+.rc-types button { min-height: 46px; padding: 8px 10px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg2); color: var(--mute); font-weight: 600; font-size: 14.5px; cursor: pointer; transition: border-color .2s, color .2s, background .2s }
+.rc-types button[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); background: rgba(107, 138, 255, .12) }
+
+/* verdict */
+.rc-verdict { --v: var(--accent2); padding: 20px; border-radius: 20px; background: color-mix(in srgb, var(--v) 10%, transparent); border: 1px solid color-mix(in srgb, var(--v) 45%, transparent) }
+.rc-verdict.yes { --v: var(--green) } .rc-verdict.no { --v: #ff5c84 } .rc-verdict.maybe { --v: var(--beam) } .rc-verdict.wait { --v: var(--mute) }
+.rc-verdict.pop { animation: rc-pop .45s var(--ease) }
+@keyframes rc-pop { 0% { transform: scale(.97); opacity: .4 } }
+.rc-v-top { display: flex; align-items: center; gap: 14px }
+.rc-v-ico { flex: none; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: var(--v); box-shadow: 0 0 30px -4px var(--v) }
+.rc-v-ico svg { width: 30px; height: 30px; fill: none; stroke: #0b0c10; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round }
+.rc-verdict.pop .rc-v-ico svg path { stroke-dasharray: 30; animation: rc-draw .55s .1s var(--ease) both }
+@keyframes rc-draw { from { stroke-dashoffset: 30 } to { stroke-dashoffset: 0 } }
+.rc-verdict .eyebrow { font-size: 11px; letter-spacing: .1em }
+.rc-verdict .eyebrow i { background: var(--v); box-shadow: 0 0 12px var(--v) }
+.rc-verdict h3 { margin: 6px 0 0; font-family: var(--display); font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.03em; line-height: 1.05; color: var(--v) }
+.rc-verdict p { margin: 14px 0 0; color: var(--text); font-size: 16px; line-height: 1.55 }
+.rc-verdict ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px }
+.rc-verdict li { position: relative; padding: 10px 12px 10px 34px; border-radius: 12px; background: rgba(7, 8, 12, .45); color: var(--text); font-size: 14.5px; line-height: 1.45 }
+.rc-verdict li::before { content: "→"; position: absolute; left: 12px; color: var(--v) }
+
+/* map */
+.rc-mapbox { position: relative; margin-top: 20px }
+.rc-map-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin-bottom: 10px }
+.rc-map-h b { font-family: var(--display); font-size: 17px }
+.rc-map-tip { color: var(--dim); font-size: 13px }
+.rc-map { position: relative; border-radius: 18px; overflow: hidden; background: radial-gradient(90% 80% at 50% 40%, #151a2b, #0b0d14); border: 1px solid var(--line); aspect-ratio: 960 / 470 }
+.rc-map svg { display: block; width: 100%; height: 100% }
+.rc-map-load { position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); font-size: 14px }
+.rc-countries path { fill: var(--c); fill-opacity: .9; stroke: #0b0d14; stroke-width: .6; cursor: pointer; transition: fill .45s, fill-opacity .35s, filter .2s }
+.rc-map.dimmed .rc-countries path { fill-opacity: .16 }
+.rc-map.dimmed .rc-countries path.on { fill-opacity: .95 }
+.rc-countries path.unsure { fill-opacity: .45 }
+.rc-countries path:hover { filter: brightness(1.35) }
+.rc-countries path.me { stroke: #fff; stroke-width: 1.4 }
+.rc-pin { pointer-events: none; transition: transform .6s var(--ease) }
+.rc-pin .dot { fill: #fff; stroke: #0b0c10; stroke-width: 2.5 }
+.rc-pin .halo { fill: rgba(255, 255, 255, .25); animation: rc-ping 1.8s ease-out infinite; transform-origin: center; transform-box: fill-box }
+@keyframes rc-ping { from { transform: scale(.4); opacity: 1 } to { transform: scale(2.2); opacity: 0 } }
+.rc-pin text { font: 700 17px var(--body); fill: #fff; paint-order: stroke; stroke: #0b0c10; stroke-width: 5px; stroke-linejoin: round }
+.rc-legend { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13.5px; color: var(--mute) }
+.rc-legend li { display: inline-flex; align-items: center; gap: 7px; transition: color .3s }
+.rc-legend li i { width: 11px; height: 11px; border-radius: 3px; background: var(--c); opacity: .35; transition: opacity .3s }
+.rc-legend li.on { color: var(--fg) } .rc-legend li.on i { opacity: 1 }
+.rc-legend b { font-family: var(--mono); font-size: 12.5px }
+.rc-tip { position: absolute; z-index: 5; transform: translate(-50%, -100%); padding: 7px 11px; border-radius: 9px; background: #fff; color: #0b0c10; font-size: 13px; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px -6px rgba(0, 0, 0, .6) }
+.rc-tip[hidden] { display: none }
+.rc-tip b { margin-right: 6px }
+.rc-tip em { color: #b2402a; font-style: normal }
+.rc-act { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px }
+.rc-copy { border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font: 600 15px var(--body); padding: 12px 18px; border-radius: 99px; cursor: pointer }
+.rc-copy:hover { background: rgba(255, 255, 255, .1) }
+.rc-act .btn { padding: 12px 20px }
+
+.rc-peek { display: none }
+@media (max-width: 900px) {
+  .rc { grid-template-columns: 1fr }
+  .rc-out { position: static; scroll-margin-top: 90px }
+  .rc-verdict { scroll-margin-top: 90px }
+  .rc-peek { --v: var(--mute); display: flex; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 50; align-items: center; gap: 10px; padding: 12px 20px 12px 14px; border-radius: 99px; border: 1px solid color-mix(in srgb, var(--v) 55%, transparent); background: rgba(16, 18, 26, .94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--fg); font: 600 15px var(--body); cursor: pointer; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .8); transform: translate(-50%, 140px); opacity: 0; transition: transform .35s var(--ease), opacity .35s; white-space: nowrap }
+  .rc-peek.yes { --v: var(--green) } .rc-peek.no { --v: #ff5c84 } .rc-peek.maybe { --v: var(--beam) }
+  .rc-peek i { width: 12px; height: 12px; border-radius: 50%; background: var(--v); box-shadow: 0 0 12px var(--v) }
+  .rc-peek b { font-family: var(--display); font-size: 17px; color: var(--v) }
+  .rc-peek.on { transform: translate(-50%, 0); opacity: 1 }
+}
+@media (max-width: 560px) {
+  .rc { gap: 16px }
+  .rc-in, .rc-out { border-radius: 22px; padding: 18px 14px }
+  .rc-fmt button { padding: 12px 10px 10px }
+  .rc-fmt b { font-size: 17px } .rc-fmt small { font-size: 11.5px }
+  .rc-badges { grid-template-columns: repeat(4, 1fr); gap: 6px }
+  .rc-b { min-height: 84px; padding: 8px 3px; border-radius: 14px }
+  .rc-b small { font-size: 10px }
+  .rc-b.bd b { width: 34px; height: 30px; font-size: 17px }
+  .rc-b.free b { font-size: 13px; padding: 4px 5px }
+  .rc-b.dvd svg { width: 32px; height: 32px } .rc-b.dvd b { top: 14px; font-size: 15px }
+  .rc-verdict { padding: 16px }
+  .rc-v-ico { width: 46px; height: 46px } .rc-v-ico svg { width: 26px; height: 26px }
+  .rc-map { margin-inline: -4px }
+  .rc-act > * { flex: 1 1 100%; justify-content: center; text-align: center }
+}
+@media (prefers-reduced-motion: reduce) { .rc *, .rc *::after { animation: none !important; transition: none !important } }

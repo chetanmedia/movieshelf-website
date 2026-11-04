@@ -1,0 +1,41 @@
+<div class="rc" id="rc">
+  <div class="rc-in">
+    <h2 class="rc-h"><span>1</span>What are you playing?</h2>
+    <div class="rc-fmt" role="radiogroup" aria-label="Disc format">
+      <button type="button" data-f="dvd" aria-pressed="false"><b>DVD</b><small>Regions 1–6</small></button>
+      <button type="button" data-f="bd" aria-pressed="true"><b>Blu-ray</b><small>Regions A–C</small></button>
+      <button type="button" data-f="uhd" aria-pressed="false"><b>4K UHD</b><small>Region-free</small></button>
+    </div>
+
+    <h2 class="rc-h"><span>2</span>The region on the disc</h2>
+    <p class="rc-hint" data-disc-hint>Tap the badge that matches the back of the case. Pick more than one if the disc shows several.</p>
+    <div class="rc-badges" data-badges></div>
+    <label class="rc-sel rc-bought"><span>Or pick where it was bought</span>
+      <select data-bought aria-label="Country the disc was bought in"><option value="">Choose a country</option></select></label>
+
+    <h2 class="rc-h"><span>3</span>Your player</h2>
+    <label class="rc-sel"><span>Country it was bought in</span>
+      <select data-player aria-label="Country your player was bought in"></select></label>
+    <div class="rc-types" role="radiogroup" aria-label="Player type">
+      <button type="button" data-t="std" aria-pressed="true">Standard player</button>
+      <button type="button" data-t="console" aria-pressed="false">Game console</button>
+      <button type="button" data-t="free" aria-pressed="false">Region-free player</button>
+      <button type="button" data-t="pc" aria-pressed="false">Computer drive</button>
+    </div>
+  </div>
+
+  <button type="button" class="rc-peek" data-peek aria-label="Jump to the answer"><i></i><b>—</b><span aria-hidden="true">↓</span></button>
+  <div class="rc-out">
+    <div class="rc-verdict" data-verdict aria-live="polite"></div>
+    <div class="rc-mapbox">
+      <div class="rc-map-h"><b data-map-title>Where this disc plays</b><span class="rc-map-tip">Tap a country to set your player</span></div>
+      <div class="rc-map" data-map><div class="rc-map-load">Loading map…</div></div>
+      <ul class="rc-legend" data-legend></ul>
+      <span class="rc-tip" data-tip hidden></span>
+    </div>
+    <div class="rc-act">
+      <button type="button" class="rc-copy" data-copy>Copy link to this check</button>
+      <a class="btn btn-accent" href="https://apps.apple.com/us/app/movieshelf-media-organizer/id6760224869?ct=tool-region-checker&amp;mt=8" target="_blank" rel="noopener">Catalog your discs in Movieshelf</a>
+    </div>
+  </div>
+</div>
