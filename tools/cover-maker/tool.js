@@ -24,13 +24,16 @@ if (root) {
   const DEFAULT = {
     tpl: 'bd', spine: 12, paper: (navigator.language || '').toLowerCase() === 'en-us' ? 'letter' : 'a4', guides: true,
     f: { zoom: 1, x: 0, y: 0, title: 'Midnight Archive', font: 'Bebas Neue', color: '#ffffff', size: 17, pos: 'bottom', banner: true, bannerText: 'COLLECTOR’S EDITION', bannerColor: '#1d3fa8' },
-    s: { title: 'MIDNIGHT ARCHIVE', font: 'Bebas Neue', color: '#ffffff', num: '001', bg: 'auto', bgColor: '#141a2e', dir: 'down' },
-    b: { bg: 'blur', bgColor: '#10131d', tagline: 'Some films you watch. Some you keep.', body: 'Write your own synopsis here. Keep it to a few short paragraphs so it stays readable once printed.\n\nText wraps automatically and stays inside the safe area, away from the folds.', font: 'Figtree', color: '#e8eaf2', small: 'Your own notes · Runtime · Audio' },
+    s: { title: 'MIDNIGHT ARCHIVE', font: 'Bebas Neue', color: '#ffffff', num: '001', bg: 'auto', bgColor: '#141a2e', dir: 'down', zoom: 1, x: 0, y: 0 },
+    b: { bg: 'blur', bgColor: '#10131d', zoom: 1, x: 0, y: 0, dim: true, tagline: 'Some films you watch. Some you keep.', body: 'Write your own synopsis here. Keep it to a few short paragraphs so it stays readable once printed.\n\nText wraps automatically and stays inside the safe area, away from the folds.', font: 'Figtree', color: '#e8eaf2', small: 'Your own notes · Runtime · Audio' },
   };
   const clone = o => JSON.parse(JSON.stringify(o));
-  let st = clone(DEFAULT), imgs = { front: null, back: null };
+  let st = clone(DEFAULT), imgs = { front: null, back: null, spine: null };
   try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved?.st) st = { ...clone(DEFAULT), ...saved.st, f: { ...DEFAULT.f, ...saved.st.f }, s: { ...DEFAULT.s, ...saved.st.s }, b: { ...DEFAULT.b, ...saved.st.b } }; } catch {}
 
+  // images aren't saved between visits, so don't restore settings that point at one
+  if (st.s.bg === 'image') st.s.bg = 'auto';
+  if (st.b.bg === 'image') st.b.bg = 'blur';
   const track = (name, props = {}) => document.dispatchEvent(new CustomEvent('ms:track', { detail: { name, props: { tool: 'cover-maker', ...props } } }));
   let used = false; const once = () => { if (!used) { used = true; track('Tool Used'); } };
   const get = k => k.split('.').reduce((o, p) => o?.[p], st);
@@ -86,7 +89,7 @@ if (root) {
     // back background
     ctx.save(); ctx.beginPath(); ctx.rect(0, 0, xSpine, d.H); ctx.clip();
     if (st.b.bg === 'color') { ctx.fillStyle = st.b.bgColor; ctx.fillRect(0, 0, xSpine, d.H); }
-    else if (st.b.bg === 'image' && imgs.back) cover(ctx, imgs.back, 0, 0, xSpine, d.H);
+    else if (st.b.bg === 'image' && imgs.back) { cover(ctx, imgs.back, 0, 0, xSpine, d.H, +st.b.zoom, +st.b.x, +st.b.y); if (st.b.dim) { const dg = ctx.createLinearGradient(0, 0, 0, d.H); dg.addColorStop(0, 'rgba(0,0,0,.55)'); dg.addColorStop(.6, 'rgba(0,0,0,.35)'); dg.addColorStop(1, 'rgba(0,0,0,.6)'); ctx.fillStyle = dg; ctx.fillRect(0, 0, xSpine, d.H); } }
     else { ctx.filter = `blur(${6 * k}px) brightness(.45) saturate(1.2)`; ctx.scale(1, 1); cover(ctx, front, -6, -6, xSpine + 12, d.H + 12, 1.1); ctx.filter = 'none'; ctx.fillStyle = 'rgba(0,0,0,.15)'; ctx.fillRect(0, 0, xSpine, d.H); }
     ctx.restore();
     // front artwork
@@ -96,7 +99,8 @@ if (root) {
     void frontLabel;
     // spine
     ctx.save(); ctx.beginPath(); ctx.rect(xSpine, 0, sp, d.H); ctx.clip();
-    ctx.fillStyle = st.s.bg === 'color' ? st.s.bgColor : avgColor(front); ctx.fillRect(xSpine, 0, sp, d.H);
+    if (st.s.bg === 'image' && imgs.spine) cover(ctx, imgs.spine, xSpine, 0, sp, d.H, +st.s.zoom, +st.s.x, +st.s.y);
+    else { ctx.fillStyle = st.s.bg === 'color' ? st.s.bgColor : avgColor(front); ctx.fillRect(xSpine, 0, sp, d.H); }
     const sg = ctx.createLinearGradient(xSpine, 0, xSpine + sp, 0); sg.addColorStop(0, 'rgba(255,255,255,.06)'); sg.addColorStop(.5, 'rgba(255,255,255,0)'); sg.addColorStop(1, 'rgba(0,0,0,.18)');
     ctx.fillStyle = sg; ctx.fillRect(xSpine, 0, sp, d.H);
     ctx.translate(xSpine + sp / 2, yTop + d.h / 2); ctx.rotate(st.s.dir === 'up' ? -Math.PI / 2 : Math.PI / 2);
@@ -212,18 +216,25 @@ if (root) {
 
   // ---------- drag the front image on the flat preview ----------
   let dragF = null;
-  canvas.addEventListener('pointerdown', e => {
+  // which part of the cover is under the pointer, and does it have a movable image?
+  function partAt(e) {
     const d = dims(), r = canvas.getBoundingClientRect(), mm = (e.clientX - r.left) / r.width * d.W;
-    if (mm < BLEED + d.panel + st.spine) return;
-    dragF = { x: e.clientX, y: e.clientY, fx: +st.f.x, fy: +st.f.y, w: r.width * (d.panel / d.W), h: r.height };
+    if (mm >= BLEED + d.panel + st.spine) return { key: 'f', w: r.width * (d.panel / d.W) };
+    if (mm >= BLEED + d.panel) return st.s.bg === 'image' && imgs.spine ? { key: 's', w: r.width * (st.spine / d.W) } : null;
+    return st.b.bg === 'image' && imgs.back ? { key: 'b', w: r.width * (d.panel / d.W) } : null;
+  }
+  canvas.addEventListener('pointerdown', e => {
+    const part = partAt(e); if (!part) return;
+    const o = st[part.key];
+    dragF = { ...part, x: e.clientX, y: e.clientY, fx: +o.x, fy: +o.y, h: canvas.getBoundingClientRect().height };
     canvas.setPointerCapture(e.pointerId); canvas.classList.add('grab'); once();
   });
   canvas.addEventListener('pointermove', e => {
-    if (!dragF) return;
-    const z = Math.max(1.05, +st.f.zoom);
-    st.f.x = Math.max(-1, Math.min(1, dragF.fx - (e.clientX - dragF.x) / (dragF.w * (z - .95)) * 2));
-    st.f.y = Math.max(-1, Math.min(1, dragF.fy - (e.clientY - dragF.y) / (dragF.h * (z - .95)) * 2));
-    syncInputs(['f.x', 'f.y']); draw();
+    if (!dragF) { const p2 = partAt(e); canvas.style.cursor = p2 ? 'grab' : 'default'; return; }
+    const o = st[dragF.key], z = Math.max(1.05, +o.zoom);
+    o.x = Math.max(-1, Math.min(1, dragF.fx - (e.clientX - dragF.x) / (dragF.w * (z - .95)) * 2));
+    o.y = Math.max(-1, Math.min(1, dragF.fy - (e.clientY - dragF.y) / (dragF.h * (z - .95)) * 2));
+    syncInputs([`${dragF.key}.x`, `${dragF.key}.y`]); draw();
   });
   const endDrag = () => { if (dragF) { dragF = null; canvas.classList.remove('grab'); save(); } };
   canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag);
@@ -262,7 +273,9 @@ if (root) {
       $('[data-flat]').hidden = v.dataset.view !== 'flat'; $('[data-case]').hidden = v.dataset.view !== 'case';
       if (v.dataset.view === 'case') { draw3d(); track('Tool 3D View'); }
     }
-    if (e.target.closest('[data-reset]')) { st = clone(DEFAULT); imgs = { front: null, back: null }; try { localStorage.removeItem(KEY); } catch {} syncInputs(); draw(); }
+    const rm = e.target.closest('[data-remove]');
+    if (rm) { const w2 = rm.dataset.remove; imgs[w2] = null; if (w2 === 'back') st.b.bg = 'blur'; else st.s.bg = 'auto'; syncInputs(); draw(); save(); }
+    if (e.target.closest('[data-reset]')) { st = clone(DEFAULT); imgs = { front: null, back: null, spine: null }; try { localStorage.removeItem(KEY); } catch {} syncInputs(); draw(); }
     const ex = e.target.closest('[data-export]');
     if (ex) exportFile(ex.dataset.export, ex);
   });
@@ -273,7 +286,8 @@ if (root) {
     const url = URL.createObjectURL(file);
     try { imgs[which] = await loadImg(url); } catch { return; }
     if (which === 'front') { st.f.zoom = 1; st.f.x = 0; st.f.y = 0; }
-    if (which === 'back') st.b.bg = 'image';
+    if (which === 'back') { st.b.bg = 'image'; st.b.zoom = 1; st.b.x = 0; st.b.y = 0; }
+    if (which === 'spine') { st.s.bg = 'image'; st.s.zoom = 1; st.s.x = 0; st.s.y = 0; }
     once(); track('Tool Image Added', { which }); syncInputs(); draw();
   }
   root.addEventListener('change', e => { const f = e.target.closest('[data-file]'); if (f) useFile(f.files[0], f.dataset.file); });

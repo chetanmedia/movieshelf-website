@@ -7,7 +7,7 @@
     </div>
     <div class="cm-canvas-wrap" data-flat>
       <canvas class="cm-canvas" data-canvas aria-label="Cover print layout preview"></canvas>
-      <p class="cm-drag-tip">Drag on the front to move your image</p>
+      <p class="cm-drag-tip">Drag an image on the cover to move it</p>
     </div>
     <div class="cm-case-wrap" data-case hidden>
       <div class="cm-case" data-case3d><div class="cm-face front" data-face-front></div><div class="cm-face spine" data-face-spine></div><div class="cm-face back" data-face-back></div><div class="cm-face edge" data-face-edge></div></div>
@@ -73,16 +73,31 @@
         <label class="cm-row"><span>Text colour</span><input type="color" data-k="s.color"></label>
       </div>
       <label class="cm-row"><span>Collector number<small>For example 042. Leave empty for none.</small></span><input type="text" maxlength="6" data-k="s.num"></label>
-      <label class="cm-row"><span>Background</span><select data-k="s.bg"><option value="auto">Match the front artwork</option><option value="color">Solid colour</option></select></label>
+      <label class="cm-drop small" data-drop="spine"><input type="file" accept="image/*" data-file="spine"><b>Add a spine image</b><span>A tall, narrow image works best</span></label>
+      <label class="cm-row"><span>Background</span><select data-k="s.bg"><option value="auto">Match the front artwork</option><option value="color">Solid colour</option><option value="image">My spine image</option></select></label>
       <label class="cm-row" data-show-if="s.bg=color"><span>Spine colour</span><input type="color" data-k="s.bgColor"></label>
+      <div class="cm-imgctl" data-show-if="s.bg=image">
+        <label class="cm-row"><span>Zoom</span><input type="range" min="1" max="3" step="0.01" data-k="s.zoom"></label>
+        <label class="cm-row"><span>Move up/down</span><input type="range" min="-1" max="1" step="0.01" data-k="s.y"></label>
+        <button type="button" class="cm-reset" data-remove="spine">Remove spine image</button>
+      </div>
       <label class="cm-row"><span>Text reads</span><select data-k="s.dir"><option value="down">Top to bottom (US style)</option><option value="up">Bottom to top (UK and Europe)</option></select></label>
     </section>
 
     <section class="cm-sec" data-sec="back" hidden>
       <h3>Back</h3>
-      <label class="cm-row"><span>Background</span><select data-k="b.bg"><option value="blur">Blurred front artwork</option><option value="color">Solid colour</option><option value="image">Its own image</option></select></label>
+      <label class="cm-drop small" data-drop="back"><input type="file" accept="image/*" data-file="back"><b>Add a back image</b><span>or drop it here</span></label>
+      <label class="cm-row"><span>Background</span><select data-k="b.bg"><option value="blur">Blurred front artwork</option><option value="color">Solid colour</option><option value="image">My back image</option></select></label>
       <label class="cm-row" data-show-if="b.bg=color"><span>Colour</span><input type="color" data-k="b.bgColor"></label>
-      <label class="cm-drop small" data-show-if="b.bg=image" data-drop="back"><input type="file" accept="image/*" data-file="back"><b>Choose a back image</b></label>
+      <div class="cm-imgctl" data-show-if="b.bg=image">
+        <label class="cm-row"><span>Zoom</span><input type="range" min="1" max="3" step="0.01" data-k="b.zoom"></label>
+        <div class="cm-two">
+          <label class="cm-row"><span>Move sideways</span><input type="range" min="-1" max="1" step="0.01" data-k="b.x"></label>
+          <label class="cm-row"><span>Move up/down</span><input type="range" min="-1" max="1" step="0.01" data-k="b.y"></label>
+        </div>
+        <label class="cm-check"><input type="checkbox" data-k="b.dim"> Darken it so the text stays readable</label>
+        <button type="button" class="cm-reset" data-remove="back">Remove back image</button>
+      </div>
       <label class="cm-row"><span>Tagline</span><input type="text" maxlength="80" data-k="b.tagline"></label>
       <label class="cm-row"><span>Synopsis</span><textarea rows="5" maxlength="900" data-k="b.body"></textarea></label>
       <div class="cm-two">
