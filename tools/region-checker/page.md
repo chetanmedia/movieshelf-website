@@ -6,7 +6,7 @@ h1: "Will this disc play <em>on your player?</em>"
 dek: "Pick the format, the region badge on the case and where your player is from. Get a straight answer, plus a map of where the disc plays."
 description: "Free DVD and Blu-ray region checker. See if a Region 1, 2, A or B disc will play on your player, with a world map of DVD and Blu-ray region codes."
 summary: "Check if a Region 1, 2, A, B or 4K disc will play on your player, with a world map of every region."
-icon: "🌍"
+
 order: 2
 updated: 2026-11-04
 faq:

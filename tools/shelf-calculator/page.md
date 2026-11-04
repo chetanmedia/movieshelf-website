@@ -6,7 +6,7 @@ h1: "How much shelf do your <em>discs need?</em>"
 dek: "Enter how many DVDs, Blu-rays, 4K UHDs, steelbooks and VHS tapes you own. Get the exact shelf length, and how many IKEA KALLAX cubes or BILLY shelves that is."
 description: "Free shelf space calculator for DVD, Blu-ray and 4K collections. See how many feet of shelf you need and how many IKEA KALLAX cubes or BILLY shelves fit."
 summary: "Work out how many feet of shelf your DVDs, Blu-rays and 4K UHDs need, and how many KALLAX cubes or BILLY shelves that is."
-icon: "📏"
+
 order: 1
 updated: 2026-11-04
 faq:

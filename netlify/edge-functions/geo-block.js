@@ -5,7 +5,7 @@ const KEY = 'DF4Fm_OcxVgtttte';
 const COOKIE = 'ms_access';
 // Search engine and AI crawlers always get the real site, whatever country they crawl from,
 // so rankings and indexing are never affected by the block.
-const CRAWLERS = /googlebot|google-inspectiontool|googleother|storebot-google|adsbot-google|mediapartners-google|bingbot|bingpreview|duckduckbot|applebot|yandex|baiduspider|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-searchbot|claude-user|perplexitybot|perplexity-user/i;
+const CRAWLERS = /googlebot|google favicon|google-inspectiontool|googleother|storebot-google|adsbot-google|mediapartners-google|bingbot|bingpreview|duckduckbot|applebot|yandex|baiduspider|gptbot|oai-searchbot|chatgpt-user|claudebot|claude-searchbot|claude-user|perplexitybot|perplexity-user/i;
 
 const PAGE = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>Not available in your region</title>

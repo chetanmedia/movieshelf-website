@@ -290,7 +290,8 @@ export function loadTools() {
     const dir = path.join(TOOLS_DIR, slug);
     const { data, content } = matter(fs.readFileSync(path.join(dir, 'page.md'), 'utf8'));
     return { ...data, slug, dir, body: content, faq: data.faq || [], url: `/tools/${slug}/`, order: data.order ?? 99,
-      updated: new Date(data.updated || Date.now()), widget: fs.readFileSync(path.join(dir, 'widget.html'), 'utf8') };
+      updated: new Date(data.updated || Date.now()), widget: fs.readFileSync(path.join(dir, 'widget.html'), 'utf8'),
+      art: fs.existsSync(path.join(dir, 'card.svg')) ? fs.readFileSync(path.join(dir, 'card.svg'), 'utf8') : '' };
   }).filter(t => !t.draft).sort((a, b) => a.order - b.order);
   return TOOLS_CACHE;
 }
@@ -333,7 +334,7 @@ export function renderTool(tool, posts) {
 ${js}` + footer(cats);
 }
 
-const toolCard = t => `<a class="tool-card" href="${t.url}"><span class="tc-ico" aria-hidden="true">${t.icon || '◆'}</span><b>${esc(t.title)}</b><p>${esc(t.summary || t.description)}</p><span class="tc-go">Open tool →</span></a>`;
+const toolCard = t => `<a class="tool-card" href="${t.url}">${t.art ? `<span class="tc-art">${t.art}</span>` : ''}<span class="tc-body"><b>${esc(t.title)}</b><p>${esc(t.summary || t.description)}</p><span class="tc-go">Open tool →</span></span></a>`;
 
 export function renderToolsHub(posts) {
   const tools = loadTools(), cats = [...new Set(posts.map(p => p.category))];
