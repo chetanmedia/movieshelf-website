@@ -48,6 +48,8 @@
         <label class="cm-row"><span>Move sideways</span><input type="range" min="-1" max="1" step="0.01" data-k="f.x"></label>
         <label class="cm-row"><span>Move up/down</span><input type="range" min="-1" max="1" step="0.01" data-k="f.y"></label>
       </div>
+      <label class="cm-check cm-notext"><input type="checkbox" data-k="f.noText"> No text on the front</label>
+      <div class="cm-textblock" data-hide-if="f.noText">
       <h3>Title on the front</h3>
       <label class="cm-row"><span>Title</span><input type="text" maxlength="60" data-k="f.title" placeholder="Leave empty for none"></label>
       <div class="cm-two">
@@ -63,16 +65,11 @@
         <label class="cm-row"><span>Banner text</span><input type="text" maxlength="40" data-k="f.bannerText"></label>
         <label class="cm-row"><span>Banner colour</span><input type="color" data-k="f.bannerColor"></label>
       </div>
+      </div>
     </section>
 
     <section class="cm-sec" data-sec="spine" hidden>
       <h3>Spine</h3>
-      <label class="cm-row"><span>Spine title</span><input type="text" maxlength="60" data-k="s.title"></label>
-      <div class="cm-two">
-        <label class="cm-row"><span>Font</span><select data-k="s.font" data-fonts></select></label>
-        <label class="cm-row"><span>Text colour</span><input type="color" data-k="s.color"></label>
-      </div>
-      <label class="cm-row"><span>Collector number<small>For example 042. Leave empty for none.</small></span><input type="text" maxlength="6" data-k="s.num"></label>
       <label class="cm-drop small" data-drop="spine"><input type="file" accept="image/*" data-file="spine"><b>Add a spine image</b><span>A tall, narrow image works best</span></label>
       <label class="cm-row"><span>Background</span><select data-k="s.bg"><option value="auto">Match the front artwork</option><option value="color">Solid colour</option><option value="image">My spine image</option></select></label>
       <label class="cm-row" data-show-if="s.bg=color"><span>Spine colour</span><input type="color" data-k="s.bgColor"></label>
@@ -81,7 +78,16 @@
         <label class="cm-row"><span>Move up/down</span><input type="range" min="-1" max="1" step="0.01" data-k="s.y"></label>
         <button type="button" class="cm-reset" data-remove="spine">Remove spine image</button>
       </div>
+      <label class="cm-check cm-notext"><input type="checkbox" data-k="s.noText"> No text on the spine</label>
+      <div class="cm-textblock" data-hide-if="s.noText">
+      <label class="cm-row"><span>Spine title</span><input type="text" maxlength="60" data-k="s.title"></label>
+      <div class="cm-two">
+        <label class="cm-row"><span>Font</span><select data-k="s.font" data-fonts></select></label>
+        <label class="cm-row"><span>Text colour</span><input type="color" data-k="s.color"></label>
+      </div>
+      <label class="cm-row"><span>Collector number<small>For example 042. Leave empty for none.</small></span><input type="text" maxlength="6" data-k="s.num"></label>
       <label class="cm-row"><span>Text reads</span><select data-k="s.dir"><option value="down">Top to bottom (US style)</option><option value="up">Bottom to top (UK and Europe)</option></select></label>
+      </div>
     </section>
 
     <section class="cm-sec" data-sec="back" hidden>
@@ -98,6 +104,8 @@
         <label class="cm-check"><input type="checkbox" data-k="b.dim"> Darken it so the text stays readable</label>
         <button type="button" class="cm-reset" data-remove="back">Remove back image</button>
       </div>
+      <label class="cm-check cm-notext"><input type="checkbox" data-k="b.noText"> No text on the back</label>
+      <div class="cm-textblock" data-hide-if="b.noText">
       <label class="cm-row"><span>Tagline</span><input type="text" maxlength="80" data-k="b.tagline"></label>
       <label class="cm-row"><span>Synopsis</span><textarea rows="5" maxlength="900" data-k="b.body"></textarea></label>
       <div class="cm-two">
@@ -105,6 +113,7 @@
         <label class="cm-row"><span>Text colour</span><input type="color" data-k="b.color"></label>
       </div>
       <label class="cm-row"><span>Small print<small>Runtime, audio, your own notes</small></span><input type="text" maxlength="120" data-k="b.small"></label>
+      </div>
     </section>
     <p class="cm-legal">Use your own photos or artwork you have the rights to. Covers are for your personal collection.</p>
   </div>

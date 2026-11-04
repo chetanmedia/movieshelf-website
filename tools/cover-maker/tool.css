@@ -77,6 +77,9 @@
 .cm-drop b { color: var(--fg); font-size: 15.5px }
 .cm-drop span { color: var(--dim); font-size: 13px }
 .cm-drop.small { padding: 14px }
+.cm-textblock { display: grid; gap: 12px }
+.cm-textblock[hidden] { display: none }
+.cm-notext { margin-top: 8px; padding: 10px 12px; border-radius: 12px; background: var(--bg2); border: 1px solid var(--line) }
 .cm-imgctl { display: grid; gap: 10px; padding: 12px; border-radius: 14px; background: rgba(255, 255, 255, .03); border: 1px solid var(--line) }
 .cm-imgctl[hidden] { display: none }
 .cm-reset { justify-self: start; border: 0; background: none; color: var(--accent2); font-weight: 600; font-size: 14px; padding: 8px 0; cursor: pointer }

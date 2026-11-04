@@ -106,8 +106,8 @@ if (root) {
     ctx.translate(xSpine + sp / 2, yTop + d.h / 2); ctx.rotate(st.s.dir === 'up' ? -Math.PI / 2 : Math.PI / 2);
     const len = d.h - SAFE * 2 - (st.s.num ? 16 : 0);
     ctx.fillStyle = st.s.color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    if (st.s.title) { fitText(ctx, st.s.title, st.s.font, 700, len, sp * .62); ctx.fillText(st.s.title, st.s.num ? -8 : 0, sp * .03); }
-    if (st.s.num) {
+    if (st.s.title && !st.s.noText) { fitText(ctx, st.s.title, st.s.font, 700, len, sp * .62); ctx.fillText(st.s.title, st.s.num ? -8 : 0, sp * .03); }
+    if (st.s.num && !st.s.noText) {
       ctx.font = `700 ${Math.min(5, sp * .38)}px ${ff("Space Mono")}`;
       const nx = d.h / 2 - SAFE - 6;
       ctx.globalAlpha = .9; ctx.fillText(st.s.num, nx, 0); ctx.globalAlpha = 1;
@@ -116,13 +116,13 @@ if (root) {
     ctx.restore();
     // front banner + title
     const fx = xFront, fw = pw;
-    if (st.f.banner && st.f.bannerText) {
+    if (st.f.banner && st.f.bannerText && !st.f.noText) {
       ctx.fillStyle = st.f.bannerColor; ctx.fillRect(fx, 0, d.W - fx, yTop + 11);
       ctx.fillStyle = 'rgba(255,255,255,.12)'; ctx.fillRect(fx, yTop + 10.6, d.W - fx, .4);
       ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       fitText(ctx, st.f.bannerText, 'Figtree', 700, fw - SAFE * 4, 4.6); ctx.fillText(st.f.bannerText, fx + fw / 2, yTop + 5.6);
     }
-    if (st.f.title) {
+    if (st.f.title && !st.f.noText) {
       ctx.save(); ctx.fillStyle = st.f.color; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
       const lines = []; const px = +st.f.size;
       ctx.font = `700 ${px}px ${ff(st.f.font)}`;
@@ -137,17 +137,17 @@ if (root) {
     const bx = xBack + SAFE + 6, bw = pw - SAFE * 2 - 12;
     let y = yTop + SAFE + 10;
     ctx.fillStyle = st.b.color; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-    if (st.b.tagline) {
+    if (st.b.tagline && !st.b.noText) {
       ctx.font = `italic 400 ${d.h > 160 ? 9 : 8}px ${ff("Instrument Serif")}`;
       for (const l of wrap(ctx, st.b.tagline, bw)) { ctx.fillText(l, bx, y + 6); y += 8.8; }
       y += 6;
     }
-    if (st.b.body) {
+    if (st.b.body && !st.b.noText) {
       const bpx = d.h > 160 ? 3.4 : 3.1; ctx.font = `400 ${bpx}px ${ff(st.b.font)}`; ctx.globalAlpha = .92;
       for (const l of wrap(ctx, st.b.body, bw)) { if (y > yTop + d.h - SAFE - 18) break; ctx.fillText(l, bx, y + bpx); y += bpx * 1.5; }
       ctx.globalAlpha = 1;
     }
-    if (st.b.small) {
+    if (st.b.small && !st.b.noText) {
       ctx.font = `500 2.6px ${ff("Space Mono")}`; ctx.globalAlpha = .7;
       const sy = yTop + d.h - SAFE - 8; ctx.fillRect(bx, sy - 5, bw, .2); ctx.fillText(st.b.small, bx, sy); ctx.globalAlpha = 1;
     }
@@ -250,6 +250,7 @@ if (root) {
     }
     $$('[data-tpl]').forEach(b => b.setAttribute('aria-pressed', b.dataset.tpl === st.tpl));
     $$('[data-show-if]').forEach(el => { const [k, v] = el.dataset.showIf.split('='); el.hidden = get(k) !== v; });
+    $$('[data-hide-if]').forEach(el => { el.hidden = !!get(el.dataset.hideIf); });
     $('[data-paper]').textContent = st.paper === 'a4' ? 'A4' : 'Letter';
   }
   let saveT;
