@@ -25,7 +25,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 14 | 2026-11-05 | rare dvds worth money | 170 | 25 | rare dvds, list of rare dvds worth money, rare dvds to look for | Rare DVDs Worth Money: What Collectors Actually Pay For | Collecting | done 2026-11-05 |
 | 15 | 2026-11-06 | criterion collection sale | 8100 | 41 | criterion collection barnes and noble sale, criterion collection flash sale | Criterion Collection Sales: When They Happen and How to Plan | Collecting | done 2026-11-06 |
 | 16 | 2026-11-07 | friday the 13th blu ray collection | 590 | 18 | — | Friday the 13th on Blu-ray: Every Collection Explained | Collecting | done 2026-11-07 |
-| 17 | 2026-11-08 | what is 4k uhd | 1300 | 27 | uhd vs 4k, 4k uhd blu ray discs, what is 4k uhd blu ray | What Is 4K UHD Blu-ray? Discs, HDR and Players Explained | Formats | todo |
+| 17 | 2026-11-08 | what is 4k uhd | 1300 | 27 | uhd vs 4k, 4k uhd blu ray discs, what is 4k uhd blu ray | What Is 4K UHD Blu-ray? Discs, HDR and Players Explained | Formats | done 2026-11-08 |
 | 18 | 2026-11-09 | best region free blu ray player | 260 | 20 | region free blu ray player, blu ray region free player, 4k blu ray region free | Region-Free Blu-ray Players: How They Work and What to Buy | Gear | todo |
 | 19 | 2026-11-10 | movie collection spreadsheet | 30 | 26 | dvd inventory | Movie Collection Spreadsheet vs App: Which Should You Use? | Guides | todo |
 | 20 | 2026-11-11 | how to store dvds | 170 | 23 | how to store dvds without cases, how to store dvds minimalist, physical media storage | How to Store DVDs and Blu-rays So They Last Decades | Organizing | todo |
