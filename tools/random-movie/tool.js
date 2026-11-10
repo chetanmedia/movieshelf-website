@@ -71,7 +71,7 @@ if (root) {
     }
     if (mode === 'mine' && data) {
       const all = myList(), found = all.filter(f => !f.mine).length;
-      $('[data-mine-n]').textContent = all.length ? `${found} of ${all.length} recognised, so they get posters and details.` : '';
+      $('[data-mine-n]').textContent = all.length ? `${found} of ${all.length} recognized, so they get posters and details.` : '';
     }
     drawSaved();
   }
@@ -118,70 +118,248 @@ if (root) {
     track('Tool Used', { mode });
     reveal(f, true);
   }
+  // ---------- the slot machine ----------
+  // Three reels (genre symbol, poster, year) driven frame by frame: a little wind-up, a fast spin with motion blur,
+  // a long slow crawl, then a weighty overshoot that springs back onto the payline. Reels stop left, right, then poster.
+  const slot = $('[data-machine]'), lever = $('[data-lever]'), msg = $('[data-slot-msg]');
+  const reels = $$('.rm-reelv').map(el => ({ el, rs: el.querySelector('.rm-rs'), k: 1, items: [] }));
+  const SYM = { 28: '💥', 12: '🗺️', 16: '🎨', 35: '😂', 80: '🕵️', 99: '🎥', 18: '🎭', 10751: '👪', 14: '🐉', 36: '🏛️', 27: '👻', 10402: '🎵', 9648: '🔍', 10749: '💘', 878: '🚀', 53: '🔪', 10752: '⚔️', 37: '🤠', 10770: '📺' };
+  const SHORT = { 'Science Fiction': 'Sci-fi', 'Documentary': 'Doc', 'TV Movie': 'TV' };
+  const symFor = f => {
+    if (f.x || mode === 'xmas') return ['🎄', 'Xmas'];
+    const g = (f.g || []).find(id => SYM[id]);
+    return g ? [SYM[g], SHORT[genres[g]] || genres[g] || ''] : ['🎬', f.mine ? 'Yours' : 'Film'];
+  };
+  const symHtml = ([e, l]) => `<div class="rm-sym"><b>${e}</b><span>${esc(l)}</span></div>`;
+  const yearHtml = y => `<div class="rm-sym yr"><b>${y || '★'}</b></div>`;
+  const posterHtml = t => `<div class="rm-pt${t.p ? '' : ' nop'}"><div class="rm-pf">${t.p ? `<img src="${poster(t, 'w185')}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.add('nop')">` : ''}<span>${esc(t.t)}</span></div></div>`;
+  const rnd = a => a[Math.floor(Math.random() * a.length)];
+  const fillers = () => { const ready = warm.filter(w => w.ok).map(w => w.f), list = pool(); return ready.length > 5 ? ready : list.length ? list : data?.films || []; };
+  const randGenreSym = () => { const ids = Object.keys(SYM).filter(id => genres[id] && id !== '10770'); if (!ids.length) return symHtml([rnd(['🎬', '🍿', '⭐', '🎟️']), '']); const id = rnd(ids); return symHtml([SYM[id], SHORT[genres[id]] || genres[id]]); };
+  const randYear = () => yearHtml(1960 + Math.floor(Math.random() * 66));
+
+  function place(r, k) {
+    r.k = k;
+    const h = r.h || (r.h = r.rs.firstElementChild?.offsetHeight || 1), H = r.H || (r.H = r.el.clientHeight);
+    r.rs.style.transform = `translate3d(0,${((H - h) / 2 - (r.items.length - 1 - k) * h).toFixed(2)}px,0)`;
+  }
+  // items[0] sits below the payline, items[k] on it; higher indexes come down from above (reels roll downwards)
+  function load(r, items, k) { r.items = items; r.rs.innerHTML = items.slice().reverse().join(''); r.h = r.H = 0; place(r, k); }
+  function idle() {
+    const fl = fillers();
+    load(reels[0], [randGenreSym(), randGenreSym(), randGenreSym()], 1);
+    load(reels[1], fl.length ? [posterHtml(rnd(fl)), posterHtml(rnd(fl)), posterHtml(rnd(fl))] : [0, 1, 2].map(() => '<div class="rm-pt nop"><div class="rm-pf"><span>🎬</span></div></div>'), 1);
+    load(reels[2], [randYear(), randYear(), randYear()], 1);
+  }
+  function finalState(f) {
+    load(reels[0], [randGenreSym(), symHtml(symFor(f)), randGenreSym()], 1);
+    load(reels[1], [posterHtml(rnd(fillers()) || f), posterHtml(f), posterHtml(rnd(fillers()) || f)], 1);
+    load(reels[2], [randYear(), yearHtml(f.y), randYear()], 1);
+  }
+
+  const easeQuart = u => 1 - Math.pow(1 - u, 4), easeQuint = u => 1 - Math.pow(1 - u, 5);
+  function roll(r, final, makeFiller, n, dur, ease, onStop, onSpeed) {
+    const cur = Math.round(r.k), old = r.items;
+    const items = [old[cur - 1] ?? makeFiller(), old[cur] ?? makeFiller()];
+    for (let i = 0; i < n; i++) items.push(makeFiller());
+    items.push(final, makeFiller());
+    load(r, items, 1);
+    const K = items.length - 2, ov = .2, wind = 200, settle = 650, a = 7, w = 12;
+    const t0 = performance.now(); let lastI = 1, lastK = 1, lastT = t0;
+    const frame = now => {
+      const t = now - t0; let k;
+      if (t < wind) k = 1 - .16 * Math.sin(Math.PI * t / wind);
+      else if (t < wind + dur) k = 1 + (K + ov - 1) * ease((t - wind) / dur);
+      else { const s = (t - wind - dur) / 1000; k = K + ov * Math.exp(-a * s) * (Math.cos(w * s) + a / w * Math.sin(w * s)); }
+      const done = t >= wind + dur + settle;
+      if (done) k = K;
+      place(r, k);
+      const v = Math.abs(k - lastK) / Math.max(1, now - lastT) * 1000; lastK = k; lastT = now;
+      r.el.classList.toggle('fast', v > 9); onSpeed?.(v);
+      const i = Math.round(k); if (i !== lastI) { lastI = i; sfx.tick(); }
+      if (!done) requestAnimationFrame(frame);
+      else { r.el.classList.remove('fast'); r.el.classList.add('stop'); setTimeout(() => r.el.classList.remove('stop'), 400); onStop(); }
+    };
+    // the clunk lands as the reel hits the payline, before the bounce settles
+    setTimeout(() => sfx.clunk(), wind + dur - 40);
+    requestAnimationFrame(frame);
+  }
+
   function reveal(f, animate) {
     picked = f;
-    const pick = $('[data-pick]'), reel = $('[data-reel]');
+    const pick = $('[data-pick]');
     const finish = () => {
-      pick.innerHTML = cardHtml(f); pick.classList.remove('out'); void pick.offsetWidth; pick.classList.add('in');
-      reel.classList.remove('go', 'landed', 'calm'); reel.innerHTML = ''; spinning = false; update();
+      pick.innerHTML = cardHtml(f); pick.classList.remove('out', 'in'); void pick.offsetWidth; pick.classList.add('in');
+      spinning = false; slot.classList.remove('spinning'); update();
       const p = new URLSearchParams(location.search); if (f.i) { p.set('m', f.i); } else p.delete('m');
       history.replaceState(history.state, '', `${location.pathname}${p.toString() ? '?' + p : ''}`);
     };
-    if (!animate) { finish(); return; }
+    if (!animate) { finalState(f); msg.textContent = `Tonight’s pick: ${f.t}`; finish(); return; }
     spinning = true; update();
-    if (calm.matches) { calmShuffle(f, finish); return; }
-    // Slot-machine reel: posters race sideways through a spotlight and slow down onto the pick.
-    const ready = warm.filter(w => w.ok && key(w.f) !== key(f)), list = pool(), tiles = [];
-    for (let i = 0; i < 22; i++) tiles.push(ready.length > 6 ? ready[Math.floor(Math.random() * ready.length)].f : list[Math.floor(Math.random() * list.length)] || f);
-    tiles.push(f);
-    reel.innerHTML = `<div class="rm-strip">${tiles.map((t, i) => `<div class="rm-tile${t.p ? '' : ' nop'}${i === tiles.length - 1 ? ' final' : ''}">${t.p ? `<img src="${poster(t, 'w185')}" alt="" onerror="this.parentNode.classList.add('nop')">` : ''}<span>${esc(t.t)}</span></div>`).join('')}</div><div class="rm-spot" aria-hidden="true"></div>`;
+    slot.classList.remove('win'); slot.classList.add('spinning');
     pick.classList.add('out');
-    reel.classList.add('go');
-    const strip = reel.querySelector('.rm-strip'), tile = strip.firstElementChild;
-    const step = tile.offsetWidth + parseFloat(getComputedStyle(strip).columnGap || 14); // layout size (ignores the tiles' scale), now that the reel is visible
-    const from = -tile.offsetWidth / 2, to = from - (tiles.length - 1) * step;
+    msg.textContent = rnd(['Rolling…', 'Feeling lucky…', 'Here we go…', 'Come on, big screen…']);
     const big = new Image(); if (f.p) big.src = poster(f, 'w342');
-    const anim = strip.animate([
-      { transform: `translateX(${from}px)`, filter: 'blur(0px)' },
-      { transform: `translateX(${from + (to - from) * .25}px)`, filter: 'blur(5px)', offset: .18 },
-      { transform: `translateX(${from + (to - from) * .9}px)`, filter: 'blur(2px)', offset: .62 },
-      { transform: `translateX(${to}px)`, filter: 'blur(0px)' },
-    ], { duration: 2100, easing: 'cubic-bezier(.2,.6,.15,1)', fill: 'forwards' });
-    anim.onfinish = () => {
-      reel.classList.add('landed');
-      // give the full-size poster a moment to arrive so the card doesn't flash empty
-      const done = () => { clearTimeout(cap); setTimeout(finish, 420); }, cap = setTimeout(done, 700);
+    const fl = fillers(), filmFiller = () => posterHtml(rnd(fl) || f);
+    const win = () => {
+      slot.classList.add('win'); sfx.jingle(); burst();
+      msg.textContent = rnd(['Jackpot!', 'Winner!', 'Big win!', 'Lights, camera, jackpot!']) + ' ' + f.t;
+      spins = store.get('spins', 0) + 1; store.set('spins', spins); drawSpins();
+      const done = () => { clearTimeout(cap); setTimeout(finish, 380); }, cap = setTimeout(done, 900);
       if (!f.p || big.complete) done(); else big.onload = big.onerror = done;
     };
+    if (calm.matches) { calmRoll(f, filmFiller, win); warmUp(); return; }
+    const hum = sfx.motor();
+    let stopped = 0;
+    const stop = () => { if (++stopped === 3) { hum?.stop(); win(); } };
+    roll(reels[0], symHtml(symFor(f)), randGenreSym, 14, 1500, easeQuart, stop);
+    roll(reels[2], yearHtml(f.y), randYear, 18, 2200, easeQuart, stop);
+    roll(reels[1], posterHtml(f), filmFiller, 24, 3300, easeQuint, stop, v => hum?.speed(v));
     warmUp();
   }
 
-  // Reduce motion: no sliding, just a quick cross-fade through a few posters in the spotlight.
-  function calmShuffle(f, finish) {
-    const pick = $('[data-pick]'), reel = $('[data-reel]');
-    const ready = warm.filter(w => w.ok).map(w => w.f), list = pool();
-    const tiles = Array.from({ length: 6 }, () => (ready.length ? ready : list)[Math.floor(Math.random() * (ready.length || list.length))] || f).concat(f);
-    reel.innerHTML = `<div class="rm-fades">${tiles.map(t => `<div class="rm-tile${t.p ? '' : ' nop'}">${t.p ? `<img src="${poster(t, 'w185')}" alt="" onerror="this.parentNode.classList.add('nop')">` : ''}<span>${esc(t.t)}</span></div>`).join('')}</div><div class="rm-spot" aria-hidden="true"></div>`;
-    pick.classList.add('out'); reel.classList.add('go', 'calm');
-    const els = [...reel.querySelectorAll('.rm-tile')]; let i = 0;
-    els[0].classList.add('show');
+  // Reduce motion: reels don't travel. Side reels change in place, the poster window cross-fades a few films.
+  function calmRoll(f, filmFiller, win) {
+    let n = 0;
     const tick = setInterval(() => {
-      els[i].classList.remove('show'); i++; els[i].classList.add('show');
-      if (i === els.length - 1) { clearInterval(tick); els[i].classList.add('final'); reel.classList.add('landed'); setTimeout(() => { reel.classList.remove('calm'); finish(); }, 650); }
-    }, 170);
-    warmUp();
+      n++; sfx.tick();
+      load(reels[1], [filmFiller(), n < 7 ? filmFiller() : posterHtml(f), filmFiller()], 1);
+      reels[1].el.classList.remove('swap'); void reels[1].el.offsetWidth; reels[1].el.classList.add('swap');
+      if (n === 2) { load(reels[0], [randGenreSym(), symHtml(symFor(f)), randGenreSym()], 1); sfx.clunk(); }
+      if (n === 4) { load(reels[2], [randYear(), yearHtml(f.y), randYear()], 1); sfx.clunk(); }
+      if (n === 7) { clearInterval(tick); sfx.clunk(); win(); }
+    }, 190);
   }
 
-  // Keep a handful of posters pre-loaded so the reel never shows empty tiles.
+  // coins, popcorn and tickets burst out of the window on a win
+  function burst() {
+    if (calm.matches) return;
+    const win = slot.querySelector('.rm-window'), box = win.getBoundingClientRect(), sb = slot.getBoundingClientRect();
+    const cx = box.left - sb.left + box.width / 2, cy = box.top - sb.top + box.height / 2;
+    for (let i = 0; i < 26; i++) {
+      const s = document.createElement('span'); s.className = 'rm-fx'; s.textContent = rnd(['🪙', '🪙', '🍿', '⭐', '🎟️', '🪙']);
+      s.style.left = cx + 'px'; s.style.top = cy + 'px'; slot.appendChild(s);
+      const ang = Math.random() * Math.PI * 2, sp = 140 + Math.random() * 220, dx = Math.cos(ang) * sp, up = -120 - Math.random() * 200;
+      s.animate([
+        { transform: 'translate(-50%,-50%) scale(.3) rotate(0deg)', opacity: 1 },
+        { transform: `translate(calc(-50% + ${dx * .6}px), calc(-50% + ${up}px)) scale(1.1) rotate(${Math.random() * 360}deg)`, opacity: 1, offset: .4 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${up + 380}px)) scale(.9) rotate(${Math.random() * 720}deg)`, opacity: 0 },
+      ], { duration: 1300 + Math.random() * 500, easing: 'cubic-bezier(.2,.7,.4,1)' }).onfinish = () => s.remove();
+    }
+  }
+
+  // bulbs around the bezel: the top and bottom rows plus the sides, chasing in three phases
+  function drawBulbs() {
+    const pts = [];
+    for (let i = 0; i <= 13; i++) { const x = 3 + i * 94 / 13; pts.push(`left:${x}%;top:7px`, `left:${x}%;top:calc(100% - 7px)`); }
+    for (let i = 1; i <= 5; i++) { const y = i * 100 / 6; pts.push(`left:7px;top:${y}%`, `left:calc(100% - 7px);top:${y}%`); }
+    $('[data-bulbs]').innerHTML = pts.map((p, i) => `<i style="${p};--n:${i % 3}"></i>`).join('');
+  }
+
+  // ---------- lever ----------
+  function setLever(p) { lever.style.setProperty('--p', p.toFixed(3)); }
+  let leverBusy = false;
+  function pull() {
+    if (spinning || leverBusy || $('[data-spin]').disabled) return;
+    sfx.unlock();
+    if (calm.matches) { spin(); return; }
+    leverBusy = true;
+    const t0 = performance.now(); let notch = 0;
+    const down = 260, hold = 70, up = 520;
+    const frame = now => {
+      const t = now - t0; let p;
+      if (t < down) { const u = t / down; p = u * u; const nn = Math.floor(p * 6); if (nn > notch) { notch = nn; sfx.ratchet(nn); } }
+      else if (t < down + hold) p = 1;
+      else { const u = Math.min(1, (t - down - hold) / up); p = Math.exp(-5 * u) * Math.cos(9 * u) * (1 - u); }
+      setLever(Math.max(-.08, p));
+      if (t >= down && !lever.dataset.fired) { lever.dataset.fired = 1; spin(); }
+      if (t < down + hold + up) requestAnimationFrame(frame); else { setLever(0); delete lever.dataset.fired; leverBusy = false; }
+    };
+    requestAnimationFrame(frame);
+  }
+  // drag the knob down like the real thing; a tap pulls it for you
+  let drag = null;
+  lever.addEventListener('pointerdown', e => {
+    if (spinning || leverBusy || $('[data-spin]').disabled) return;
+    e.preventDefault(); lever.setPointerCapture(e.pointerId); sfx.unlock();
+    drag = { y: e.clientY, p: 0, notch: 0, len: lever.offsetHeight * .5 };
+  });
+  lever.addEventListener('pointermove', e => {
+    if (!drag) return;
+    drag.p = Math.max(0, Math.min(1, (e.clientY - drag.y) / drag.len)); setLever(drag.p);
+    const nn = Math.floor(drag.p * 6); if (nn > drag.notch) { drag.notch = nn; sfx.ratchet(nn); } else if (nn < drag.notch) drag.notch = nn;
+  });
+  const release = () => {
+    if (!drag) return;
+    const d = drag; drag = null;
+    if (d.p < .06) { setLever(0); pull(); return; }
+    if (d.p > .6) { spin(); }
+    // spring back
+    const t0 = performance.now(), from = d.p;
+    const frame = now => { const u = Math.min(1, (now - t0) / 480); setLever(from * Math.exp(-5 * u) * Math.cos(9 * u) * (1 - u)); if (u < 1) requestAnimationFrame(frame); else setLever(0); };
+    requestAnimationFrame(frame);
+  };
+  lever.addEventListener('pointerup', release); lever.addEventListener('pointercancel', release);
+  lever.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pull(); } });
+
+  // ---------- sound (synthesised, nothing to download) ----------
+  const sfx = (() => {
+    let ctx = null, noise = null, lastTick = 0, muted = store.get('mute', false);
+    const ac = () => {
+      if (muted) return null;
+      if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; try { ctx = new C(); } catch { return null; } }
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    };
+    const nbuf = c => { if (!noise) { noise = c.createBuffer(1, c.sampleRate * .4, c.sampleRate); const d = noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } return noise; };
+    const out = (c, node, t, peak, dec, att = .002) => { const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + att); g.gain.exponentialRampToValueAtTime(.0001, t + att + dec); node.connect(g); g.connect(c.destination); };
+    const click = (c, t, f, vol, dec) => { const s = c.createBufferSource(); s.buffer = nbuf(c); const b = c.createBiquadFilter(); b.type = 'bandpass'; b.frequency.value = f; b.Q.value = 3; s.connect(b); out(c, b, t, vol, dec); s.start(t, Math.random() * .3); s.stop(t + dec + .03); };
+    const tone = (c, t, f, type, vol, dec, to) => { const o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (to) o.frequency.exponentialRampToValueAtTime(to, t + dec); out(c, o, t, vol, dec, .004); o.start(t); o.stop(t + dec + .05); };
+    return {
+      get muted() { return muted; },
+      setMuted(m) { muted = m; store.set('mute', m); if (m && ctx) ctx.suspend?.(); else ac(); },
+      unlock() { ac(); },
+      tick() { const c = ac(); if (!c) return; const n = c.currentTime; if (n - lastTick < .028) return; lastTick = n; click(c, n, 2400 + Math.random() * 800, .22, .022); tone(c, n, 1250, 'square', .018, .018); },
+      clunk() { const c = ac(); if (!c) return; const n = c.currentTime; tone(c, n, 150, 'sine', .55, .22, 50); click(c, n, 420, .45, .09); click(c, n + .012, 3000, .18, .03); },
+      ratchet(i) { const c = ac(); if (!c) return; const n = c.currentTime; click(c, n, 1500 + i * 120, .3, .03); tone(c, n, 240 + i * 20, 'square', .03, .03); },
+      jingle() {
+        const c = ac(); if (!c) return; const n = c.currentTime + .05;
+        [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5, 1318.5].forEach((f, i) => { tone(c, n + i * .085, f, 'triangle', .2, .26); tone(c, n + i * .085, f * 2, 'sine', .05, .16); });
+        for (let i = 0; i < 12; i++) { const t = n + .62 + i * .055 + Math.random() * .03; tone(c, t, 2300 + Math.random() * 900, 'sine', .07, .14); tone(c, t + .01, 3600 + Math.random() * 900, 'sine', .035, .09); }
+      },
+      motor() {
+        const c = ac(); if (!c) return null;
+        const o = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain();
+        o.type = 'sawtooth'; o.frequency.value = 60; lp.type = 'lowpass'; lp.frequency.value = 380; g.gain.value = .0001;
+        o.connect(lp); lp.connect(g); g.connect(c.destination); o.start();
+        g.gain.exponentialRampToValueAtTime(.045, c.currentTime + .25);
+        return {
+          speed(v) { const t = c.currentTime; o.frequency.setTargetAtTime(45 + Math.min(v, 40) * 3, t, .05); g.gain.setTargetAtTime(.008 + Math.min(v, 40) / 40 * .045, t, .08); },
+          stop() { const t = c.currentTime; g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(.0001, t, .05); o.stop(t + .4); },
+        };
+      },
+    };
+  })();
+  const muteBtn = $('[data-mute]');
+  const drawMute = () => { muteBtn.setAttribute('aria-pressed', sfx.muted); muteBtn.setAttribute('aria-label', sfx.muted ? 'Sound off' : 'Sound on'); };
+  muteBtn.addEventListener('click', () => { sfx.setMuted(!sfx.muted); drawMute(); });
+  drawMute();
+
+  let spins = store.get('spins', 0);
+  function drawSpins() { slot.style.setProperty('--spins', `"${String(spins).padStart(3, '0')}"`); }
+
+  // Keep a handful of posters pre-loaded so the reels never show empty tiles.
   let warm = [];
   function warmUp() {
     const list = pool().filter(f => f.p); if (!list.length) return;
-    warm = warm.filter(w => w.ok).slice(-30);
-    for (let i = 0; i < 16; i++) {
+    warm = warm.filter(w => w.ok).slice(-40);
+    for (let i = 0; i < 18; i++) {
       const f = list[Math.floor(Math.random() * list.length)], w = { f, ok: false }, im = new Image();
       im.onload = () => { w.ok = true; }; im.src = poster(f, 'w185'); warm.push(w);
     }
   }
+  drawBulbs(); idle(); drawSpins();
+  addEventListener('resize', () => reels.forEach(r => { r.h = r.H = 0; place(r, r.k); }));
 
   // ---------- saved / seen ----------
   function drawSaved() {
@@ -202,13 +380,13 @@ if (root) {
     const l = t.closest('[data-len]'); if (l) { filt.len = l.dataset.len; update(); return; }
     const r = t.closest('[data-rate]'); if (r) { filt.rate = +r.dataset.rate; update(); return; }
     if (t.closest('[data-clear]')) { filt.g.clear(); filt.dec = 'any'; filt.len = 'any'; filt.rate = 0; update(); return; }
-    if (t.closest('[data-spin]')) { spin(); return; }
+    if (t.closest('[data-spin]')) { pull(); return; }
     if (t.closest('[data-save]') && picked) {
       const k = key(picked), i = saved.findIndex(s => s.k === k);
       if (i >= 0) saved.splice(i, 1); else { saved.unshift({ k, t: picked.t, y: picked.y, p: picked.p || '', f: picked.mine ? picked : undefined }); track('Tool Save'); }
       store.set('saved', saved); $('[data-pick]').innerHTML = cardHtml(picked); update(); return;
     }
-    if (t.closest('[data-seenit]') && picked) { seen.add(key(picked)); store.set('seen', [...seen]); spin(); return; }
+    if (t.closest('[data-seenit]') && picked) { seen.add(key(picked)); store.set('seen', [...seen]); pull(); return; }
     if (t.closest('[data-share]') && picked) {
       const url = location.href, text = `Tonight’s pick: ${picked.t}${picked.y ? ` (${picked.y})` : ''}`;
       if (navigator.share) navigator.share({ title: text, text, url }).catch(() => {});
@@ -222,14 +400,14 @@ if (root) {
   });
   let lt; $('[data-list]').addEventListener('input', () => { clearTimeout(lt); lt = setTimeout(() => { store.set('list', $('[data-list]').value); update(); }, 250); });
   $('[data-list]').value = store.get('list', '');
-  addEventListener('keydown', e => { if (e.code === 'Space' && !/INPUT|TEXTAREA|SELECT|BUTTON|A/.test(document.activeElement?.tagName || '') && !$('[data-spin]').disabled) { e.preventDefault(); spin(); } });
+  addEventListener('keydown', e => { if (e.code === 'Space' && !/INPUT|TEXTAREA|SELECT|BUTTON|A/.test(document.activeElement?.tagName || '') && !$('[data-spin]').disabled) { e.preventDefault(); pull(); } });
 
   fetch('/tools/films.json').then(r => r.json()).then(j => {
     data = j; genres = j.genres || {};
     drawGenres();
     const m = +new URLSearchParams(location.search).get('m');
     const shared = m && j.films.find(f => f.i === m);
-    if (shared) reveal(shared, false);
+    if (shared) reveal(shared, false); else idle();
     update(); warmUp();
   }).catch(() => { $('[data-spin-label]').textContent = 'Couldn’t load films'; });
 }

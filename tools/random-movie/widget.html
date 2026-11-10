@@ -8,16 +8,26 @@
 
   <div class="rm-main">
     <div class="rm-stage">
-      <div class="rm-machine" data-machine aria-live="polite">
-        <div class="rm-reel" data-reel></div>
-        <div class="rm-pick" data-pick>
-          <div class="rm-empty"><span class="rm-dice" aria-hidden="true">🎲</span><b>Can’t decide what to watch?</b><p>Set a few filters if you like, then hit spin.</p></div>
+      <div class="rm-slot" data-machine>
+        <div class="rm-marquee"><span class="rm-sign">Cinema <b>Slots</b></span><button type="button" class="rm-mute" data-mute aria-pressed="false" aria-label="Sound on"><svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5v14l-4.5-4.5H4z"/><path class="on" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/><path class="off" d="m16 9.5 5 5m0-5-5 5"/></svg></button></div>
+        <div class="rm-cab">
+          <div class="rm-bulbs" data-bulbs aria-hidden="true"></div>
+          <div class="rm-window" aria-hidden="true">
+            <div class="rm-reelv side" data-r="0"><div class="rm-rs"></div></div>
+            <div class="rm-reelv main" data-r="1"><div class="rm-rs"></div></div>
+            <div class="rm-reelv side" data-r="2"><div class="rm-rs"></div></div>
+            <div class="rm-payline"><i></i><i></i></div>
+            <div class="rm-glass"></div>
+          </div>
         </div>
+        <div class="rm-lever" data-lever role="button" tabindex="0" aria-label="Pull the lever to spin"><i class="rod"></i><b class="knob"></b><span class="base"></span></div>
+        <div class="rm-tray"><span data-slot-msg>Pull the lever or press Spin</span></div>
       </div>
       <div class="rm-go">
         <button type="button" class="rm-spin" data-spin disabled><span data-spin-label>Loading films…</span></button>
         <p class="rm-count" data-count></p>
       </div>
+      <div class="rm-pick" data-pick aria-live="polite"></div>
     </div>
 
     <div class="rm-side">

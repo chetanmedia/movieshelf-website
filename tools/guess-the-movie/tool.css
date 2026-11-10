@@ -7,6 +7,7 @@
 .gm-title span { color: var(--mute); font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
 .gm-tools { display: flex; align-items: center; gap: 6px }
 .gm-streak { display: inline-flex; align-items: center; gap: 4px; height: 40px; padding: 0 12px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); font-weight: 700; color: var(--mute) }
+.gm-streak[hidden] { display: none }
 .gm-streak i { font-style: normal; filter: grayscale(1); opacity: .5; transition: filter .3s, opacity .3s }
 .gm-streak.hot { color: var(--beam); border-color: rgba(255, 181, 71, .4) }
 .gm-streak.hot i { filter: none; opacity: 1; animation: gm-flame 1.6s ease-in-out infinite }
@@ -146,7 +147,74 @@ html.gm-lock, html.gm-lock body { overflow: hidden }
 .gm-confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 1200; pointer-events: none; display: none }
 .gm-confetti.on { display: block }
 
+/* modes */
+.gm-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; margin-bottom: 14px; border-radius: 20px; background: var(--card); border: 1px solid var(--line) }
+.gm-modes button { display: grid; gap: 1px; padding: 10px 12px; border: 0; border-radius: 15px; background: none; color: var(--mute); cursor: pointer; text-align: center; transition: background .25s, color .2s }
+.gm-modes b { font: 800 17px var(--display); letter-spacing: -.01em }
+.gm-modes small { font-size: 12.5px; color: var(--dim) }
+.gm-modes button[aria-selected="true"] { background: var(--accent); color: #fff; box-shadow: 0 10px 26px -12px var(--accent) }
+.gm-modes button[aria-selected="true"] small { color: rgba(255, 255, 255, .8) }
+
+/* the day's ten films */
+.gm-set { display: flex; align-items: center; gap: 5px; margin: 0 0 12px }
+.gm-set[hidden] { display: none }
+.gm-set button { position: relative; flex: 1; min-width: 0; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--mute); font: 700 14px var(--mono); cursor: pointer; transition: transform .2s, border-color .2s, background .2s }
+.gm-set button:disabled { cursor: default; opacity: .55 }
+.gm-set button i { position: absolute; inset: 0; display: grid; place-items: center; font-style: normal; font-size: 20px }
+.gm-set button.won span, .gm-set button.lost span { opacity: 0 }
+.gm-set button.won { border-color: rgba(47, 209, 91, .5); background: rgba(47, 209, 91, .1) }
+.gm-set button.lost { border-color: rgba(255, 92, 132, .45); background: rgba(255, 92, 132, .08) }
+.gm-set button.cur { border-color: var(--accent2); color: var(--fg); box-shadow: 0 0 0 2px rgba(163, 180, 255, .35), 0 8px 20px -10px var(--accent); transform: translateY(-2px) }
+.gm-set button.pulse i { animation: gm-pop .5s cubic-bezier(.3, 1.6, .5, 1) both }
+.gm-score { flex: none; display: grid; justify-items: center; min-width: 52px; line-height: 1 }
+.gm-score b { font: 800 22px var(--display); color: var(--beam); font-variant-numeric: tabular-nums }
+.gm-score small { color: var(--dim); font: 500 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase }
+
+/* endless */
+.gm-hud { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 0 0 12px }
+.gm-hud[hidden] { display: none }
+.gm-diff { display: flex; gap: 6px }
+.gm-diff button { min-height: 38px; padding: 6px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--text); font-weight: 600; font-size: 14px; cursor: pointer }
+.gm-diff button[aria-pressed="true"] { border-color: var(--beam); background: rgba(255, 181, 71, .14); color: var(--fg) }
+.gm-run { display: flex; gap: 14px; font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim) }
+.gm-run b { display: inline-block; margin-left: 4px; font: 800 22px var(--display); color: var(--fg); letter-spacing: 0; vertical-align: -3px }
+.gm-run b.bump { animation: gm-bump .6s cubic-bezier(.3, 1.6, .5, 1); color: var(--green) }
+@keyframes gm-bump { 40% { transform: scale(1.6) } }
+.gm.endless .gm-stage { background: radial-gradient(70% 90% at 50% 0%, rgba(255, 181, 71, .2), transparent 70%), radial-gradient(60% 60% at 50% 110%, rgba(255, 92, 132, .14), transparent 70%), var(--card) }
+
+/* fact rounds: a clapperboard with the year */
+.gm-emoji.fact { font-size: inherit }
+.gm-clap { width: clamp(200px, 46vw, 270px); border-radius: 14px; overflow: hidden; box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .9); transform-origin: 50% 100% }
+.gm-clap-top { display: flex; height: 30px; background: #f2f2f2; transform-origin: 0 100%; transform: rotate(-8deg) translateY(-4px) }
+.gm-clap-top i { flex: 1; background: #111; transform: skewX(-30deg) translateX(-6px) }
+.gm-clap-top i:nth-child(even) { background: #f2f2f2 }
+.gm-clap-body { display: grid; justify-items: center; gap: 2px; padding: 16px 16px 18px; background: linear-gradient(160deg, #262a3d, #13151f); border-top: 3px solid #f2f2f2 }
+.gm-clap-body small { color: var(--dim); font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase }
+.gm-clap-body b { font: 800 clamp(46px, 9vw, 64px)/1 var(--display); letter-spacing: -.03em; color: var(--fg); text-shadow: 0 0 30px rgba(163, 180, 255, .35) }
+.gm-clap-body span { color: var(--accent2); font-weight: 600; font-size: 15px; text-align: center }
+.gm-emoji.fact.pop .gm-clap { animation: gm-clap-in .7s cubic-bezier(.3, 1.4, .5, 1) both }
+.gm-emoji.fact.pop .gm-clap-top { animation: gm-clack .55s ease-out .45s both }
+@keyframes gm-clap-in { from { transform: translateY(30px) scale(.8); opacity: 0 } }
+@keyframes gm-clack { 0% { transform: rotate(-26deg) translateY(-4px) } 60% { transform: rotate(0) translateY(0) } 100% { transform: rotate(-8deg) translateY(-4px) } }
+.gm-fx { position: absolute; left: 50%; top: 50%; z-index: 5; font-size: 24px; pointer-events: none }
+
+/* results */
+.gm-nextbtn { min-width: 240px }
+.gm-over { margin: 10px 0 0 !important; font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim) !important }
+.gm-bigscore { display: grid; justify-items: center; margin: 4px 0 8px }
+.gm-bigscore > b { font: 800 clamp(64px, 12vw, 92px)/1 var(--display); letter-spacing: -.04em; background: linear-gradient(180deg, #fff, #ffd27f); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums }
+.gm-bigscore small { color: var(--mute); font-size: 15px }
+.gm-result.big .gm-grid { flex-wrap: wrap; gap: 4px; font-size: 24px }
+.gm-endless-cta { margin-top: 16px }
+.gm-nums.three { grid-template-columns: repeat(3, 1fr) }
+
 @media (max-width: 560px) {
+  .gm-modes b { font-size: 15.5px } .gm-modes small { font-size: 11px }
+  .gm-set { gap: 3px } .gm-set button { height: 38px; border-radius: 9px; font-size: 12.5px } .gm-set button i { font-size: 16px }
+  .gm-result.big .gm-grid { font-size: 19px; gap: 3px }
+  .gm-score { min-width: 40px } .gm-score b { font-size: 18px }
+  .gm-diff button { padding: 6px 11px; font-size: 13px }
+  .gm-stage.solved .gm-emoji.fact { transform: translateX(-24vw) scale(.62) }
   .gm-title b { font-size: 21px } .gm-title span { font-size: 13px }
   .gm-streak { height: 36px; padding: 0 10px } .gm-ico { width: 36px; height: 36px }
   .gm-stage { min-height: 200px; padding: 30px 14px 42px; border-radius: 22px }
@@ -158,4 +226,5 @@ html.gm-lock, html.gm-lock body { overflow: hidden }
 @media (prefers-reduced-motion: reduce) {
   .gm .gm-emoji span, .gm .gm-glow { animation: none !important }
   .gm .gm-flip { transition: opacity .3s !important }
+  .gm .gm-clap-top { transform: rotate(-8deg) translateY(-4px) }
 }
