@@ -123,23 +123,64 @@ if (root) {
     const pick = $('[data-pick]'), reel = $('[data-reel]');
     const finish = () => {
       pick.innerHTML = cardHtml(f); pick.classList.remove('out'); void pick.offsetWidth; pick.classList.add('in');
-      reel.classList.remove('go'); reel.innerHTML = ''; spinning = false; update();
+      reel.classList.remove('go', 'landed', 'calm'); reel.innerHTML = ''; spinning = false; update();
       const p = new URLSearchParams(location.search); if (f.i) { p.set('m', f.i); } else p.delete('m');
       history.replaceState(history.state, '', `${location.pathname}${p.toString() ? '?' + p : ''}`);
     };
-    if (!animate || calm.matches) { finish(); return; }
+    if (!animate) { finish(); return; }
     spinning = true; update();
-    // a short slot-machine reel of random posters that lands on the pick
-    const list = pool(), tiles = [];
-    for (let i = 0; i < 18; i++) tiles.push(list[Math.floor(Math.random() * list.length)] || f);
+    if (calm.matches) { calmShuffle(f, finish); return; }
+    // Slot-machine reel: posters race sideways through a spotlight and slow down onto the pick.
+    const ready = warm.filter(w => w.ok && key(w.f) !== key(f)), list = pool(), tiles = [];
+    for (let i = 0; i < 22; i++) tiles.push(ready.length > 6 ? ready[Math.floor(Math.random() * ready.length)].f : list[Math.floor(Math.random() * list.length)] || f);
     tiles.push(f);
-    reel.innerHTML = `<div class="rm-strip">${tiles.map(t => `<div class="rm-tile${t.p ? '' : ' nop'}">${t.p ? `<img src="${poster(t, 'w185')}" alt="" loading="eager" onerror="this.parentNode.classList.add('nop')">` : ''}<span>${esc(t.t)}</span></div>`).join('')}</div>`;
+    reel.innerHTML = `<div class="rm-strip">${tiles.map((t, i) => `<div class="rm-tile${t.p ? '' : ' nop'}${i === tiles.length - 1 ? ' final' : ''}">${t.p ? `<img src="${poster(t, 'w185')}" alt="" onerror="this.parentNode.classList.add('nop')">` : ''}<span>${esc(t.t)}</span></div>`).join('')}</div><div class="rm-spot" aria-hidden="true"></div>`;
     pick.classList.add('out');
-    const strip = reel.firstElementChild;
-    requestAnimationFrame(() => { reel.classList.add('go'); strip.style.transform = `translateY(calc(-${tiles.length - 1} * var(--tile)))`; });
-    setTimeout(finish, 1550);
-    // warm the poster cache for the final card
-    if (f.p) { const im = new Image(); im.src = poster(f, 'w342'); }
+    reel.classList.add('go');
+    const strip = reel.querySelector('.rm-strip'), tile = strip.firstElementChild;
+    const step = tile.offsetWidth + parseFloat(getComputedStyle(strip).columnGap || 14); // layout size (ignores the tiles' scale), now that the reel is visible
+    const from = -tile.offsetWidth / 2, to = from - (tiles.length - 1) * step;
+    const big = new Image(); if (f.p) big.src = poster(f, 'w342');
+    const anim = strip.animate([
+      { transform: `translateX(${from}px)`, filter: 'blur(0px)' },
+      { transform: `translateX(${from + (to - from) * .25}px)`, filter: 'blur(5px)', offset: .18 },
+      { transform: `translateX(${from + (to - from) * .9}px)`, filter: 'blur(2px)', offset: .62 },
+      { transform: `translateX(${to}px)`, filter: 'blur(0px)' },
+    ], { duration: 2100, easing: 'cubic-bezier(.2,.6,.15,1)', fill: 'forwards' });
+    anim.onfinish = () => {
+      reel.classList.add('landed');
+      // give the full-size poster a moment to arrive so the card doesn't flash empty
+      const done = () => { clearTimeout(cap); setTimeout(finish, 420); }, cap = setTimeout(done, 700);
+      if (!f.p || big.complete) done(); else big.onload = big.onerror = done;
+    };
+    warmUp();
+  }
+
+  // Reduce motion: no sliding, just a quick cross-fade through a few posters in the spotlight.
+  function calmShuffle(f, finish) {
+    const pick = $('[data-pick]'), reel = $('[data-reel]');
+    const ready = warm.filter(w => w.ok).map(w => w.f), list = pool();
+    const tiles = Array.from({ length: 6 }, () => (ready.length ? ready : list)[Math.floor(Math.random() * (ready.length || list.length))] || f).concat(f);
+    reel.innerHTML = `<div class="rm-fades">${tiles.map(t => `<div class="rm-tile${t.p ? '' : ' nop'}">${t.p ? `<img src="${poster(t, 'w185')}" alt="" onerror="this.parentNode.classList.add('nop')">` : ''}<span>${esc(t.t)}</span></div>`).join('')}</div><div class="rm-spot" aria-hidden="true"></div>`;
+    pick.classList.add('out'); reel.classList.add('go', 'calm');
+    const els = [...reel.querySelectorAll('.rm-tile')]; let i = 0;
+    els[0].classList.add('show');
+    const tick = setInterval(() => {
+      els[i].classList.remove('show'); i++; els[i].classList.add('show');
+      if (i === els.length - 1) { clearInterval(tick); els[i].classList.add('final'); reel.classList.add('landed'); setTimeout(() => { reel.classList.remove('calm'); finish(); }, 650); }
+    }, 170);
+    warmUp();
+  }
+
+  // Keep a handful of posters pre-loaded so the reel never shows empty tiles.
+  let warm = [];
+  function warmUp() {
+    const list = pool().filter(f => f.p); if (!list.length) return;
+    warm = warm.filter(w => w.ok).slice(-30);
+    for (let i = 0; i < 16; i++) {
+      const f = list[Math.floor(Math.random() * list.length)], w = { f, ok: false }, im = new Image();
+      im.onload = () => { w.ok = true; }; im.src = poster(f, 'w185'); warm.push(w);
+    }
   }
 
   // ---------- saved / seen ----------
@@ -155,7 +196,7 @@ if (root) {
   // ---------- events ----------
   root.addEventListener('click', e => {
     const t = e.target;
-    const m = t.closest('[data-mode]'); if (m) { mode = m.dataset.mode; update(); return; }
+    const m = t.closest('[data-mode]'); if (m) { mode = m.dataset.mode; update(); warm = []; warmUp(); return; }
     const g = t.closest('[data-g]'); if (g) { const id = +g.dataset.g; filt.g.has(id) ? filt.g.delete(id) : filt.g.add(id); update(); return; }
     const d = t.closest('[data-dec]'); if (d) { filt.dec = d.dataset.dec; update(); return; }
     const l = t.closest('[data-len]'); if (l) { filt.len = l.dataset.len; update(); return; }
@@ -189,6 +230,6 @@ if (root) {
     const m = +new URLSearchParams(location.search).get('m');
     const shared = m && j.films.find(f => f.i === m);
     if (shared) reveal(shared, false);
-    update();
+    update(); warmUp();
   }).catch(() => { $('[data-spin-label]').textContent = 'Couldn’t load films'; });
 }
