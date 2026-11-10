@@ -1,0 +1,55 @@
+<div class="rm" id="rm">
+  <div class="rm-modes" role="tablist" aria-label="Pick from">
+    <button type="button" role="tab" data-mode="popular" aria-selected="true">Popular films</button>
+    <button type="button" role="tab" data-mode="gems" aria-selected="false">Hidden gems</button>
+    <button type="button" role="tab" data-mode="xmas" aria-selected="false">Christmas</button>
+    <button type="button" role="tab" data-mode="mine" aria-selected="false">My own list</button>
+  </div>
+
+  <div class="rm-main">
+    <div class="rm-stage">
+      <div class="rm-machine" data-machine aria-live="polite">
+        <div class="rm-reel" data-reel></div>
+        <div class="rm-pick" data-pick>
+          <div class="rm-empty"><span class="rm-dice" aria-hidden="true">🎲</span><b>Can’t decide what to watch?</b><p>Set a few filters if you like, then hit spin.</p></div>
+        </div>
+      </div>
+      <div class="rm-go">
+        <button type="button" class="rm-spin" data-spin disabled><span data-spin-label>Loading films…</span></button>
+        <p class="rm-count" data-count></p>
+      </div>
+    </div>
+
+    <div class="rm-side">
+      <section class="rm-filters" data-filters>
+        <div class="rm-f"><b>Genre</b><div class="rm-chips" data-genres></div></div>
+        <div class="rm-f"><b>Decade</b><div class="rm-chips" data-decades></div></div>
+        <div class="rm-f"><b>Length</b><div class="rm-chips" data-lengths>
+          <button type="button" data-len="any" aria-pressed="true">Any</button>
+          <button type="button" data-len="short" aria-pressed="false">Under 90 min</button>
+          <button type="button" data-len="mid" aria-pressed="false">90 min – 2 h</button>
+          <button type="button" data-len="long" aria-pressed="false">Over 2 h</button>
+        </div></div>
+        <div class="rm-f"><b>Rating</b><div class="rm-chips" data-ratings>
+          <button type="button" data-rate="0" aria-pressed="true">Any</button>
+          <button type="button" data-rate="6.5" aria-pressed="false">6.5+</button>
+          <button type="button" data-rate="7.5" aria-pressed="false">7.5+</button>
+          <button type="button" data-rate="8" aria-pressed="false">8+</button>
+        </div></div>
+        <button type="button" class="rm-clear" data-clear>Clear filters</button>
+      </section>
+
+      <section class="rm-mine" data-mine hidden>
+        <label for="rm-list"><b>Your list</b><span>One film per line. Add the year in brackets if you like, e.g. <em>Heat (1995)</em>. It stays in this browser.</span></label>
+        <textarea id="rm-list" rows="9" data-list placeholder="Jaws&#10;The Thing (1982)&#10;Paddington 2&#10;…"></textarea>
+        <p class="rm-mine-n" data-mine-n></p>
+      </section>
+
+      <section class="rm-lists">
+        <div class="rm-lh"><b>Saved for later</b><button type="button" class="rm-link" data-clear-saved hidden>Clear</button></div>
+        <ul class="rm-saved" data-saved><li class="none">Tap ♥ on a pick to save it here.</li></ul>
+        <p class="rm-seen" data-seen></p>
+      </section>
+    </div>
+  </div>
+</div>

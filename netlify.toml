@@ -13,5 +13,9 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
+# Keeps the TMDB film data between builds (see scripts/tmdb.mjs).
+[[plugins]]
+  package = "/netlify/plugins/tmdb-cache"
+
 [[plugins]]
   package = "/netlify/plugins/instant-indexing"

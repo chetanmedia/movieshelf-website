@@ -32,7 +32,15 @@ export function buildBlog({ quiet = false } = {}) {
   fs.rmSync(path.join(PUB, 'tools'), { recursive: true, force: true });
   const tools = loadTools();
   for (const t of tools) {
-    for (const f of fs.readdirSync(t.dir)) if (!/\.(md|html)$/.test(f)) fs.cpSync(path.join(t.dir, f), path.join(PUB, 'tools', t.slug, f), { recursive: true });
+    // files starting with _ are source material and stay private (e.g. _sample.json)
+    for (const f of fs.readdirSync(t.dir)) if (!/\.(md|html)$/.test(f) && !f.startsWith('_') && f !== 'card.svg') fs.cpSync(path.join(t.dir, f), path.join(PUB, 'tools', t.slug, f), { recursive: true });
+    // tools that use the TMDB film data share /tools/films.json (falls back to the tool's _sample.json)
+    if (t.data === 'films') {
+      const live = path.join(ROOT, 'data', 'tmdb', 'films.json'), sample = path.join(t.dir, '_sample.json');
+      const src = fs.existsSync(live) ? live : sample;
+      if (fs.existsSync(src)) fs.copyFileSync(src, path.join(PUB, 'tools', 'films.json')); // shared by every film tool
+      if (!quiet) console.log(`tools: ${t.slug} uses ${src === live ? 'TMDB' : 'sample'} film data`);
+    }
     write(`tools/${t.slug}/index.html`, renderTool(t, posts));
   }
   if (tools.length) write('tools/index.html', renderToolsHub(posts));

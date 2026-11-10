@@ -10,3 +10,5 @@ public/llms.txt
 .DS_Store
 public/privacy/
 public/tools/
+# downloaded from TMDB at build time
+data/tmdb/

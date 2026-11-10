@@ -5,11 +5,12 @@
     "covers": "node scripts/fetch-covers.mjs",
     "predev": "node scripts/fetch-covers.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/fetch-covers.mjs",
+    "prebuild": "node scripts/fetch-covers.mjs && node scripts/tmdb.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "new-post": "node scripts/new-post.mjs",
-    "blog": "node scripts/build-blog.mjs"
+    "blog": "node scripts/build-blog.mjs",
+    "films": "node scripts/tmdb.mjs --force"
   },
   "dependencies": {
     "@plausible-analytics/tracker": "^0.4.6",

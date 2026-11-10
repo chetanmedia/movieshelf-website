@@ -295,6 +295,8 @@ export function loadTools() {
   }).filter(t => !t.draft).sort((a, b) => a.order - b.order);
   return TOOLS_CACHE;
 }
+// TMDB asks every app using its API to show this notice, its logo and a link back.
+const TMDB_CREDIT = `<p class="tmdb-credit"><a href="https://www.themoviedb.org/" target="_blank" rel="noopener"><img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="TMDB" width="102" height="14" onerror="this.replaceWith('TMDB')"></a><span>Film data and posters from <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">The Movie Database (TMDB)</a>. This product uses the TMDB API but is not endorsed or certified by TMDB.</span></p>`;
 const TOOLS_LINKS = () => loadTools().map(t => `<a href="${t.url}">${esc(t.short || t.title)}</a>`).join('');
 
 export function renderTool(tool, posts) {
@@ -323,7 +325,7 @@ export function renderTool(tool, posts) {
     <h1>${tool.h1 || esc(tool.title)}</h1>
     ${tool.dek ? `<p class="dek">${esc(tool.dek)}</p>` : ''}
   </header>
-  <section class="wrap tool-app" aria-label="${esc(tool.title)}">${tool.widget}</section>
+  <section class="wrap tool-app" aria-label="${esc(tool.title)}">${tool.widget}${tool.data === 'films' ? TMDB_CREDIT : ''}</section>
   <div class="post-grid wrap tool-body">
     <aside class="toc" aria-label="On this page"><b>On this page</b><ol>${toc.filter(t => t.depth === 2).map(t => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ol>
       <div class="toc-app"><span>${LOGO}</span><p>Catalog your collection with Movieshelf.</p>${storeBadge('tool-toc')}</div></aside>
