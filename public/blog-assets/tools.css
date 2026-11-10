@@ -16,3 +16,10 @@
 .tool-card b { font-family: var(--display); font-size: 22px; letter-spacing: -.02em; color: var(--fg) }
 .tool-card p { margin: 0; color: var(--mute); font-size: 15.5px }
 .tc-go { margin-top: auto; padding-top: 6px; color: var(--accent2); font-weight: 600; font-size: 15px }
+
+/* TMDB credit (required by TMDB's terms) */
+.tmdb-credit { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); color: var(--dim); font-size: 13px }
+.tmdb-credit img { height: 14px; width: auto; flex: none }
+.tmdb-credit > a:first-child { flex: none; color: var(--mute); font-weight: 700; text-decoration: none }
+.tmdb-credit a { color: var(--mute) }
+

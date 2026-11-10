@@ -1,0 +1,51 @@
+<div class="cq" id="cq">
+  <canvas class="cq-snow" data-snow aria-hidden="true"></canvas>
+
+  <section class="cq-screen cq-intro" data-screen="intro">
+    <div class="cq-tree" aria-hidden="true"><span>🎄</span><i></i><i></i><i></i><i></i><i></i></div>
+    <h2>How well do you know your Christmas films?</h2>
+    <p>Ten questions, a different set every round. Answer fast and keep a streak going for bonus points.</p>
+    <div class="cq-best" data-best hidden></div>
+    <div class="cq-mode" role="radiogroup" aria-label="Pace">
+      <button type="button" data-pace="timed" aria-pressed="true"><b>⏱️ Against the clock</b><small>20 seconds a question, speed bonus</small></button>
+      <button type="button" data-pace="relaxed" aria-pressed="false"><b>☕ Relaxed</b><small>No timer, no rush</small></button>
+    </div>
+    <button type="button" class="cq-start" data-start disabled>Loading questions…</button>
+    <button type="button" class="cq-link" data-print>Print a quiz for your party (with answers)</button>
+  </section>
+
+  <section class="cq-screen cq-play" data-screen="play" hidden>
+    <div class="cq-hud">
+      <div class="cq-prog"><span data-qn>1 / 10</span><div class="cq-bar"><i data-bar></i></div></div>
+      <div class="cq-score"><b data-score>0</b><small>points</small></div>
+      <div class="cq-mult" data-mult hidden>🔥 <b>×1.5</b></div>
+    </div>
+    <div class="cq-card" data-card>
+      <div class="cq-ring" data-ring aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19"/><circle class="t" cx="22" cy="22" r="19" pathLength="100"/></svg><b data-secs>20</b></div>
+      <span class="cq-film" data-film></span>
+      <h3 data-q></h3>
+      <div class="cq-opts" data-opts></div>
+      <p class="cq-fb" data-fb aria-live="polite"></p>
+      <button type="button" class="cq-next" data-next hidden>Next question →</button>
+    </div>
+  </section>
+
+  <section class="cq-screen cq-end" data-screen="end" hidden>
+    <div class="cq-rank" data-rank></div>
+    <div class="cq-final"><div><b data-final-n>0</b><small>correct</small></div><div><b data-final-pts>0</b><small>points</small></div><div><b data-final-best>0</b><small>best streak</small></div></div>
+    <p class="cq-newbest" data-newbest hidden>🎉 New personal best!</p>
+    <ol class="cq-review" data-review></ol>
+    <div class="cq-acts">
+      <button type="button" class="cq-start" data-again>Play another round</button>
+      <button type="button" class="cq-btn" data-share>Share my score</button>
+    </div>
+    <div class="cq-more">
+      <a class="cq-mcard" href="/tools/guess-the-movie/"><b>🎬 Guess the Movie</b><span>A new emoji puzzle every day. Christmas films all December.</span></a>
+      <a class="cq-mcard" href="/tools/random-movie/?"><b>🎲 Pick tonight’s film</b><span>Spin the random movie generator, Christmas mode included.</span></a>
+      <button type="button" class="cq-mcard" data-print><b>🖨️ Print it for a party</b><span>20 questions and an answer sheet.</span></button>
+    </div>
+  </section>
+
+  <div class="cq-print" data-print-area aria-hidden="true"></div>
+  <canvas class="cq-burst" data-burst aria-hidden="true"></canvas>
+</div>

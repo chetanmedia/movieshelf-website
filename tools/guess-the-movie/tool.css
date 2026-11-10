@@ -1,0 +1,161 @@
+/* Guess the Movie */
+.gm { position: relative; max-width: 760px; margin: 0 auto }
+.gm button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; font-family: var(--body) }
+.gm-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px }
+.gm-title { display: flex; align-items: baseline; gap: 10px; min-width: 0 }
+.gm-title b { font-family: var(--display); font-size: 24px; letter-spacing: -.02em }
+.gm-title span { color: var(--mute); font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.gm-tools { display: flex; align-items: center; gap: 6px }
+.gm-streak { display: inline-flex; align-items: center; gap: 4px; height: 40px; padding: 0 12px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); font-weight: 700; color: var(--mute) }
+.gm-streak i { font-style: normal; filter: grayscale(1); opacity: .5; transition: filter .3s, opacity .3s }
+.gm-streak.hot { color: var(--beam); border-color: rgba(255, 181, 71, .4) }
+.gm-streak.hot i { filter: none; opacity: 1; animation: gm-flame 1.6s ease-in-out infinite }
+@keyframes gm-flame { 50% { transform: scale(1.15) rotate(-6deg) } }
+.gm-ico { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; transition: background .2s, transform .15s }
+.gm-ico:hover { background: var(--card2) } .gm-ico:active { transform: scale(.92) }
+.gm-ico svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
+
+/* stage */
+.gm-stage { position: relative; display: grid; place-items: center; min-height: 230px; padding: 34px 20px 46px; border-radius: 28px; overflow: hidden; border: 1px solid var(--line);
+  background: radial-gradient(70% 90% at 50% 0%, rgba(107, 138, 255, .22), transparent 70%), radial-gradient(60% 60% at 50% 110%, rgba(255, 181, 71, .16), transparent 70%), var(--card) }
+.gm-glow { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 210, 140, .16), transparent); animation: gm-breathe 5s ease-in-out infinite }
+@keyframes gm-breathe { 50% { transform: scale(1.15); opacity: .7 } }
+.gm-emoji { position: relative; display: flex; gap: clamp(10px, 3vw, 26px); font-size: clamp(56px, 11vw, 96px); line-height: 1; transition: transform .6s var(--ease), opacity .4s }
+.gm-emoji span { display: inline-block; filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .45)); animation: gm-float 4s ease-in-out infinite; animation-delay: calc(var(--i) * -1.3s) }
+@keyframes gm-float { 50% { transform: translateY(-7px) rotate(3deg) } }
+.gm-emoji.pop span { animation: gm-pop .7s cubic-bezier(.3, 1.6, .5, 1) both, gm-float 4s ease-in-out .9s infinite; animation-delay: calc(var(--i) * .16s), calc(var(--i) * .16s + .9s) }
+@keyframes gm-pop { from { transform: scale(0) rotate(-30deg); opacity: 0 } }
+.gm-ladder { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px }
+.gm-ladder i { width: 26px; height: 6px; border-radius: 99px; background: rgba(255, 255, 255, .12); transition: background .4s, box-shadow .4s }
+.gm-ladder i.on { background: var(--accent2); box-shadow: 0 0 10px rgba(163, 180, 255, .6) }
+.gm-ladder i.win { background: var(--green); box-shadow: 0 0 12px var(--green) }
+.gm-stage.solved .gm-emoji { transform: translateX(clamp(-150px, -16vw, -60px)) scale(.7); opacity: .8 }
+.gm-poster { position: absolute; right: clamp(16px, 7vw, 70px); top: 50%; width: clamp(92px, 20vw, 132px); aspect-ratio: 2 / 3; transform: translateY(-50%); perspective: 900px }
+.gm-poster[hidden] { display: none }
+.gm-flip { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.3, 1.3, .5, 1) .15s }
+.gm-poster.flip .gm-flip { transform: rotateY(180deg) }
+.gm-face { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; display: grid; place-items: center; overflow: hidden; box-shadow: 0 20px 40px -14px rgba(0, 0, 0, .9) }
+.gm-face.front { background: linear-gradient(150deg, #2c3570, #151827); font: 800 42px var(--display); color: var(--accent2) }
+.gm-face.back { transform: rotateY(180deg); background: linear-gradient(150deg, #3a2d18, #151827); text-align: center; padding: 8px }
+.gm-face.back img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0 }
+.gm-face.back b { font-family: var(--display); font-size: 15px; line-height: 1.15 }
+
+/* clues */
+.gm-clues { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px }
+.gm-clues li { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 16px; background: var(--card); border: 1px solid var(--line) }
+.gm-clues li.new { animation: gm-in .55s var(--ease) both; border-color: rgba(163, 180, 255, .5); box-shadow: 0 0 0 1px rgba(163, 180, 255, .2), 0 10px 30px -14px rgba(107, 138, 255, .6) }
+@keyframes gm-in { from { opacity: 0; transform: translateY(-10px) scale(.97) } }
+.gm-clues li.locked { opacity: .45; border-style: dashed; background: none }
+.gm-clues .ci { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--bg2); font-size: 18px }
+.gm-clues small { display: block; color: var(--dim); font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase }
+.gm-clues b { display: block; font-weight: 600; font-size: 16px; color: var(--fg); line-height: 1.4 }
+.gm-clues li.locked b { font-weight: 500; color: var(--dim); font-size: 14px }
+.gm-clues li.shape b { font-family: var(--mono); letter-spacing: .08em; white-space: pre-wrap }
+
+/* input */
+.gm-play { margin-top: 16px }
+.gm-play[hidden] { display: none }
+.gm-form { display: flex; gap: 8px }
+.gm-form.shake { animation: gm-shake .45s }
+@keyframes gm-shake { 20%, 60% { transform: translateX(-9px) } 40%, 80% { transform: translateX(9px) } }
+.gm-input { position: relative; flex: 1; min-width: 0 }
+.gm-input input { width: 100%; height: 56px; padding: 0 18px; border-radius: 16px; border: 1.5px solid var(--line2); background: var(--bg2); color: var(--fg); font: 600 17px var(--body) }
+.gm-input input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(107, 138, 255, .18) }
+.gm-go { flex: none; height: 56px; padding: 0 24px; border: 0; border-radius: 16px; cursor: pointer; color: #0b0c10; font: 800 17px var(--display); background: linear-gradient(135deg, #ffd27f, #ffb547 55%, #ff9a5a); box-shadow: 0 12px 28px -12px rgba(255, 170, 70, .8); transition: transform .12s }
+.gm-go:active { transform: scale(.95) }
+.gm-sug { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 20; list-style: none; margin: 0; padding: 6px; border-radius: 16px; background: #171a26; border: 1px solid var(--line2); box-shadow: 0 24px 50px -16px rgba(0, 0, 0, .9) }
+.gm-sug[hidden] { display: none }
+.gm-sug li { display: flex; align-items: center; gap: 12px; padding: 7px 10px; border-radius: 10px; cursor: pointer; font-size: 15.5px }
+.gm-sug li:hover, .gm-sug li.sel { background: rgba(107, 138, 255, .16) }
+.gm-sug img, .gm-sug i { flex: none; width: 28px; height: 42px; border-radius: 4px; object-fit: cover; background: #262a3c }
+.gm-sug span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600 }
+.gm-sug em { font-style: normal; color: var(--dim); font-family: var(--mono); font-size: 13px }
+.gm-under { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; color: var(--mute); font-size: 14px }
+.gm-skip { border: 0; background: none; color: var(--accent2); font-weight: 600; font-size: 14px; cursor: pointer; padding: 8px 0 }
+.gm-guesses { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px }
+.gm-guesses li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px; border-radius: 99px; font-weight: 600; font-size: 14.5px; border: 1px solid }
+.gm-guesses li span { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; color: #0b0c10 }
+.gm-guesses li.no { border-color: rgba(255, 92, 132, .4); background: rgba(255, 92, 132, .08); color: #ffb3c4; text-decoration: line-through; text-decoration-color: rgba(255, 92, 132, .5) }
+.gm-guesses li.no span { background: #ff5c84 }
+.gm-guesses li.skip { border-color: var(--line2); color: var(--mute) }
+.gm-guesses li.skip span { background: var(--mute) }
+.gm-guesses li.ok { border-color: rgba(47, 209, 91, .5); background: rgba(47, 209, 91, .1); color: #9ff0b6 }
+.gm-guesses li.ok span { background: var(--green) }
+.gm-guesses li.new { animation: gm-in .4s var(--ease) both }
+
+/* result */
+.gm-result { margin-top: 18px; padding: clamp(20px, 3vw, 30px); border-radius: 26px; background: radial-gradient(80% 70% at 50% 0%, rgba(255, 181, 71, .14), transparent 70%), var(--card); border: 1px solid var(--line); text-align: center; animation: gm-in .6s var(--ease) both }
+.gm-result[hidden] { display: none }
+.gm-badge { display: inline-block; padding: 6px 14px; border-radius: 99px; font: 800 14px var(--display); letter-spacing: .02em }
+.gm-badge.win { background: var(--green); color: #06210f; animation: gm-bounce .7s cubic-bezier(.3, 1.6, .5, 1) both .3s }
+.gm-badge.lose { background: rgba(255, 92, 132, .18); color: #ffb3c4 }
+@keyframes gm-bounce { from { transform: scale(0) } }
+.gm-result h2 { margin: 12px 0 4px; font-family: var(--display); font-size: clamp(26px, 4vw, 38px); letter-spacing: -.02em; line-height: 1.08 }
+.gm-result h2 span { color: var(--mute); font-weight: 500 }
+.gm-result p { margin: 0; color: var(--text) }
+.gm-grid { display: flex; justify-content: center; gap: 6px; margin: 14px 0 4px; font-size: 26px }
+.gm-grid i { font-style: normal; animation: gm-pop .45s cubic-bezier(.3, 1.6, .5, 1) both; animation-delay: calc(.5s + var(--i) * .09s) }
+.gm-res-acts { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 24px; margin-top: 18px }
+.gm-share { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; border: 0; border-radius: 99px; cursor: pointer; color: #fff; font: 700 16px var(--body); background: var(--accent); box-shadow: 0 14px 30px -12px var(--accent); transition: transform .12s }
+.gm-share:active { transform: scale(.96) }
+.gm-btn { min-height: 48px; padding: 0 20px; border-radius: 99px; border: 1px solid var(--line2); background: rgba(255, 255, 255, .05); color: var(--fg); font-weight: 600; cursor: pointer }
+.gm-next { display: grid; text-align: center }
+.gm-next small { color: var(--dim); font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase }
+.gm-next b { font: 700 26px var(--mono); font-variant-numeric: tabular-nums; color: var(--fg) }
+.gm-more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 22px; text-align: left }
+.gm-card { display: grid; gap: 3px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg2); color: var(--fg); text-decoration: none; cursor: pointer; font: inherit; text-align: left; transition: border-color .2s, transform .2s }
+.gm-card:hover { border-color: var(--line2); transform: translateY(-2px) }
+.gm-card b { font-size: 15px } .gm-card span { color: var(--mute); font-size: 13px }
+
+/* modal */
+.gm-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px }
+.gm-modal[hidden] { display: none }
+.gm-back { position: absolute; inset: 0; background: rgba(4, 5, 8, .7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; transition: opacity .25s }
+.gm-sheet { position: relative; width: min(460px, 100%); max-height: calc(100dvh - 32px); overflow-y: auto; padding: 28px 24px 24px; border-radius: 26px; background: #121521; border: 1px solid var(--line2); box-shadow: 0 40px 100px -30px #000; transform: translateY(18px) scale(.97); opacity: 0; transition: transform .35s var(--ease), opacity .25s }
+.gm-modal.open .gm-back { opacity: 1 } .gm-modal.open .gm-sheet { transform: none; opacity: 1 }
+.gm-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .07); color: var(--fg); font-size: 22px; cursor: pointer }
+.gm-sheet h2 { margin: 0 0 16px; font-family: var(--display); font-size: 26px; letter-spacing: -.02em }
+.gm-sheet h3 { margin: 22px 0 10px; font-size: 14px; color: var(--mute); font-weight: 600 }
+.gm-sheet .gm-share { width: 100%; margin-top: 20px }
+.gm-how { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px }
+.gm-how li { display: flex; gap: 12px; align-items: flex-start; color: var(--text); font-size: 15.5px; line-height: 1.45 }
+.gm-how span { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--bg2); font-size: 18px }
+.gm-small { color: var(--mute); font-size: 14px; margin: 14px 0 0 }
+.gm-nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center }
+.gm-nums div { padding: 12px 4px; border-radius: 14px; background: var(--bg2) }
+.gm-nums b { display: block; font: 800 28px var(--display); font-variant-numeric: tabular-nums }
+.gm-nums small { color: var(--mute); font-size: 12px }
+.gm-dist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px }
+.gm-dist li { display: flex; align-items: center; gap: 8px; font: 600 14px var(--mono) }
+.gm-dist i { display: flex; justify-content: flex-end; width: 7%; min-width: 26px; padding: 3px 8px; border-radius: 6px; background: var(--card2); font-style: normal; transition: width .8s var(--ease) }
+.gm-modal.bars .gm-dist i { width: var(--w) }
+.gm-dist li:nth-child(2) i { transition-delay: .05s } .gm-dist li:nth-child(3) i { transition-delay: .1s } .gm-dist li:nth-child(4) i { transition-delay: .15s } .gm-dist li:nth-child(5) i { transition-delay: .2s } .gm-dist li:nth-child(6) i { transition-delay: .25s }
+.gm-dist li.me i { background: var(--green); color: #06210f }
+.gm-dist b { font-size: 13px }
+.gm-arch { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; margin-top: 14px }
+.gm-arch button { display: grid; gap: 1px; padding: 10px 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg2); color: var(--fg); cursor: pointer }
+.gm-arch button small { color: var(--dim); font-size: 11.5px }
+.gm-arch button.won { border-color: rgba(47, 209, 91, .5); background: rgba(47, 209, 91, .1) }
+.gm-arch button.lost { border-color: rgba(255, 92, 132, .45); background: rgba(255, 92, 132, .08) }
+.gm-arch button.part { border-style: dashed; border-color: var(--accent2) }
+.gm-arch button.cur { outline: 2px solid var(--accent); outline-offset: 1px }
+html.gm-lock, html.gm-lock body { overflow: hidden }
+.gm-toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 1100; transform: translate(-50%, 30px); opacity: 0; padding: 12px 20px; border-radius: 99px; background: #fff; color: #0b0c10; font-weight: 600; font-size: 15px; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .8); pointer-events: none }
+.gm-toast.show { animation: gm-toast 2.4s var(--ease) both }
+@keyframes gm-toast { 12%, 85% { transform: translate(-50%, 0); opacity: 1 } }
+.gm-confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 1200; pointer-events: none; display: none }
+.gm-confetti.on { display: block }
+
+@media (max-width: 560px) {
+  .gm-title b { font-size: 21px } .gm-title span { font-size: 13px }
+  .gm-streak { height: 36px; padding: 0 10px } .gm-ico { width: 36px; height: 36px }
+  .gm-stage { min-height: 200px; padding: 30px 14px 42px; border-radius: 22px }
+  .gm-form { flex-direction: column } .gm-go { width: 100% }
+  .gm-more { grid-template-columns: 1fr }
+  .gm-nums b { font-size: 24px }
+  .gm-tools { gap: 4px }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gm .gm-emoji span, .gm .gm-glow { animation: none !important }
+  .gm .gm-flip { transition: opacity .3s !important }
+}

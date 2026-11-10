@@ -1,0 +1,394 @@
+{
+"questions": [
+{
+"q": "Where are the McCallisters flying to for Christmas?",
+"f": "Home Alone",
+"a": "Paris",
+"w": [
+"London",
+"Florida",
+"Rome"
+]
+},
+{
+"q": "What do Harry and Marv call themselves?",
+"f": "Home Alone",
+"a": "The Wet Bandits",
+"w": [
+"The Midnight Burglars",
+"The Christmas Crooks",
+"The Snow Bandits"
+]
+},
+{
+"q": "How old is Kevin?",
+"f": "Home Alone",
+"a": "8",
+"w": [
+"6",
+"10",
+"12"
+]
+},
+{
+"q": "Who ends up with a tarantula on his face?",
+"f": "Home Alone",
+"a": "Marv",
+"w": [
+"Harry",
+"Uncle Frank",
+"Buzz"
+]
+},
+{
+"q": "Which hotel does Kevin check into in New York?",
+"f": "Home Alone 2: Lost in New York",
+"a": "The Plaza",
+"w": [
+"The Ritz",
+"The Waldorf Astoria",
+"The Four Seasons"
+]
+},
+{
+"q": "What does Buddy pour on his spaghetti?",
+"f": "Elf",
+"a": "Maple syrup",
+"w": [
+"Ketchup",
+"Gravy",
+"Mustard"
+]
+},
+{
+"q": "Where does Buddy's dad work?",
+"f": "Elf",
+"a": "The Empire State Building",
+"w": [
+"Rockefeller Center",
+"The Chrysler Building",
+"Macy's"
+]
+},
+{
+"q": "Who plays Papa Elf?",
+"f": "Elf",
+"a": "Bob Newhart",
+"w": [
+"Steve Martin",
+"Ed Asner",
+"James Caan"
+]
+},
+{
+"q": "Who plays Santa?",
+"f": "Elf",
+"a": "Ed Asner",
+"w": [
+"Bob Newhart",
+"Tim Allen",
+"Richard Attenborough"
+]
+},
+{
+"q": "What does Ralphie want for Christmas?",
+"f": "A Christmas Story",
+"a": "A Red Ryder BB gun",
+"w": [
+"A bicycle",
+"A train set",
+"A football"
+]
+},
+{
+"q": "Dad's \"major award\" is a lamp shaped like what?",
+"f": "A Christmas Story",
+"a": "A leg",
+"w": [
+"A Christmas tree",
+"A reindeer",
+"A star"
+]
+},
+{
+"q": "What does Flick's tongue get stuck to?",
+"f": "A Christmas Story",
+"a": "A flagpole",
+"w": [
+"A lamppost",
+"A fence",
+"A mailbox"
+]
+},
+{
+"q": "What is the name of George Bailey's guardian angel?",
+"f": "It's a Wonderful Life",
+"a": "Clarence",
+"w": [
+"Gabriel",
+"Harold",
+"Joseph"
+]
+},
+{
+"q": "Which town does George Bailey live in?",
+"f": "It's a Wonderful Life",
+"a": "Bedford Falls",
+"w": [
+"Mill Valley",
+"Cedar Grove",
+"Hadleyville"
+]
+},
+{
+"q": "What is the name of the building where the party is held?",
+"f": "Die Hard",
+"a": "Nakatomi Plaza",
+"w": [
+"Gennero Tower",
+"Hightower Plaza",
+"Takagi Center"
+]
+},
+{
+"q": "What is the name of the villain played by Alan Rickman?",
+"f": "Die Hard",
+"a": "Hans Gruber",
+"w": [
+"Simon Peters",
+"Viktor Klaus",
+"Dieter Hahn"
+]
+},
+{
+"q": "Which city is John McClane a police officer in?",
+"f": "Die Hard",
+"a": "New York",
+"w": [
+"Chicago",
+"Boston",
+"Los Angeles"
+]
+},
+{
+"q": "What is the family's surname?",
+"f": "National Lampoon's Christmas Vacation",
+"a": "Griswold",
+"w": [
+"Kowalski",
+"Henderson",
+"McCallister"
+]
+},
+{
+"q": "What turns out to be Clark's Christmas bonus?",
+"f": "National Lampoon's Christmas Vacation",
+"a": "A Jelly of the Month Club membership",
+"w": [
+"A fruitcake",
+"A gift card",
+"A frozen turkey"
+]
+},
+{
+"q": "What is the name of the Grinch's dog?",
+"f": "How the Grinch Stole Christmas",
+"a": "Max",
+"w": [
+"Rex",
+"Buddy",
+"Toby"
+]
+},
+{
+"q": "What is the name of the town where the Whos live?",
+"f": "How the Grinch Stole Christmas",
+"a": "Whoville",
+"w": [
+"Whobury",
+"Snowtown",
+"Grinchton"
+]
+},
+{
+"q": "Jack Skellington is the Pumpkin King of which town?",
+"f": "The Nightmare Before Christmas",
+"a": "Halloween Town",
+"w": [
+"Christmas Town",
+"Spooky Hollow",
+"Pumpkin Patch"
+]
+},
+{
+"q": "What is the name of Jack's ghost dog?",
+"f": "The Nightmare Before Christmas",
+"a": "Zero",
+"w": [
+"Bones",
+"Spook",
+"Shadow"
+]
+},
+{
+"q": "Which of these is NOT one of the three rules for looking after Gizmo?",
+"f": "Gremlins",
+"a": "Don't let him watch TV",
+"w": [
+"Keep him out of bright light",
+"Don't get him wet",
+"Never feed him after midnight"
+]
+},
+{
+"q": "What kind of creature is Gizmo?",
+"f": "Gremlins",
+"a": "A mogwai",
+"w": [
+"A furby",
+"A tribble",
+"An ewok"
+]
+},
+{
+"q": "What does the boy choose as the first gift of Christmas?",
+"f": "The Polar Express",
+"a": "A bell from Santa's sleigh",
+"w": [
+"A train ticket",
+"A snow globe",
+"A teddy bear"
+]
+},
+{
+"q": "Who wrote the book the film is based on?",
+"f": "The Polar Express",
+"a": "Chris Van Allsburg",
+"w": [
+"Dr. Seuss",
+"Maurice Sendak",
+"Roald Dahl"
+]
+},
+{
+"q": "What is Hugh Grant's character's job?",
+"f": "Love Actually",
+"a": "Prime Minister",
+"w": [
+"Rock star",
+"Novelist",
+"Teacher"
+]
+},
+{
+"q": "Which department store hires Kris Kringle?",
+"f": "Miracle on 34th Street",
+"a": "Macy's",
+"w": [
+"Bloomingdale's",
+"Saks",
+"Sears"
+]
+},
+{
+"q": "What is Tim Allen's character called?",
+"f": "The Santa Clause",
+"a": "Scott Calvin",
+"w": [
+"Clark Griswold",
+"Frank Cross",
+"Buddy Hobbs"
+]
+},
+{
+"q": "Which Muppet plays Bob Cratchit?",
+"f": "The Muppet Christmas Carol",
+"a": "Kermit the Frog",
+"w": [
+"Fozzie Bear",
+"Gonzo",
+"Rizzo the Rat"
+]
+},
+{
+"q": "Who plays Ebenezer Scrooge?",
+"f": "The Muppet Christmas Carol",
+"a": "Michael Caine",
+"w": [
+"Patrick Stewart",
+"Bill Murray",
+"Jim Carrey"
+]
+},
+{
+"q": "Which toy is every parent fighting over?",
+"f": "Jingle All the Way",
+"a": "Turbo-Man",
+"w": [
+"Buzz Lightyear",
+"Mega Max",
+"Robo Rex"
+]
+},
+{
+"q": "What is Jesper's job?",
+"f": "Klaus",
+"a": "Postman",
+"w": [
+"Toymaker",
+"Teacher",
+"Sailor"
+]
+},
+{
+"q": "Iris lives in a cottage in which English county?",
+"f": "The Holiday",
+"a": "Surrey",
+"w": [
+"Kent",
+"Devon",
+"Yorkshire"
+]
+},
+{
+"q": "What is Bill Murray's job?",
+"f": "Scrooged",
+"a": "TV network executive",
+"w": [
+"Banker",
+"Lawyer",
+"Department store owner"
+]
+},
+{
+"q": "What does Edward carve that makes it snow in the town?",
+"f": "Edward Scissorhands",
+"a": "An ice sculpture",
+"w": [
+"A snowman",
+"A wooden angel",
+"A hedge reindeer"
+]
+},
+{
+"q": "Who is Arthur?",
+"f": "Arthur Christmas",
+"a": "Santa's son",
+"w": [
+"An elf",
+"A reindeer",
+"Santa's brother"
+]
+},
+{
+"q": "Where is the inn the singers try to save?",
+"f": "White Christmas",
+"a": "Vermont",
+"w": [
+"Maine",
+"Colorado",
+"New Hampshire"
+]
+}
+]
+}

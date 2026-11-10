@@ -95,11 +95,6 @@
 .rm-x:hover { color: var(--fg); background: rgba(255, 255, 255, .06) }
 .rm-seen { margin: 10px 0 0; color: var(--dim); font-size: 13px }
 
-/* TMDB credit (required by TMDB's terms) */
-.tmdb-credit { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); color: var(--dim); font-size: 13px }
-.tmdb-credit img { height: 14px; width: auto; flex: none }
-.tmdb-credit a { color: var(--mute) }
-
 @media (max-width: 960px) { .rm-main { grid-template-columns: 1fr } }
 @media (max-width: 600px) {
   .rm-modes { width: 100%; display: grid; grid-template-columns: 1fr 1fr; border-radius: 20px }
