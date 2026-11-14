@@ -31,7 +31,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 20 | 2026-11-11 | how to store dvds | 170 | 23 | how to store dvds without cases, how to store dvds minimalist, physical media storage | How to Store DVDs and Blu-rays So They Last Decades | Organizing | done 2026-11-11 |
 | 21 | 2026-11-12 | how to clean dvd cd | 1300 | 23 | how to clean dvd discs, best way to clean dvd, how to clean dvd scratches | How to Clean DVDs and Blu-rays Safely | Collecting | done 2026-11-12 |
 | 22 | 2026-11-13 | blu ray vs dvd | 6600 | 29 | blu ray vs dvd quality, blu ray vs dvd resolution, what is blu ray vs dvd, blu ray vs dvd hd | Blu-ray vs DVD: Quality, Resolution and Whether It Matters | Formats | done 2026-11-13 |
-| 23 | 2026-11-14 | vinegar syndrome blu ray | 210 | 29 | best vinegar syndrome releases, vinegar syndrome 4k, vinegar syndrome slipcover | Vinegar Syndrome Blu-rays: A Beginner's Guide to the Label | Collecting | todo |
+| 23 | 2026-11-14 | vinegar syndrome blu ray | 210 | 29 | best vinegar syndrome releases, vinegar syndrome 4k, vinegar syndrome slipcover | Vinegar Syndrome Blu-rays: A Beginner's Guide to the Label | Collecting | done 2026-11-14 |
 | 24 | 2026-11-15 | letterboxd alternative | 210 | 26 | app to track movies watched, movie watchlist app | Letterboxd vs a Collection App: What You Watch vs What You Own | Guides | todo |
 | 25 | 2026-11-16 | dvd storage ideas | 1000 | 26 | hidden dvd storage ideas, diy dvd storage ideas, blu ray storage ideas, dvd storage ideas for small spaces | 27 DVD Storage Ideas for Every Size of Collection | Organizing | todo |
 | 26 | 2026-11-17 | studio ghibli blu ray collection | 480 | 27 | — | Collecting Studio Ghibli on Blu-ray and 4K | Collecting | todo |
