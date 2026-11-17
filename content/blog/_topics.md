@@ -34,7 +34,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 23 | 2026-11-14 | vinegar syndrome blu ray | 210 | 29 | best vinegar syndrome releases, vinegar syndrome 4k, vinegar syndrome slipcover | Vinegar Syndrome Blu-rays: A Beginner's Guide to the Label | Collecting | done 2026-11-14 |
 | 24 | 2026-11-15 | letterboxd alternative | 210 | 26 | app to track movies watched, movie watchlist app | Letterboxd vs a Collection App: What You Watch vs What You Own | Guides | done 2026-11-15 |
 | 25 | 2026-11-16 | dvd storage ideas | 1000 | 26 | hidden dvd storage ideas, diy dvd storage ideas, blu ray storage ideas, dvd storage ideas for small spaces | 27 DVD Storage Ideas for Every Size of Collection | Organizing | done 2026-11-16 |
-| 26 | 2026-11-17 | studio ghibli blu ray collection | 480 | 27 | — | Collecting Studio Ghibli on Blu-ray and 4K | Collecting | todo |
+| 26 | 2026-11-17 | studio ghibli blu ray collection | 480 | 27 | — | Collecting Studio Ghibli on Blu-ray and 4K | Collecting | done 2026-11-17 |
 | 27 | 2026-11-18 | how to fix scratched dvd | 720 | 28 | fix scratched blu ray, scratched blu ray disc, how to fix a scratched blu ray | How to Fix a Scratched DVD or Blu-ray: What Works and What Doesn't | Collecting | todo |
 | 28 | 2026-11-19 | the thing 4k vs blu ray | 20 | 8 | — | The Thing: 4K vs Blu-ray Compared | Formats | todo |
 | 29 | 2026-11-20 | 4k blu ray player black friday | 90 | 26 | — | Black Friday for Disc Collectors: A Wishlist Strategy | Guides | todo |
