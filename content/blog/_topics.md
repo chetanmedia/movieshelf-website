@@ -39,7 +39,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 28 | 2026-11-19 | the thing 4k vs blu ray | 20 | 8 | — | The Thing: 4K vs Blu-ray Compared | Formats | done 2026-11-19 |
 | 29 | 2026-11-20 | 4k blu ray player black friday | 90 | 26 | — | Black Friday for Disc Collectors: A Wishlist Strategy | Guides | done 2026-11-20 |
 | 30 | 2026-11-21 | kino lorber 4k | 260 | 22 | best kino lorber releases, kino lorber blu ray, kino lorber | Kino Lorber Blu-rays and 4K: Where to Start | Collecting | done 2026-11-21 |
-| 31 | 2026-11-22 | physical media vs streaming | 90 | 25 | streaming vs physical media, dvd vs streaming, physical media vs netflix streaming, benefits of physical media | Physical Media vs Streaming: Why Collectors Still Buy Discs | Collecting | todo |
+| 31 | 2026-11-22 | physical media vs streaming | 90 | 25 | streaming vs physical media, dvd vs streaming, physical media vs netflix streaming, benefits of physical media | Physical Media vs Streaming: Why Collectors Still Buy Discs | Collecting | done 2026-11-22 |
 | 32 | 2026-11-23 | box set | 2900 | 18 | blu ray box set, complete series dvd | How to Catalog Box Sets and Multi-Disc Editions | Organizing | todo |
 | 33 | 2026-11-24 | hdr10 vs dolby vision | 2900 | 39 | dolby vision blu ray | HDR10 vs Dolby Vision on 4K Blu-ray: What's the Difference? | Formats | todo |
 | 34 | 2026-11-25 | how to stop buying duplicate movies *(long-tail)* | — | — | — | How to Stop Buying Movies You Already Own | Guides | todo |
