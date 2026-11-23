@@ -1,9 +1,9 @@
 ---
 title: "DVD Region Code 1 Explained: Regions 1–8, 0 and Region-Free"
-seoTitle: "DVD Region Code 1: What It Means and Which Discs Will Play"
-description: "DVD region code 1 covers the US, Canada and Bermuda. See every DVD region from 0 to 8, why Region 2 discs won't play in the US, and how PAL fits in."
+seoTitle: "Region 1 DVD: What It Means and Where It Plays (Map)"
+description: "Region 1 DVD means the disc is made for the US, Canada and Bermuda. See the full DVD region map from 0 to 8 and check if an import will play on your player."
 date: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-23
 author: Chetan Nagaraja
 category: Formats
 tags: [dvd region code 1, dvd region code, dvd region code 2, dvd region code for us, dvd region code 0, region free dvd, pal vs ntsc]
@@ -99,7 +99,7 @@ It's usually printed in the same technical block. US discs are NTSC. UK, Europea
 ### Read the listing, not just the photo
 Retailers and labels normally state the region in the product details. The [BFI shop](https://shop.bfi.org.uk/formats-and-region-codes/), for example, notes that its DVDs are made for Region 2 players.
 ### Check what your player is set to
-A standalone player sold in the US is Region 1. A player that can play other regions will say "region-free" or "multi-region" in its specs.
+A standalone player sold in the US is Region 1. A player that can play other regions will say "region-free" or "multi-region" in its specs. Our guide to the [best region-free Blu-ray players](/blog/best-region-free-blu-ray-player/) covers the models that also play DVDs from every region.
 :::
 
 {{app-cta}}

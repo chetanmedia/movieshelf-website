@@ -1,9 +1,9 @@
 ---
 title: "What Blu-ray Region Is the US? Regions A, B and C Explained"
-seoTitle: "What Blu-ray Region Is the US? Region A, B and C Explained"
-description: "The US is Blu-ray Region A. Here's which countries use Regions A, B and C, how to check a disc before you buy, and why 4K UHD discs play anywhere."
+seoTitle: "What Blu-ray Region Is the US? Region A (With Full Map)"
+description: "The US is Blu-ray Region A, shared with Canada, Mexico and Japan. See which countries use Regions A, B and C, and check if an import will play in the US."
 date: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-23
 author: Chetan Nagaraja
 category: Formats
 tags: [what blu ray region is the us, blu ray region, blu ray region a, blu ray region b, region locked blu ray, imports]
@@ -139,7 +139,7 @@ You have a few options:
 Game consoles follow the same rules for movies. A US console plays Region A and region-free Blu-rays, and every 4K UHD disc if it has a UHD drive.
 
 :::tip Price the region-free player against your import list
-If you only want two or three Region B discs, the 4K editions or a later US release usually cost less than a new player. If you buy UK boutique releases every month, a region-free player pays for itself quickly.
+If you only want two or three Region B discs, the 4K editions or a later US release usually cost less than a new player. If you buy UK boutique releases every month, a region-free player pays for itself quickly. See our [region-free Blu-ray player guide](/blog/best-region-free-blu-ray-player/) for the models worth buying.
 :::
 
 ## Which Blu-rays are most likely to be region locked?

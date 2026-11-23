@@ -142,7 +142,7 @@ Look up the model number. If it lists Dolby Vision, a player with Dolby Vision i
 ### Check your sound system
 An Atmos receiver or soundbar works with any UHD player. If your receiver can't pass 4K HDR video, pick a player with a separate audio-only HDMI output, like the DP-UB820.
 ### Decide whether you buy imports
-4K discs play anywhere, but a UK Blu-ray or a Region 2 DVD won't play on a standard US player. Heavy import buyers should look at region-free models.
+4K discs play anywhere, but a UK Blu-ray or a Region 2 DVD won't play on a standard US player. Heavy import buyers should look at [region-free Blu-ray players](/blog/best-region-free-blu-ray-player/).
 ### Count your other disc formats
 If you own SACDs or DVD-Audio discs, a universal player such as a Magnetar saves you a second machine.
 ### Set your budget, then buy new
