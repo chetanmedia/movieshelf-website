@@ -1,9 +1,9 @@
 ---
 title: "4K Blu-ray Player Black Friday: What's a Real Deal in 2026"
-seoTitle: "4K Blu-ray Player Black Friday 2026: Deals Worth Buying"
+seoTitle: "4K Blu-ray Player Black Friday 2026: Deals Checked Nov 23"
 description: "4K Blu-ray player Black Friday guide: 2026 list prices, what counts as a real deal, the upscaling-player trap, and a wishlist plan so you never buy a duplicate."
 date: 2026-11-20
-updated: 2026-11-20
+updated: 2026-11-23
 author: Chetan Nagaraja
 category: Guides
 tags: [4k blu ray player black friday, black friday blu ray deals, panasonic ub820, 4K UHD, blu-ray player deals, wishlist]
@@ -65,6 +65,22 @@ Discounts are starting to appear. In the week before Black Friday, [TechRadar sp
 :::tip What counts as a real deal this year
 For the DP-UB820, treat anything near $549 as a good price and anything under $500 as excellent. For the budget models, $20 to $50 off list is typical. Prices move daily, so check the seller is the retailer itself, not a third-party listing.
 :::
+
+## Which 4K Blu-ray player deals are live in Black Friday week?
+
+*Checked on November 23, 2026, four days before Black Friday.* The deepest early discounts are in the UK so far. In the US, the DP-UB820 is still hovering around $610 to $625 at the big retailers, a little under its $649.99 list price.
+
+| Player | Region | List price | Black Friday week price | Retailer |
+|---|---|---|---|---|
+| Panasonic DP-UB820 | UK | £429.99 | £378.99 | Amazon UK |
+| Panasonic DP-UB9000 | UK | £1,199 | £999 | Sevenoaks Sound and Vision |
+| Panasonic DP-UB154 | UK | £231.93 | £182.75 | Amazon UK |
+| Sony UBP-X700 | UK | £299 | £269 | Argos |
+| Panasonic DP-UB820 | US | $649.99 | around $610 | Amazon |
+
+UK prices are from [T3's physical media deals roundup](https://www.t3.com/live/news/best-physical-media-players-deals-22-11-2026) of November 22. Treat them as a snapshot: retailers change Black Friday prices several times a week, and the biggest drops often land on the day itself or on Cyber Monday (November 30).
+
+For a sense of how low the DP-UB820 can go, it sold for [$399.98 at Amazon in Black Friday week 2024](https://www.whathifi.com/us/news/cancel-your-streaming-subscriptions-and-go-back-to-discs-with-this-deal-on-our-favourite-4k-blu-ray-player), when its list price was $499. With the 2026 list price $150 higher, a repeat of that price is unlikely, which is why anything near $549 is worth taking this year.
 
 ## Which 4K Blu-ray player should you buy on Black Friday?
 
