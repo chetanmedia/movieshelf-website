@@ -26,7 +26,7 @@ faq:
     a: "A clean, matching replacement usually doesn't matter for standard releases. For sealed copies, limited editions and anything with original printed inner artwork, collectors pay more for the original case, so keep the cracked one if it carries printing you can't move."
 ---
 
-**For a DVD case replacement, buy a standard 14 mm DVD keep case (about 190 x 135 mm), or for Blu-ray and 4K UHD a case about 171.5 x 136 mm and 11 to 13 mm thick, with the same disc count and spine thickness as the one that cracked.** Match the color too: clear or black for DVD, blue for Blu-ray, black for 4K. Get those four things right and your cover art, slipcover and shelf line all fit like the original.
+**For a DVD case replacement, buy a standard 14 mm DVD keep case (about 190 x 135 mm), or for Blu-ray and 4K UHD a case about 171.5 x 136 mm and 11 to 13 mm thick, with the same disc count and spine thickness as the one that cracked.** Match the color too: clear or black for DVD, blue for Blu-ray, black for 4K. Get those four things right and your cover art, slipcover and shelf line all fit like the original. For every case size at a glance, in inches and millimetres, use our free [case dimensions lookup](/tools/case-dimensions/).
 
 Cases crack, hubs snap, and plenty of modern releases ship in cut-away "eco" cases that collectors swap out on day one. This guide gives you the real sizes in millimeters and inches, explains which details actually matter when you buy a replacement, and covers the cases that need special care.
 

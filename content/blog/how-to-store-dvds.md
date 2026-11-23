@@ -26,7 +26,7 @@ faq:
     a: "NIST estimates 20 to 100 years for pressed discs such as DVD-ROMs, depending on how well they were made and how they're stored. Good storage can't fix a bad pressing, but it pushes a well-made disc toward the long end of that range."
 ---
 
-**To store DVDs and Blu-rays so they last, keep them upright like books, in cases that hold the disc by its center hub, in a cool, dry, dark room with stable temperature.** Avoid attics, garages, basements and sunny walls. If you need to save space, soft non-woven or felt-lined sleeves work, but cheap plastic wallets and tight sleeves are the most common way collectors damage discs in storage.
+**To store DVDs and Blu-rays so they last, keep them upright like books, in cases that hold the disc by its center hub, in a cool, dry, dark room with stable temperature.** Avoid attics, garages, basements and sunny walls. If you need to save space, soft non-woven or felt-lined sleeves work, but cheap plastic wallets and tight sleeves are the most common way collectors damage discs in storage. If you're buying shelves or boxes, the [case dimensions lookup](/tools/case-dimensions/) gives the exact size of every DVD, Blu-ray and 4K case.
 
 The good news is that discs are tough. Most of the damage people find years later comes from a handful of storage mistakes, and every one of them is easy to avoid once you know what they are.
 
