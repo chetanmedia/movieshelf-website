@@ -102,6 +102,8 @@ There are three HDR formats you'll see on disc:
 - **Dolby Vision** is optional and uses dynamic metadata, adjusting scene by scene. Your player and TV both need to support it.
 - **HDR10+** is also optional and dynamic, mainly backed by Samsung and some studios. It's far less common on disc.
 
+For a deeper look at how the two main formats differ on screen and what your gear needs, see [HDR10 vs Dolby Vision on 4K Blu-ray](/blog/hdr10-vs-dolby-vision/).
+
 :::pullquote
 Resolution is what the box sells. HDR is what you actually notice.
 :::

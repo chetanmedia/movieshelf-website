@@ -91,7 +91,7 @@ Spec sheets list a dozen acronyms. Only a handful decide whether a player suits 
 | Streaming apps | Rarely | Your TV or streaming stick already does this better |
 
 :::tip Check your TV before you pay for Dolby Vision
-Dolby Vision support on the player does nothing if your TV is HDR10 or HDR10+ only, which includes every Samsung TV. In that case a cheaper player without Dolby Vision gives you the same picture.
+Dolby Vision support on the player does nothing if your TV is HDR10 or HDR10+ only, which includes every Samsung TV. In that case a cheaper player without Dolby Vision gives you the same picture. Our [HDR10 vs Dolby Vision explainer](/blog/hdr10-vs-dolby-vision/) covers when the format makes a visible difference.
 :::
 
 {{app-cta}}

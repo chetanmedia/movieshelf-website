@@ -108,7 +108,7 @@ The disc is only one link in the chain. If any link is missing, the upgrade disa
 
 A few setup details trip people up:
 
-- **Your player matters.** A regular Blu-ray player can't read UHD discs at all. Game consoles play them, but if you want Dolby Vision from disc, a dedicated UHD player is the safer bet. The good news: every UHD player also plays your existing Blu-rays.
+- **Your player matters.** A regular Blu-ray player can't read UHD discs at all. Game consoles play them, but if you want Dolby Vision from disc, a dedicated UHD player is the safer bet (here's [how HDR10 and Dolby Vision differ](/blog/hdr10-vs-dolby-vision/)). The good news: every UHD player also plays your existing Blu-rays.
 - **Check the HDMI path.** The TV input, any soundbar or receiver in between, and the cable all need to pass 4K HDR. Many TVs only enable full HDR on certain inputs or after you switch on an "enhanced" HDMI setting.
 - **Picture mode counts.** Vivid or store modes can make HDR look worse. Use Filmmaker, Cinema or Movie mode.
 
