@@ -43,7 +43,7 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 32 | 2026-11-23 | how to catalog box sets *(long-tail; head term "box set" 2900/18 is shopping intent)* | — | — | box set, blu ray box set, complete series dvd, do box sets count as one movie | How to Catalog Box Sets and Multi-Disc Editions | Organizing | done 2026-11-23 |
 | 32a | 2026-11-24 | blu ray case dimensions *(from Search Console, 23 Nov: ~150 impressions/28 days at pos 50 to 85 landing on dvd-case-replacement)* | — | — | dvd case dimensions, dvd case size, how big is a dvd case, blu ray case size, standard dvd case dimensions, 4k blu ray case size, steelbook size | DVD, Blu-ray and 4K Case Dimensions: Exact Sizes in Inches and mm | Collecting | skipped – covered by /tools/case-dimensions/ (built 2026-11-23) |
 | 33 | 2026-11-24 | hdr10 vs dolby vision | 2900 | 39 | dolby vision blu ray | HDR10 vs Dolby Vision on 4K Blu-ray: What's the Difference? | Formats | done 2026-11-24 |
-| 34 | 2026-11-25 | how to stop buying duplicate movies *(long-tail)* | — | — | — | How to Stop Buying Movies You Already Own | Guides | todo |
+| 34 | 2026-11-25 | how to stop buying duplicate movies *(long-tail)* | — | — | — | How to Stop Buying Movies You Already Own | Guides | done 2026-11-25 |
 | 35 | 2026-11-26 | back to the future 4k vs blu ray | 20 | 8 | — | Back to the Future: 4K vs Blu-ray Compared | Formats | todo |
 | 36 | 2026-11-27 | is physical media making a comeback | 390 | 31 | physical media comeback, is physical media dying | Is Physical Media Making a Comeback? What the Numbers Say | Collecting | todo |
 | 37 | 2026-11-28 | universal monsters blu ray collection | 210 | 20 | — | Universal Monsters on Blu-ray and 4K: Which Set to Buy | Collecting | todo |

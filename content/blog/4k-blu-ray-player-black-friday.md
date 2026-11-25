@@ -148,7 +148,7 @@ If you play imports, remember that US players are locked to Region A for regular
 
 ## How do you plan a Black Friday disc wishlist without buying duplicates?
 
-A new player usually means new discs, and Black Friday disc sales move fast. The collectors who do well have a list ready before the sales start, and they know what's already on their shelf. Here's a simple plan:
+A new player usually means new discs, and Black Friday disc sales move fast. The collectors who do well have a list ready before the sales start, and they know what's already on their shelf. Our guide on [how to stop buying duplicate movies](/blog/how-to-stop-buying-duplicate-movies/) covers that habit year-round. Here's a simple plan:
 
 :::steps
 ### Catalog what you already own

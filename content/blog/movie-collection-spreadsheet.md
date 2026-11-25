@@ -67,7 +67,7 @@ Most free "movie list" templates are built for tracking what you've *watched*: t
 If you collect box sets, add a **Package** column: the name of the set a disc belongs to (for example, *The Lord of the Rings Extended Trilogy*). Every film still gets its own row, so searching for any title finds it, and filtering on the package shows the whole set.
 
 :::tip One row per disc, not per film
-It feels redundant to list *Alien* twice, but a single "Alien" row can't tell you whether you own the 4K, the Blu-ray, or both. Collectors who start with one row per film almost always end up splitting rows later.
+It feels redundant to list *Alien* twice, but a single "Alien" row can't tell you whether you own the 4K, the Blu-ray, or both. Collectors who start with one row per film almost always end up splitting rows later. Edition-level rows are also what [stop you buying duplicate movies](/blog/how-to-stop-buying-duplicate-movies/) when a reissue or box set comes along.
 :::
 
 ## How do you set up the sheet so it stays clean?

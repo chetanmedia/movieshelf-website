@@ -48,7 +48,7 @@ A quick disclosure: we make Movieshelf. Everything said here about the other app
 
 ## What should a movie collection app do?
 
-Before comparing apps, it helps to know what separates a good one from a glorified list. Collectors on forums like r/dvdcollection and AV Nirvana raise the same handful of needs again and again:
+Before comparing apps, it helps to know what separates a good one from a glorified list. Collectors on forums like r/dvdcollection and AV Nirvana raise the same handful of needs again and again, starting with [not buying the same movie twice](/blog/how-to-stop-buying-duplicate-movies/):
 
 :::cards
 ### Scan, don't type
