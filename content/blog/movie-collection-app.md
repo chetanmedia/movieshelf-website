@@ -54,7 +54,7 @@ Before comparing apps, it helps to know what separates a good one from a glorifi
 ### Scan, don't type
 The [UPC or EAN barcode](https://en.wikipedia.org/wiki/Universal_Product_Code) on the case identifies the exact release. An app that reads it fills in title, year, format and cover in seconds.
 ### Track editions, not just films
-Your *Dune* 4K steelbook and your old Blu-ray are two different things. A good app keeps them separate.
+Your *Dune* 4K steelbook and your old Blu-ray are two different things (if you're new to the format, here's [what a steelbook is and how to tell if one is limited](/blog/what-is-a-steelbook/)). A good app keeps them separate.
 ### Work in the store
 The whole point is checking whether you already own something before you buy it again. That means fast search on your phone.
 ### Handle box sets

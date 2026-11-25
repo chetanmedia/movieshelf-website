@@ -55,7 +55,7 @@ Most free "movie list" templates are built for tracking what you've *watched*: t
 | Title | Alien | Use the title as printed; move "The" to the end or ignore it when sorting |
 | Year | 1979 | Separates remakes and same-name films |
 | Format | 4K UHD | Dropdown: DVD, Blu-ray, 4K UHD |
-| Edition | Steelbook | The column that tells an upgrade from a duplicate |
+| Edition | Steelbook | The column that tells an upgrade from a duplicate (note the number on [limited steelbooks](/blog/what-is-a-steelbook/)) |
 | Label / studio | 20th Century Studios | Essential for Criterion, Arrow and other boutique releases |
 | Region | A / B / Free | Record it for every import |
 | Barcode | 12 or 13 digits from the back | Identifies the exact release; store as text |

@@ -1,9 +1,9 @@
 ---
 title: "What Is a Steelbook? A Collector's Guide to Metal Cases"
-seoTitle: "What Is a Steelbook? Meaning, Terms and Is It Worth It"
+seoTitle: "What Is a Steelbook? Meaning, Limited Runs and Is It Worth It"
 description: "What is a steelbook? A metal case for a Blu-ray, 4K or DVD with exclusive art. What the jargon means, whether they're worth it, and how to care for them."
 date: 2026-10-24
-updated: 2026-10-24
+updated: 2026-11-25
 author: Chetan Nagaraja
 category: Collecting
 tags: [what is a steelbook, steelbook, blu-ray steelbook, 4K steelbook, collector's editions]
@@ -14,6 +14,8 @@ summary: "A steelbook is a metal disc case with exclusive artwork, usually sold 
 faq:
   - q: "What is a steelbook?"
     a: "A steelbook is a disc case made of printed metal instead of plastic, used for special editions of Blu-rays, 4K UHDs, DVDs and video games. Inside is a plastic tray that holds the discs. SteelBook is a registered trademark of the Danish packaging company Scanavo."
+  - q: "How can you tell if a steelbook is limited?"
+    a: "Look for \"Limited Edition\" on the J-card or the shrink-wrap sticker, a printed or stamped number such as 1 of 1,000, and a retailer-exclusive sticker. Then check the release listing or the r/Steelbooks community, which track variants and print runs. If none of those apply, treat it as a standard run that may be reprinted."
   - q: "Is the movie different on a steelbook?"
     a: "Usually not. In most cases the discs inside a steelbook are the same ones sold in the standard plastic case, so picture, sound and extras are identical. You are paying for the packaging and artwork, so check the edition listing if you want to be sure."
   - q: "Are steelbooks worth it?"
@@ -98,6 +100,23 @@ Artwork printed on the inside of the case, behind the disc tray, which you only 
 :::
 
 You'll also see "premium" or "numbered" steelbooks. These come from specialist labels and retailers and add things like full slips, art cards and a hand-numbered run. According to the [r/Steelbooks community wiki](https://www.reddit.com/r/Steelbooks/wiki/faq), some Asian specialty labels make numbered editions in runs from a couple of hundred to a few thousand copies.
+
+## How can you tell if a steelbook is limited?
+
+Almost every steelbook is sold as a "limited edition," but that word alone doesn't tell you how many were made. Four checks tell you what you actually have:
+
+:::checklist Is this steelbook really limited?
+- The J-card or shrink-wrap sticker says "Limited Edition" (common, but often with no number attached)
+- A number is printed or stamped on the case, a card or a certificate, such as 1 of 1,000 (a numbered run)
+- A sticker or listing names a single retailer (a retailer exclusive, usually sold only through that store)
+- The release listing or the [r/Steelbooks community wiki](https://www.reddit.com/r/Steelbooks/wiki/faq) mentions a print run, a variant or a sell-out
+:::
+
+If you can tick the second box, you have a numbered edition, and that number is worth recording. If you can only tick the first, assume a standard run: the same design may come back in stock or be reissued later, which is why "limited" on its own rarely moves resale prices.
+
+:::tip Record the edition the day it arrives
+Write the number, the retailer and whether it's still sealed somewhere you'll find it again. In Movieshelf, scan the barcode, set the edition and put the number and retailer in custom fields, so you can tell your numbered copy from a later reissue at a glance.
+:::
 
 {{app-cta}}
 
