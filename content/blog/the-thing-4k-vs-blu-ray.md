@@ -91,7 +91,7 @@ If you're still deciding whether 4K makes sense for your setup at all, our guide
 
 ## Is the Blu-ray in the 4K combo pack the new restoration?
 
-No, and this trips a lot of buyers up. The 1080p disc inside Universal's 4K UHD set is **the same Blu-ray Universal released in 2008**, complete with the old U-Control picture-in-picture features. Only the 4K disc carries the new restoration.
+No, and this trips a lot of buyers up. The 1080p disc inside Universal's 4K UHD set is **the same Blu-ray Universal released in 2008**, complete with the old U-Control picture-in-picture features. Only the 4K disc carries the new restoration. That isn't true of every catalog 4K: the [Back to the Future trilogy](/blog/back-to-the-future-4k-vs-blu-ray/) shipped with newly remastered Blu-rays alongside its 4K discs.
 
 That matters in two situations:
 

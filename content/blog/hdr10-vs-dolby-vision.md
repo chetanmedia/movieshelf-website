@@ -147,7 +147,7 @@ The transfer matters more than the badge. A careful HDR10 grade from a fresh 4K 
 
 HDR10+ is the third format you'll see on some cases. Like Dolby Vision, it uses dynamic metadata. Unlike Dolby Vision, it's royalty-free and was developed with Samsung's backing, which is why Samsung TVs use it instead.
 
-On disc, HDR10+ is much less common than Dolby Vision, and a handful of releases carry both. Like Dolby Vision, it sits on top of HDR10, so an HDR10+ disc plays normally on any UHD player and TV. If you own a Samsung TV and a player that supports HDR10+, such as Panasonic's DP-UB820, you get the dynamic benefit on the discs that have it.
+On disc, HDR10+ is much less common than Dolby Vision, and a handful of releases carry both, such as the [Back to the Future trilogy on 4K](/blog/back-to-the-future-4k-vs-blu-ray/), which has Dolby Vision, HDR10+ and HDR10 on the same discs. Like Dolby Vision, it sits on top of HDR10, so an HDR10+ disc plays normally on any UHD player and TV. If you own a Samsung TV and a player that supports HDR10+, such as Panasonic's DP-UB820, you get the dynamic benefit on the discs that have it.
 
 :::tip How to tell which format a disc has
 Check the back of the case for the Dolby Vision or HDR10+ logo, usually in the tech specs strip near the bottom. If there's no extra logo, assume HDR10 only. Your player's info display will also show which format is actually being output.

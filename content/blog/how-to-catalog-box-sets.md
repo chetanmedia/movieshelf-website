@@ -154,7 +154,7 @@ If you sell or give away part of a set, edit the set entry so it lists only what
 
 ### When you double-dip
 
-Owning a film both in a box set and on its own is common. The standalone release often has a newer transfer or different extras. Keep both entries. Because your set lists every film inside it, searching for the title shows both copies, which is exactly what stops you buying a third.
+Owning a film both in a box set and on its own is common. The standalone release often has a newer transfer or different extras. The [Back to the Future trilogy](/blog/back-to-the-future-4k-vs-blu-ray/) is a classic case: its 2020 and 2025 4K sets share the same movie discs but come with different bonus discs. Keep both entries. Because your set lists every film inside it, searching for the title shows both copies, which is exactly what stops you buying a third.
 
 :::shelf Bottom shelf: box sets live together, with one shelf address for each set
 - Alien Quadrilogy | dvd
