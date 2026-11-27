@@ -46,10 +46,10 @@ Strategy: months 1–2 favour low-difficulty wins (SD ≤ 25) and core collectio
 | 34 | 2026-11-25 | how to stop buying duplicate movies *(long-tail)* | — | — | — | How to Stop Buying Movies You Already Own | Guides | done 2026-11-25 |
 | 35 | 2026-11-26 | back to the future 4k vs blu ray | 20 | 8 | — | Back to the Future: 4K vs Blu-ray Compared | Formats | done 2026-11-26 |
 | 36 | 2026-11-27 | is physical media making a comeback | 390 | 31 | physical media comeback, is physical media dying | Is Physical Media Making a Comeback? What the Numbers Say | Collecting | done 2026-11-27 |
-| 37 | 2026-11-28 | universal monsters blu ray collection | 210 | 20 | — | Universal Monsters on Blu-ray and 4K: Which Set to Buy | Collecting | todo |
+| 40 | 2026-11-28 | track which shelf every movie is on *(long-tail)* | — | — | — | How to Know Exactly Which Shelf Every Movie Is On | Organizing | todo |
 | 38 | 2026-11-29 | steelbook display ideas | 30 | 30 | how to display steelbooks, steelbook display, steelbook display shelf, steelbook display case | How to Display Steelbooks: Shelves, Frames and Cases | Organizing | todo |
 | 39 | 2026-11-30 | theme movie night ideas | 320 | 25 | movie night ideas for adults | Themed Movie Nights: 30 Ideas Using Films You Already Own | Watching | todo |
-| 40 | 2026-12-01 | track which shelf every movie is on *(long-tail)* | — | — | — | How to Know Exactly Which Shelf Every Movie Is On | Organizing | todo |
+| 37 | 2026-12-01 | universal monsters blu ray collection | 210 | 20 | — | Universal Monsters on Blu-ray and 4K: Which Set to Buy | Collecting | todo |
 | 41 | 2026-12-02 | steelbook protector | 590 | 18 | steelbook collection | Steelbook Protectors: Do You Need Them? | Collecting | todo |
 | 42 | 2026-12-03 | godfather 4k vs blu ray | 20 | 5 | — | The Godfather: 4K vs Blu-ray Compared | Formats | todo |
 | 43 | 2026-12-04 | christmas movie night ideas | 260 | 19 | christmas vacation 4k vs blu ray | Christmas Movie Night Ideas From Your Own Shelf | Watching | todo |

@@ -206,7 +206,7 @@ As each shelf fills, note its location in your catalog: *Living room · Shelf B*
 The shelf order matters less than the habit of keeping it. Three things stop a tidy collection from drifting back into chaos:
 
 - **Shelve new discs the day they arrive.** A "put away later" stack is how collections fall apart.
-- **Scan before shelving.** Adding each new disc to your catalog, with its format, edition and shelf, takes seconds with a barcode. See our guide on [how to catalog a DVD and Blu-ray collection](/blog/how-to-catalog-dvd-blu-ray-collection/) for the full workflow.
+- **Scan before shelving.** Adding each new disc to your catalog, with its format, edition and shelf, takes seconds with a barcode. See our guide on [how to catalog a DVD and Blu-ray collection](/blog/how-to-catalog-dvd-blu-ray-collection/) for the full workflow, or our comparison of [movie collection apps for iPhone](/blog/movie-collection-app/) if you haven't picked a tool yet.
 - **Audit one shelf every few months.** Walk it, compare it against your catalog, and fix what's out of place.
 
 If your shelves hold imports, it's worth noting the region on each one too; our explainer on [Blu-ray region codes](/blog/what-blu-ray-region-is-the-us/) covers why. And if you're deciding which films deserve a 4K slot, read [4K Blu-ray vs Blu-ray](/blog/4k-blu-ray-vs-blu-ray/).

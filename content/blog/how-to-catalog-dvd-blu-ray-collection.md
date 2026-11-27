@@ -94,7 +94,7 @@ There are really two options: a spreadsheet or a dedicated collection app.
 | Custom fields | Unlimited columns | Depends on the app |
 | Cost | Free | Often free to start, paid for big collections |
 
-Spreadsheets are flexible and fine for a small, stable collection. Once you're past a hundred discs, or you shop for discs in person, an app that scans barcodes saves hours and gets used far more often.
+Spreadsheets are flexible and fine for a small, stable collection. Once you're past a hundred discs, or you shop for discs in person, an app that scans barcodes saves hours and gets used far more often. If you're staying with a sheet, our [movie collection spreadsheet guide](/blog/movie-collection-spreadsheet/) lists the columns worth having; if you're choosing an app, we compared [five movie collection apps for iPhone](/blog/movie-collection-app/) on scanning, editions and real prices.
 
 Whichever you choose, the important rule is **one list**. A spreadsheet on your laptop *and* notes on your phone will drift apart within a month.
 
