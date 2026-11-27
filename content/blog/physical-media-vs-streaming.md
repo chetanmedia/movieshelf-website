@@ -128,7 +128,7 @@ Physical media also has real downsides: a higher upfront cost per title, the nee
 
 ## Why are collectors buying more discs, not fewer?
 
-Talk to collectors on forums like r/4kbluray or r/criterion and the same reasons come up again and again. They're less about nostalgia than about control.
+Talk to collectors on forums like r/4kbluray or r/criterion and the same reasons come up again and again. They're less about nostalgia than about control. The sales data backs them up: as our look at [whether physical media is making a comeback](/blog/is-physical-media-making-a-comeback/) shows, 4K Blu-ray sales grew in 2025 even as overall disc spending fell.
 
 - **Films disappear.** A title you streamed last year may not be on any service you pay for this year.
 - **Boutique labels add value.** Criterion, Arrow, Vinegar Syndrome and Kino Lorber releases come with restorations, commentaries, essays and extras that no service carries.

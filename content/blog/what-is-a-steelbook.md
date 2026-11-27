@@ -28,7 +28,7 @@ faq:
     a: "No. A slipcover is a cardboard sleeve that slides over a case. A steelbook is the case itself, made of metal. Some steelbooks come with a full slipcover or a lenticular slip over the top."
 ---
 
-A **steelbook** is a disc case made from printed metal instead of plastic, sold as a special edition of a Blu-ray, 4K UHD, DVD or video game. It usually carries artwork you won't find on the standard release, it's often made in limited numbers, and the discs inside are typically the same ones from the regular plastic case. Collectors buy them for display, not for a better picture.
+A **steelbook** is a disc case made from printed metal instead of plastic, sold as a special edition of a Blu-ray, 4K UHD, DVD or video game. It usually carries artwork you won't find on the standard release, it's often made in limited numbers, and the discs inside are typically the same ones from the regular plastic case. Collectors buy them for display, not for a better picture, and premium releases like these are a big reason [physical media is making a comeback among collectors](/blog/is-physical-media-making-a-comeback/).
 
 That's the short answer. The longer one covers the jargon (WEA, J-card, lenticular, embossing), whether steelbooks are worth the premium, and how to keep a metal case from picking up dents you can never undo.
 

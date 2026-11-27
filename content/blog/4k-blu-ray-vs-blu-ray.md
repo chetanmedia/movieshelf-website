@@ -28,7 +28,7 @@ faq:
 
 **A 4K Blu-ray (Ultra HD Blu-ray) has four times the pixels of a regular Blu-ray, plus HDR, 10-bit color and up to 100 GB of storage.** On a 4K HDR TV of about 55 inches or larger, the upgrade is clearly visible, especially in bright highlights and dark scenes. On a 1080p TV, a small screen or a standard Blu-ray player, you won't see the difference, so the regular Blu-ray is the better buy.
 
-So the honest answer to "is it worth it?" is: it depends on your screen, your player and the film. This guide breaks down exactly what changes, what you need to see it, and how to decide which discs to upgrade first.
+So the honest answer to "is it worth it?" is: it depends on your screen, your player and the film. This guide breaks down exactly what changes, what you need to see it, and how to decide which discs to upgrade first. It's also the one disc format that's still growing: US 4K Blu-ray sales rose 12% in 2025, as we explain in [is physical media making a comeback?](/blog/is-physical-media-making-a-comeback/)
 
 :::stats
 - 4× | the pixels of a regular Blu-ray | 3840×2160 vs 1920×1080
