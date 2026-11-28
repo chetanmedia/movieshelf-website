@@ -159,7 +159,7 @@ The last two points are the ones people skip. The Library of Congress specifical
 
 {{phone:detail|Box 4, hall closet|Give boxed discs a location just like shelved ones. In Movieshelf, search any title and the shelf location tells you which box or shelf it's in, so you never open six boxes to find one film.}}
 
-This is where a catalog pays off. When your collection is split between a living-room shelf and three boxes in a closet, "do I own *Heat* on Blu-ray, and where is it?" has a ten-second answer instead of a Saturday afternoon. Our step-by-step guide to [cataloging a DVD and Blu-ray collection](/blog/how-to-catalog-dvd-blu-ray-collection/) shows how to set up shelf and box addresses, and the [Organize section](/#organize) shows how locations work in the app.
+This is where a catalog pays off. When your collection is split between a living-room shelf and three boxes in a closet, "do I own *Heat* on Blu-ray, and where is it?" has a ten-second answer instead of a Saturday afternoon. Our step-by-step guide to [cataloging a DVD and Blu-ray collection](/blog/how-to-catalog-dvd-blu-ray-collection/) shows how to set up shelf and box addresses, our guide to [knowing which shelf or box every movie is in](/blog/which-shelf-every-movie-is-on/) covers labeling and keeping those addresses accurate, and the [Organize section](/#organize) shows how locations work in the app.
 
 ## Where should you never store DVDs?
 

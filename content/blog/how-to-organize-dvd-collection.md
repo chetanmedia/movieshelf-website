@@ -196,7 +196,7 @@ A–E, F–L, M–R, S–Z on the floor or a table, then fine-sort each group. I
 ### Shelve with slack and label the shelves
 Leave space at the end of each shelf and stick small letters or numbers on the shelf edges, like *A, B, C*.
 ### Record where everything lives
-As each shelf fills, note its location in your catalog: *Living room · Shelf B*. This is what keeps the system useful later.
+As each shelf fills, note its location in your catalog: *Living room · Shelf B*. This is what keeps the system useful later, and our guide to [tracking which shelf every movie is on](/blog/which-shelf-every-movie-is-on/) shows how to label shelves, boxes and binders so those addresses never go stale.
 :::
 
 {{phone:collection|Every disc, every shelf|In Movieshelf, custom folders and a shelf location on each title mean search tells you which shelf a disc is on, whatever order the shelf itself is in.}}

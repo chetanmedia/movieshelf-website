@@ -203,7 +203,7 @@ Re-shelving is when catalogs drift. Change the location the same day you move a 
 
 {{phone:detail|Know which cube, box or drawer|In Movieshelf, every title can carry a shelf location and sit in custom folders, so search shows you exactly where a disc is stored, even behind a cabinet door.}}
 
-If you're reorganizing as you go, our guide to [organizing a DVD collection](/blog/how-to-organize-dvd-collection/) compares nine shelving orders. You can also see how [shelf locations work in Movieshelf](/#organize), or see how it compares with other [movie collection apps for iPhone](/blog/movie-collection-app/).
+For a complete labeling scheme covering shelves, boxes and binders, see [how to know exactly which shelf every movie is on](/blog/which-shelf-every-movie-is-on/). If you're reorganizing as you go, our guide to [organizing a DVD collection](/blog/how-to-organize-dvd-collection/) compares nine shelving orders. You can also see how [shelf locations work in Movieshelf](/#organize), or see how it compares with other [movie collection apps for iPhone](/blog/movie-collection-app/).
 
 ## Which DVD storage idea should you pick?
 
