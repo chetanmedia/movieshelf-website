@@ -15,7 +15,7 @@ faq:
   - q: "What is the best app to keep track of my movie collection?"
     a: "It depends on what you value. My Movies by Blu-ray.com is free, CLZ Movies is a subscription with cloud sync and deep IMDb data, iCollect Movies covers formats like VHS and LaserDisc, and Movieshelf focuses on editions, box sets and shelf locations with a lifetime Pro option. Any app with reliable barcode scanning beats typing titles in by hand."
   - q: "Is there a free app to catalog DVDs and Blu-rays?"
-    a: "Yes. My Movies by Blu-ray.com is free with a free Blu-ray.com account. Several other apps, including Movieshelf and My Movies 6, have free tiers that let you add up to 50 titles before you need to upgrade."
+    a: "Yes. My Movies by Blu-ray.com is free with a free Blu-ray.com account. Several other apps have free tiers too: Movieshelf lets you add up to 25 titles and My Movies 6 up to 50 before you need to upgrade."
   - q: "Can I scan DVD barcodes with my iPhone?"
     a: "Yes. Every app in this comparison uses the iPhone camera to read the UPC or EAN barcode on the back of the case and fill in the title, format and cover. Movieshelf lets you queue up to 10 barcodes and import them in one batch."
   - q: "Is CLZ Movies free?"
@@ -30,7 +30,7 @@ A quick disclosure: we make Movieshelf. Everything said here about the other app
 
 :::stats
 - 5 | iPhone apps compared | all scan DVD, Blu-ray and 4K barcodes
-- 50 | titles free in Movieshelf and My Movies 6 | before an upgrade is needed
+- 50 | titles free in My Movies 6 | 25 in Movieshelf, before an upgrade is needed
 - $0 | for My Movies by Blu-ray.com | with a free Blu-ray.com account
 :::
 
@@ -77,7 +77,7 @@ Here's the side-by-side. Prices are US App Store prices as listed in October 202
 | CLZ Movies | Subscription: $1.99/mo or $19.99/yr | 7-day trial, then subscription required | Yes | IMDb-based details, custom fields, CLZ Cloud sync |
 | iCollect Movies | Free + one-time unlocks and a Pro subscription | Limited; unlimited is a paid unlock | Yes | Widest format list: VHS, LaserDisc, HD DVD, CED |
 | My Movies 6 | Free + paid "Unlimited" or cross-platform upgrades | Up to 50 titles | Yes, batch | Digital copies and wish list, synced through an account |
-| Movieshelf | Free + **Pro**: $2.99/mo, $14.99/yr or $44.99 lifetime | 50 titles, 50 scans, unlimited folders | Yes, up to 10 per batch | Editions, box sets, shelf locations and "what to watch" |
+| Movieshelf | Free + **Pro**: $2.99/mo, $14.99/yr or $44.99 lifetime | 25 titles (search and scans combined), unlimited folders | Yes, up to 10 per batch | Editions, box sets, shelf locations and "what to watch" |
 
 :::bars Yearly subscription price for an unlimited collection (US, Oct 2026)
 - My Movies by Blu-ray.com | 0 | $0
@@ -121,7 +121,7 @@ Movieshelf is built for collectors who care about *which* copy they own and *whe
 
 {{phone:scan|Ten barcodes, one import|Queue up to 10 barcodes, check each match, then import them together. Box sets get their own switch so a trilogy stays one package.}}
 
-The free plan covers 50 titles and 50 barcode scans, with unlimited folders and 3 custom fields. Pro unlocks unlimited adding and scanning, unlimited custom fields, collection analytics, custom posters and backdrops, and bulk CSV import and export. It costs $2.99 a month, $14.99 a year, or $44.99 once for lifetime access. There's no free trial, so the free plan is the way to try it. Full details are on the [pricing section](/#pricing).
+The free plan covers 25 titles in total, across search, barcode scans and Shelf Scan, with unlimited folders and 3 custom fields. Pro unlocks unlimited adding and scanning, unlimited custom fields, collection analytics, custom posters and backdrops, and bulk CSV import and export. It costs $2.99 a month, $14.99 a year, or $44.99 once for lifetime access. There's no free trial, so the free plan is the way to try it. Full details are on the [pricing section](/#pricing).
 
 Movieshelf is an iPhone app, so if you need Android or a desktop editor, CLZ or iCollect is a better fit.
 
@@ -190,6 +190,6 @@ Tilt glossy cases and slipcovers away from overhead lights, since glare causes m
 
 ## Start with one shelf
 
-Whichever app you pick, the hard part is starting. Scan ten discs tonight, check they came in as the right editions, and you'll know within a week whether the app is a keeper. If you want to try Movieshelf, the free plan covers your first 50 titles, and [barcode scanning](/#scan) is the fastest way in.
+Whichever app you pick, the hard part is starting. Scan ten discs tonight, check they came in as the right editions, and you'll know within a week whether the app is a keeper. If you want to try Movieshelf, the free plan covers your first 25 titles, and [barcode scanning](/#scan) is the fastest way in.
 
 {{app-cta-end}}

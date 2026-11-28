@@ -158,7 +158,7 @@ If you already have years of data in a sheet, you don't need to start over. Most
 
 {{phone:collection|From rows to a shelf of covers|Movieshelf Pro imports a CSV of your existing list in bulk. After that, new discs go in by scanning up to 10 barcodes at a time, each with its format, edition and shelf location.}}
 
-Before you export, tidy three things: one row per disc, a consistent Format column, and a Year on every row so remakes match correctly. Then use File › Download › CSV in Google Sheets, or Save As › CSV in Excel. Bulk CSV import (and export, so your data is never locked in) comes with Movieshelf Pro, which is $2.99 a month, $14.99 a year or $44.99 once; see [pricing](/#pricing). The free plan lets you scan or add up to 50 titles if you'd rather try the scanning workflow first.
+Before you export, tidy three things: one row per disc, a consistent Format column, and a Year on every row so remakes match correctly. Then use File › Download › CSV in Google Sheets, or Save As › CSV in Excel. Bulk CSV import (and export, so your data is never locked in) comes with Movieshelf Pro, which is $2.99 a month, $14.99 a year or $44.99 once; see [pricing](/#pricing). The free plan lets you scan or add up to 25 titles if you'd rather try the scanning workflow first.
 
 If you're starting from nothing rather than migrating, our [step-by-step catalog guide](/blog/how-to-catalog-dvd-blu-ray-collection/) covers the whole process, and [how to organize a DVD collection](/blog/how-to-organize-dvd-collection/) helps you settle the shelf order before you assign shelf addresses.
 

@@ -15,7 +15,7 @@ faq:
   - q: "Can Letterboxd track my DVD and Blu-ray collection?"
     a: "Only loosely. Many collectors make a Letterboxd list called something like Owned, but a list entry is a film, not a disc, so it can't tell your DVD of a film from your 4K steelbook, and it has no barcode scanning, format field or shelf location."
   - q: "What is the best Letterboxd alternative for physical media?"
-    a: "For discs, you want a collection app rather than another film diary. Look for barcode scanning, one entry per edition, formats (DVD, Blu-ray and 4K UHD), box set support and a shelf location field. Movieshelf on iPhone does all of these, with a free plan for up to 50 titles."
+    a: "For discs, you want a collection app rather than another film diary. Look for barcode scanning, one entry per edition, formats (DVD, Blu-ray and 4K UHD), box set support and a shelf location field. Movieshelf on iPhone does all of these, with a free plan for up to 25 titles."
   - q: "Should I stop using Letterboxd if I collect discs?"
     a: "No. Letterboxd is excellent at what it does: logging what you watched, rating, reviewing and following friends. Most collectors keep it for viewing and use a separate app as the inventory of what they physically own."
   - q: "What app tracks movies I have watched?"
@@ -149,7 +149,7 @@ If you've decided you need an inventory alongside Letterboxd, these are the feat
 - **Export**, so your data isn't locked in
 :::
 
-Here's how Movieshelf lines up. Barcode scanning with batches of up to 10, the three disc formats, editions and box sets, custom folders, shelf locations, a watchlist with "what to watch," collection stats, and search and filters are all part of the app. The free plan covers up to 50 titles and 50 barcode scans, unlimited folders and 3 custom fields. **Pro** removes those limits and adds collection analytics, custom posters and backdrops, and bulk CSV import and export; it's $2.99 a month, $14.99 a year, or $44.99 once for lifetime. There's no free trial, so the free plan is the way to try it. Full details are on the [pricing section](/#pricing).
+Here's how Movieshelf lines up. Barcode scanning with batches of up to 10, the three disc formats, editions and box sets, custom folders, shelf locations, a watchlist with "what to watch," collection stats, and search and filters are all part of the app. The free plan covers up to 25 titles in total (search, barcode scans and Shelf Scan combined), unlimited folders and 3 custom fields. **Pro** removes those limits and adds collection analytics, custom posters and backdrops, and bulk CSV import and export; it's $2.99 a month, $14.99 a year, or $44.99 once for lifetime. There's no free trial, so the free plan is the way to try it. Full details are on the [pricing section](/#pricing).
 
 :::note Coming from a spreadsheet instead?
 If your "Owned" list actually lives in Google Sheets or Excel, read [movie collection spreadsheet vs app](/blog/movie-collection-spreadsheet/) first. It covers when a spreadsheet is still the right call and how to move off one.

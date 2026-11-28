@@ -42,7 +42,7 @@ function build() {
         <a class="ga-badge gp${isAndroid ? ' pref' : ''}" href="${PLAY}&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dpopup" target="_blank" rel="noopener" data-as-goal="google-play" aria-label="Get it on Google Play">
           <img src="${PLAY_BADGE}" alt="Get it on Google Play" width="212" height="82" loading="eager"></a>
       </div>
-      <div class="ga-note"><span>${TICK}Free for your first 50 titles</span><span>${TICK}No account needed to start</span></div>
+      <div class="ga-note"><span>${TICK}Free for your first 25 titles</span><span>${TICK}No account needed to start</span></div>
     </div>
   </div>`;
   document.body.append(modal);

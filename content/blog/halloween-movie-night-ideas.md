@@ -215,6 +215,6 @@ Not every player handles every disc. A 4K UHD disc needs a 4K UHD player or a co
 
 ## Pick your theme tonight
 
-Choose one idea from this list, pull two or three discs, and stack them in order. That's all a great Halloween movie night needs. If you want the planning to take thirty seconds next year, catalog your horror shelf now: scan the barcodes, drop them in a Halloween folder, and the lineup will be waiting for you. Movieshelf is free for your first 50 titles, and [Pro](/#pricing) removes the limit.
+Choose one idea from this list, pull two or three discs, and stack them in order. That's all a great Halloween movie night needs. If you want the planning to take thirty seconds next year, catalog your horror shelf now: scan the barcodes, drop them in a Halloween folder, and the lineup will be waiting for you. Movieshelf is free for your first 25 titles, and [Pro](/#pricing) removes the limit.
 
 {{app-cta-end}}
